@@ -1,0 +1,25 @@
+html:has(.theme-dark){ color-scheme: dark; }
+.theme-dark{
+  --bg:#0f172a; --surface:#1e293b; --text:#f1f5f9; --muted:#9ca3af; --accent:#a78bfa; --accent-contrast:#ffffff; --header-bg:rgba(167,139,250,0.06); --table-border:rgba(51,65,85,0.08); --table-row-hover:rgba(167,139,250,0.03);
+  --radius:10px;
+  --shadow:0 2px 8px rgba(0,0,0,0.4);
+  --font-body:system-ui,-apple-system,sans-serif;
+  --border-width:1px;
+  --border-color:rgba(255,255,255,0.08);
+  --letter-spacing:0;
+  --heading-transform:none;
+  --btn-radius:10px;
+  --bg-pattern:none;
+  --bg-size:auto;
+  --btn-shadow:0 2px 12px rgba(167,139,250,0.35);
+  --btn-hover-transform:translateY(-1px);
+  --input-bg:rgba(255,255,255,0.05);
+  --input-border:rgba(255,255,255,0.12);
+  --modal-radius:12px;
+  --select-outline:rgba(167,139,250,0.15);
+  --select-bg:rgba(167,139,250,0.06);
+  --scrollbar-color:#334155;
+  --scrollbar-radius:999px;
+  --toggle-track:rgba(255,255,255,0.2);
+  --toggle-border:rgba(255,255,255,0.25);
+}

@@ -1,0 +1,22 @@
+.theme-midcentury{
+  --bg:#f5f0e8; --surface:#ede8d8; --text:#2c2416; --muted:#8b7a6b; --accent:#e67e22; --accent-contrast:#ffffff; --header-bg:rgba(230,126,34,0.06); --table-border:rgba(184,168,138,0.08); --table-row-hover:rgba(230,126,34,0.03);
+  --radius:6px;
+  --shadow:2px 4px 0px rgba(44,36,22,0.15);
+  --font-body:'Futura','Century Gothic','Trebuchet MS',sans-serif;
+  --border-width:2px;
+  --border-color:rgba(184,168,138,0.35);
+  --letter-spacing:0.04em;
+  --heading-transform:none;
+  --btn-radius:4px;
+  --bg-pattern:none;
+  --bg-size:auto;
+  --btn-shadow:none;
+  --btn-hover-transform:translateY(-1px);
+  --input-bg:#faf5ea;
+  --input-border:rgba(184,168,138,0.4);
+  --modal-radius:6px;
+  --select-outline:rgba(230,126,34,0.12);
+  --select-bg:rgba(230,126,34,0.05);
+  --scrollbar-color:#c8b89a;
+  --scrollbar-radius:4px;
+}

@@ -1,0 +1,3 @@
+.theme-minimalism{
+  --bg:#fafafa; --surface:#ffffff; --text:#171717; --muted:#737373; --accent:#737373; --accent-contrast:#ffffff; --header-bg: rgba(115,115,115,0.06); --table-border: rgba(229,229,229,0.08); --table-row-hover: rgba(115,115,115,0.03);
+}

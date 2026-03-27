@@ -1,0 +1,22 @@
+.theme-basic{
+  --bg:#ffffff; --surface:#f9f9f9; --text:#1a1a1a; --muted:#667085; --accent:#555555; --accent-contrast:#ffffff; --header-bg:rgba(85,85,85,0.06); --table-border:rgba(208,208,208,0.12); --table-row-hover:rgba(85,85,85,0.03);
+  --radius:10px;
+  --shadow:0 1px 4px rgba(0,0,0,0.06);
+  --font-body:system-ui,-apple-system,sans-serif;
+  --border-width:1px;
+  --border-color:rgba(0,0,0,0.08);
+  --letter-spacing:0;
+  --heading-transform:none;
+  --btn-radius:8px;
+  --bg-pattern:none;
+  --bg-size:auto;
+  --btn-shadow:0 2px 8px rgba(85,85,85,0.2);
+  --btn-hover-transform:translateY(-1px);
+  --input-bg:#ffffff;
+  --input-border:rgba(0,0,0,0.1);
+  --modal-radius:12px;
+  --select-outline:rgba(85,85,85,0.12);
+  --select-bg:rgba(85,85,85,0.04);
+  --scrollbar-color:#c0c0c0;
+  --scrollbar-radius:999px;
+}

@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PickLayers — Themes Playground</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    import {
+      getFirestore, collection, addDoc, getDocs,
+      onSnapshot, query, orderBy, limit, where,
+      writeBatch, serverTimestamp, deleteDoc, doc, updateDoc
+    } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxE04V6yShDLaMpALSBDCsXxBMKoYQ-Ag",
+      authDomain: "picklayer-net.firebaseapp.com",
+      projectId: "picklayer-net",
+      storageBucket: "picklayer-net.firebasestorage.app",
+      messagingSenderId: "211408708354",
+      appId: "1:211408708354:web:edf682db8b5cb3e859981b"
+    };
+    const app = initializeApp(firebaseConfig);
+    window._firebase = {
+      db: getFirestore(app),
+      auth: getAuth(app),
+      signInAnonymously,
+      collection, addDoc, getDocs,
+      onSnapshot, query, orderBy, limit, where,
+      writeBatch, serverTimestamp, deleteDoc, updateDoc,
+      docRef: doc
+    };
+  </script>
+  <script defer src="script.js"></script>
+  <meta name="description" content="테마 미리보기와 익명 댓글 데모">
+  <link rel="icon" href="assets/picklayer-symbol.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/picklayer-symbol.svg">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body class="theme-basic">
+  <header class="site-header">
+    <img src="assets/picklayer-light.svg" alt="PickLayers" class="site-logo">
+    <p class="slogan" data-i18n="slogan">Pick your Layers, Style your Vision</p>
+  </header>
+
+  <section class="controls">
+    <div id="theme-picker" class="theme-picker">
+      <label class="sr" id="theme-picker-label" data-i18n="themePickerLabel">테마 선택</label>
+      <div id="theme-list" class="theme-list"></div>
+      <select id="theme-select" class="theme-select" aria-label="테마 선택"></select>
+    </div>
+    <div class="lang-select">
+      <select id="lang-select" aria-label="Language selector">
+        <option value="en">English</option>
+        <option value="ko">한국어</option>
+        <option value="ja">日本語</option>
+        <option value="zh">中文</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="ru">Русский</option>
+        <option value="fi">Suomi</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Mobile menu button (fixed) -->
+  <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open menu">☰</button>
+
+  <!-- Mobile menu panel -->
+  <div id="mobile-menu-panel" class="mobile-panel" aria-hidden="true" inert>
+    <div class="panel-backdrop" data-target="mobile-menu-panel"></div>
+    <div class="panel-sheet">
+      <h4 data-i18n="menuThemeLabel">테마 선택</h4>
+      <div id="mobile-menu-theme-list" class="theme-list"></div>
+      <h4 data-i18n="menuLangLabel" style="margin-top:16px;">언어 선택</h4>
+      <div id="mobile-menu-lang-select" class="lang-select-mobile"></div>
+      <button id="mobile-menu-save" class="btn-save" data-i18n="complete" style="margin-top:32px;width:100%;">완료</button>
+    </div>
+  </div>
+
+  <!-- Mobile panels (theme / language) -->
+  <div id="mobile-theme-panel" class="mobile-panel" aria-hidden="true" inert>
+    <div class="panel-backdrop" data-target="mobile-theme-panel"></div>
+    <div class="panel-sheet">
+      <button class="panel-close" data-target="mobile-theme-panel">×</button>
+      <h4 data-i18n="themePickerLabel">테마 선택</h4>
+      <div id="mobile-theme-list" class="theme-list"></div>
+      <select id="mobile-theme-select" class="theme-select"></select>
+    </div>
+  </div>
+
+  <div id="mobile-lang-panel" class="mobile-panel" aria-hidden="true" inert>
+    <div class="panel-backdrop" data-target="mobile-lang-panel"></div>
+    <div class="panel-sheet">
+      <button class="panel-close" data-target="mobile-lang-panel">×</button>
+      <h4 data-i18n="langLabel">Language</h4>
+      <div class="panel-body">
+        <select id="mobile-lang-select" aria-label="Language selector"></select>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <article class="card sample">
+      <h2 id="page-title" data-i18n="pageTitle">샘플 페이지</h2>
+      <div id="theme-intro" class="theme-intro">
+        <!-- Dynamic theme intro will be rendered here. -->
+      </div>
+      <section class="components">
+        <h4 data-i18n="buttons">Buttons</h4>
+          <div class="actions-row buttons-row">
+            <button class="btn" id="primary-btn" data-i18n="btnPrimary">Primary</button>
+            <button class="btn ghost" id="ghost-btn" data-i18n="btnGhost">Ghost</button>
+            <button class="btn neutral" id="neutral-btn" data-i18n="btnNeutral">Neutral</button>
+          </div>
+        <h4 data-i18n="confirm">Confirm</h4>
+          <div class="actions-row buttons-row">
+            <button class="btn" id="open-confirm" data-i18n="btnOpenConfirm">Open Confirm</button>
+          </div>
+        <h4 data-i18n="toasts">Toasts</h4>
+          <div class="actions-row buttons-row">
+            <button class="btn" id="show-toast" data-i18n="btnShowToast">Show Toast</button>
+            <button class="btn ghost" id="show-success-toast" data-i18n="btnSuccess">Success</button>
+            <button class="btn neutral" id="show-error-toast" data-i18n="btnError">Error</button>
+          </div>
+
+        <h4 data-i18n="formControls">Form controls</h4>
+        <div class="form-samples">
+          <div class="form-row-inline">
+            <label id="width-20p" data-i18n="inputLabel">Input:</label>
+            <input id="sample-input" class="input" placeholder="A" data-i18n-placeholder="textareaPlaceholder"/>
+          </div>
+
+          <div class="form-row-inline">
+            <label data-i18n="textareaLabel">Textarea:</label>
+            <textarea id="sample-textarea" class="textarea" rows="3" placeholder="A" data-i18n-placeholder="textareaPlaceholder"></textarea>
+          </div>
+       
+
+          <div class="checkbox-group">
+            <label><input type="checkbox" id="sample-checkbox-1" value="apple"><span data-i18n="fruit.apple">사과</span></label>
+            <label><input type="checkbox" id="sample-checkbox-2" value="strawberry"><span data-i18n="fruit.strawberry">딸기</span></label>
+            <label><input type="checkbox" id="sample-checkbox-3" value="banana"><span data-i18n="fruit.banana">바나나</span></label>
+          </div>
+
+          <div class="radio-group">
+            <label><input type="radio" name="sample-radio" value="apple" checked><span data-i18n="fruit.apple">사과</span></label>
+            <label><input type="radio" name="sample-radio" value="strawberry"><span data-i18n="fruit.strawberry">딸기</span></label>
+            <label><input type="radio" name="sample-radio" value="banana"><span data-i18n="fruit.banana">바나나</span></label>
+          </div>
+
+          <div class="form-row-inline">
+            <label data-i18n="selectLabel">선택:</label>
+            <select id="sample-select">
+                <option value="orange" data-i18n="fruit.orange">오렌지</option>
+                <option value="grape" data-i18n="fruit.grape">포도</option>
+                <option value="mango" data-i18n="fruit.mango">망고</option>
+            </select>
+          </div>
+
+          <div class="control-row">
+            <span class="control-item">
+              <span class="control-label" data-i18n="sliderLabel">슬라이더</span>
+              <input id="sample-range" type="range" min="0" max="100" value="40"><span id="range-val">40</span>
+            </span>
+            <span class="control-item">
+              <span class="control-label" data-i18n="toggleLabel">토글</span>
+              <label class="switch"><input id="sample-toggle" type="checkbox"><span class="slider"></span></label>
+            </span>
+          </div>
+        </div>
+
+        <h4 data-i18n="dataGrid">Data grid & Table</h4>
+        <div class="grid">
+          <table class="data-table" id="sample-table">
+            <thead><tr><th>#</th><th data-i18n="colName">이름</th><th data-i18n="colStatus">상태</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <h4 data-i18n="tabs">탭</h4>
+        <div class="tabs" id="sample-tabs">
+          <div class="tab-list" role="tablist">
+            <button class="tab active" data-tab="tab1" data-i18n="tab1">디자인</button>
+            <button class="tab" data-tab="tab2" data-i18n="tab2">개발</button>
+            <button class="tab" data-tab="tab3" data-i18n="tab3">배포</button>
+          </div>
+          <div class="tab-panel active" id="sample-tab1" data-i18n="tab1Content">색상, 타이포그래피, 간격 등 시각 요소를 정의합니다.</div>
+          <div class="tab-panel" id="sample-tab2" data-i18n="tab2Content">컴포넌트를 구현하고 인터랙션 로직을 작성합니다.</div>
+          <div class="tab-panel" id="sample-tab3" data-i18n="tab3Content">빌드 후 정적 파일로 배포합니다.</div>
+        </div>
+
+        <h4 data-i18n="progressBar">진행 바</h4>
+        <div class="progress-group">
+          <div class="progress"><div class="progress-bar" style="width:65%"></div></div>
+          <div class="progress"><div class="progress-bar success" style="width:40%"></div></div>
+          <div class="progress"><div class="progress-bar error" style="width:85%"></div></div>
+        </div>
+
+        <h4 data-i18n="accordion">아코디언</h4>
+        <div class="accordion" id="sample-accordion">
+          <div class="accordion-item open">
+            <button class="accordion-header"><span data-i18n="acc1Title">레이아웃이란?</span><span class="accordion-icon">▲</span></button>
+            <div class="accordion-body"><p data-i18n="acc1Content">레이아웃은 화면의 구성 요소를 배치하는 방식입니다. Grid, Flexbox 등을 활용합니다.</p></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header"><span data-i18n="acc2Title">컬러 시스템</span><span class="accordion-icon">▼</span></button>
+            <div class="accordion-body"><p data-i18n="acc2Content">Primary, Surface, Accent 등 의미 기반 색상 토큰을 사용해 일관성을 유지합니다.</p></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header"><span data-i18n="acc3Title">타이포그래피</span><span class="accordion-icon">▼</span></button>
+            <div class="accordion-body"><p data-i18n="acc3Content">폰트 패밀리, 크기, 자간, 행간을 테마에 맞게 정의합니다.</p></div>
+          </div>
+        </div>
+
+        <!-- Confirm Dialog demo remains available via other triggers -->
+
+        <!-- Cards demo removed as requested -->
+      </section>
+    </article>
+
+    <aside id="comments-panel" class="card comments offcanvas" aria-hidden="true">
+      <h3 data-i18n="anonymousComments">익명 댓글</h3>
+      <p id="anonymous-note" class="anonymous-note" data-i18n="anonymousNote">익명으로 작성되며, 새로고침 후 삭제 권한이 변경될 수 있습니다</p>
+      <form id="comment-form" class="comment-form">
+        <textarea id="comment-input" placeholder="한 줄로 의견을 남겨주세요 (익명)" rows="2" maxlength="100" data-i18n-placeholder="textareaPlaceholder"></textarea>
+        <div class="comment-meta-row">
+          <span id="comment-error" class="comment-error"></span>
+          <span id="comment-char-count">0 / 100</span>
+        </div>
+        <div class="form-row">
+          <button id="comment-submit" type="submit" class="btn" data-i18n="submit">등록</button>
+        </div>
+      </form>
+      <div id="comment-list" class="comment-list"></div>
+    </aside>
+
+    <button id="comments-toggle" class="binder" aria-label="Open comments">💬</button>
+  </main>
+
+  <!-- Confirm dialog -->
+  <div id="confirm-modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-sheet" role="dialog" aria-modal="true">
+      <h4 data-i18n="confirmDialogTitle">확인 대화상자</h4>
+      <p data-i18n="confirmDialogMessage">이 작업을 수행하시겠습니까?</p>
+      <div class="modal-actions">
+        <button class="btn" id="confirm-ok" data-i18n="confirmOk">확인</button>
+        <button class="btn ghost" id="confirm-cancel" data-i18n="confirmCancel">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Translation modal -->
+  <div id="translate-modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-sheet" role="dialog" aria-modal="true">
+      <h4 data-i18n="translate">번역</h4>
+      <div class="translate-body">
+        <div class="translate-section">
+          <p class="translate-label" data-i18n="original">원문</p>
+          <p id="translate-original" class="translate-text"></p>
+        </div>
+        <p class="translate-note" data-i18n="translateNote">Google 번역에서 번역하려면 아래 버튼을 클릭하세요</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn" id="translate-google" data-i18n="openGoogleTranslate">Google 번역 열기</button>
+        <button class="btn ghost" id="translate-close" data-i18n="confirmCancel">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <small>© 2026 PickLayer.net. All rights reserved.</small>
+  </footer>
+</body>
+</html>

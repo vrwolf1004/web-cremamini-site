@@ -1,0 +1,22 @@
+.theme-bauhaus{
+  --bg:#ffffff; --surface:#f0f0f0; --text:#000000; --muted:#6b6b6b; --accent:#f39c12; --accent-contrast:#000000; --header-bg:rgba(243,156,18,0.06); --table-border:rgba(0,0,0,0.06); --table-row-hover:rgba(243,156,18,0.03);
+  --radius:0px;
+  --shadow:none;
+  --font-body:'Futura','Century Gothic','Trebuchet MS',sans-serif;
+  --border-width:3px;
+  --border-color:#000000;
+  --letter-spacing:0.08em;
+  --heading-transform:uppercase;
+  --btn-radius:0px;
+  --bg-pattern:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.04) 39px,rgba(0,0,0,0.04) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.04) 39px,rgba(0,0,0,0.04) 40px);
+  --bg-size:40px 40px;
+  --btn-shadow:none;
+  --btn-hover-transform:translate(-2px,-2px);
+  --input-bg:#ffffff;
+  --input-border:#000000;
+  --modal-radius:0px;
+  --select-outline:rgba(243,156,18,0.15);
+  --select-bg:rgba(243,156,18,0.06);
+  --scrollbar-color:#000000;
+  --scrollbar-radius:0px;
+}

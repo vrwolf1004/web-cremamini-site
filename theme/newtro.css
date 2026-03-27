@@ -1,0 +1,22 @@
+.theme-newtro{
+  --bg:#fef9f0; --surface:#fff3e0; --text:#1a1a1a; --muted:#8a776c; --accent:#0096c7; --accent-contrast:#ffffff; --header-bg:rgba(0,150,199,0.06); --table-border:rgba(255,179,71,0.08); --table-row-hover:rgba(0,150,199,0.03);
+  --radius:8px;
+  --shadow:3px 3px 0 rgba(214,48,96,0.25);
+  --font-body:'Courier New',Courier,monospace;
+  --border-width:2px;
+  --border-color:rgba(0,150,199,0.35);
+  --letter-spacing:0.03em;
+  --heading-transform:none;
+  --btn-radius:6px;
+  --bg-pattern:radial-gradient(circle,rgba(255,179,71,0.08) 1px,transparent 1px);
+  --bg-size:22px 22px;
+  --btn-shadow:2px 2px 0 rgba(255,179,71,0.6);
+  --btn-hover-transform:translate(-1px,-1px);
+  --input-bg:#fffdf5;
+  --input-border:rgba(0,150,199,0.35);
+  --modal-radius:8px;
+  --select-outline:rgba(0,150,199,0.15);
+  --select-bg:rgba(0,150,199,0.06);
+  --scrollbar-color:#ffb347;
+  --scrollbar-radius:4px;
+}

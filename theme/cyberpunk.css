@@ -1,0 +1,25 @@
+html:has(.theme-cyberpunk){ color-scheme: dark; }
+.theme-cyberpunk{
+  --bg:#0a0a0f; --surface:#12121e; --text:#e8e8ff; --muted:#94a3b8; --accent:#00f5ff; --accent-contrast:#0a0a0f; --header-bg:rgba(0,245,255,0.06); --table-border:rgba(240,224,0,0.06); --table-row-hover:rgba(0,245,255,0.03);
+  --radius:2px;
+  --shadow:0 0 12px rgba(240,224,0,0.4), 0 0 24px rgba(0,245,255,0.2);
+  --font-body:'Courier New',Courier,monospace;
+  --border-width:1px;
+  --border-color:rgba(0,245,255,0.35);
+  --letter-spacing:0.06em;
+  --heading-transform:uppercase;
+  --btn-radius:2px;
+  --bg-pattern:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,245,255,0.02) 3px,rgba(0,245,255,0.02) 4px);
+  --bg-size:auto;
+  --btn-shadow:0 0 14px rgba(0,245,255,0.45);
+  --btn-hover-transform:translateY(-2px);
+  --input-bg:rgba(0,245,255,0.03);
+  --input-border:rgba(0,245,255,0.35);
+  --modal-radius:2px;
+  --select-outline:rgba(0,245,255,0.15);
+  --select-bg:rgba(0,245,255,0.05);
+  --scrollbar-color:#00f5ff;
+  --scrollbar-radius:0px;
+  --toggle-track:rgba(0,245,255,0.25);
+  --toggle-border:rgba(0,245,255,0.4);
+}

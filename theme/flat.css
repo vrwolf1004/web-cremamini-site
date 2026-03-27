@@ -1,0 +1,22 @@
+.theme-flat{
+  --bg:#ecf0f1; --surface:#ffffff; --text:#2c3e50; --muted:#6b7280; --accent:#e74c3c; --accent-contrast:#ffffff; --header-bg:rgba(231,76,60,0.06); --table-border:rgba(189,195,199,0.08); --table-row-hover:rgba(231,76,60,0.03);
+  --radius:4px;
+  --shadow:none;
+  --font-body:'Helvetica Neue',Arial,sans-serif;
+  --border-width:0px;
+  --border-color:rgba(0,0,0,0.1);
+  --letter-spacing:0;
+  --heading-transform:none;
+  --btn-radius:4px;
+  --bg-pattern:none;
+  --bg-size:auto;
+  --btn-shadow:none;
+  --btn-hover-transform:none;
+  --input-bg:#f8f8f8;
+  --input-border:rgba(0,0,0,0.12);
+  --modal-radius:4px;
+  --select-outline:rgba(231,76,60,0.1);
+  --select-bg:rgba(231,76,60,0.04);
+  --scrollbar-color:#bdc3c7;
+  --scrollbar-radius:0px;
+}

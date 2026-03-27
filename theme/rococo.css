@@ -1,0 +1,22 @@
+.theme-rococo{
+  --bg:#fdf4f8; --surface:#fde8f0; --text:#4a1a2c; --muted:#7b6b7a; --accent:#e8a0bf; --accent-contrast:#4a1a2c; --header-bg:rgba(232,160,191,0.06); --table-border:rgba(232,196,212,0.08); --table-row-hover:rgba(232,160,191,0.03);
+  --radius:22px;
+  --shadow:0 4px 20px rgba(194,84,122,0.18);
+  --font-body:Palatino,'Book Antiqua',Georgia,serif;
+  --border-width:1px;
+  --border-color:rgba(232,160,191,0.45);
+  --letter-spacing:0.02em;
+  --heading-transform:none;
+  --btn-radius:22px;
+  --bg-pattern:radial-gradient(ellipse at 20% 50%,rgba(232,160,191,0.06) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(253,228,240,0.08) 0%,transparent 50%);
+  --bg-size:auto;
+  --btn-shadow:0 4px 14px rgba(232,160,191,0.45);
+  --btn-hover-transform:translateY(-2px);
+  --input-bg:#fff0f6;
+  --input-border:rgba(232,160,191,0.45);
+  --modal-radius:24px;
+  --select-outline:rgba(232,160,191,0.2);
+  --select-bg:rgba(232,160,191,0.08);
+  --scrollbar-color:#e8a0bf;
+  --scrollbar-radius:999px;
+}

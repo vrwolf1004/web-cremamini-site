@@ -1,0 +1,16 @@
+<svg width="480" height="80" viewBox="0 0 420 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;display=swap');</style>
+  </defs>
+  <path d="M22,4 Q10,4 10,14 L10,30 Q10,40 4,40 Q10,40 10,50 L10,66 Q10,76 22,76"
+        fill="none" stroke="#1D9E75" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="42" cy="30" r="13" fill="#1D9E75"/>
+  <circle cx="42" cy="30" r="20" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4 3" opacity=".5"/>
+  <circle cx="72" cy="28" r="11" fill="#D85A30"/>
+  <circle cx="57" cy="50" r="10" fill="#378ADD"/>
+  <path d="M90,4 Q102,4 102,14 L102,30 Q102,40 108,40 Q102,40 102,50 L102,66 Q102,76 90,76"
+        fill="none" stroke="#1D9E75" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text font-family="'Syne', sans-serif" font-size="50" font-weight="800" letter-spacing="-2">
+    <tspan x="124" y="56" fill="#2C2C2A">pick</tspan><tspan fill="#1D9E75">layer</tspan>
+  </text>
+</svg>
