@@ -241,7 +241,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .data-table tbody tr.selected{outline:3px solid var(--select-outline, rgba(37,99,235,0.08));background:var(--select-bg, rgba(37,99,235,0.03))}
 
 /* Modal */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:1200}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:2000}
 .modal[aria-hidden="false"]{display:flex}
 .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.4)}
 .modal-sheet{position:relative;background:var(--surface);padding:18px;border-radius:var(--modal-radius, 12px);box-shadow:var(--shadow);border:var(--border-width, 1px) solid var(--border-color, rgba(0,0,0,0.08));z-index:2;max-width:420px;width:92%}
