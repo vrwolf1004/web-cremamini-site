@@ -506,10 +506,6 @@ function initComments() {
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
-  // show loading spinner
-  const loadingOverlay = document.getElementById('loading-overlay');
-  if(loadingOverlay) loadingOverlay.style.display = 'flex';
-
   // load manifest first, then render picker
   // load chosen language first (URL ?lang= -> localStorage -> navigator), then themes and UI
   const urlParams = new URLSearchParams(location.search);
