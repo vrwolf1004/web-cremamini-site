@@ -166,7 +166,7 @@ p,li,span,label,td,th,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word;word-break:brea
 
 /* Tabs */
 .tabs{margin:4px 0}
-.tab-list{display:flex;gap:4px;border-bottom:var(--border-width, 1px) solid var(--border-color, rgba(0,0,0,0.08));padding-bottom:0;margin-bottom:0}
+.tab-list{display:flex;gap:4px;flex-wrap:wrap;border-bottom:var(--border-width, 1px) solid var(--border-color, rgba(0,0,0,0.08));padding-bottom:0;margin-bottom:0}
 .tab{background:transparent;border:none;padding:8px 16px;border-radius:var(--btn-radius, 8px) var(--btn-radius, 8px) 0 0;cursor:pointer;color:var(--muted);font-family:var(--font-body);letter-spacing:var(--letter-spacing, 0);transition:all .15s}
 .tab:hover{background:var(--table-row-hover);color:var(--text)}
 .tab.active{background:var(--surface);color:var(--accent);border:var(--border-width, 1px) solid var(--border-color, rgba(0,0,0,0.08));border-bottom:2px solid var(--accent);font-weight:600;box-shadow:var(--btn-shadow, none)}
@@ -257,11 +257,11 @@ select option{background-color:var(--surface);color:revert}
 .inline{display:inline-flex;align-items:center;gap:8px}
 
 /* checkbox & radio groups in one line */
-.checkbox-group{display:flex;gap:16px;align-items:center}
+.checkbox-group{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .checkbox-group label{display:inline-flex;align-items:center;gap:6px;font-size:0.95rem}
 
 /* checkbox & radio groups in one line */
-.checkbox-group, .radio-group{display:flex;gap:16px;align-items:center}
+.checkbox-group, .radio-group{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .checkbox-group label, .radio-group label{display:inline-flex;align-items:center;gap:6px;font-size:0.95rem}
 
 /* Theme-aware form controls: use accent color for native checkboxes/radios */
