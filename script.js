@@ -548,13 +548,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
       const saved = localStorage.getItem('pl_theme');
       const initialTheme = saved || 'basic';
 
-      // Hide loading overlay after theme CSS is fully loaded
+      // Hide loading overlay after theme CSS is fully loaded + minimum 2s for animation loop
       const loadingOverlay = document.getElementById('loading-overlay');
+      const startTime = Date.now();
       loadThemeCss(initialTheme, () => {
-        if(loadingOverlay) {
-          loadingOverlay.classList.add('hidden');
-          setTimeout(() => loadingOverlay.style.display = 'none', 200);
-        }
+        const elapsed = Date.now() - startTime;
+        const minWaitTime = 2000; // One complete animation loop
+        const remainingWait = Math.max(0, minWaitTime - elapsed);
+        setTimeout(() => {
+          if(loadingOverlay) {
+            loadingOverlay.classList.add('hidden');
+            setTimeout(() => loadingOverlay.style.display = 'none', 200);
+          }
+        }, remainingWait);
       });
 
       renderThemeIntro(initialTheme);
