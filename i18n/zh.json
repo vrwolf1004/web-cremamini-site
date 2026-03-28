@@ -51,6 +51,7 @@
   "commentTooLong": "最多100个字符。",
   "urlNotAllowed": "不允许输入URL。",
   "tooManyRepeats": "重复字符太多。",
+  "badwordBlocked": "评论包含不当语言。",
   "cooldownWait": "秒后重试。",
   "fruit": {
     "apple": "苹果",

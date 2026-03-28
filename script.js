@@ -192,6 +192,23 @@ let _unsubscribeComments = null;
 const COMMENT_MAX = 100;
 const COMMENT_COOLDOWN = 30000; // 30초
 
+/* Badwords filter */
+let _badwords = { words: [], patterns: [] };
+async function loadBadwords() {
+  try {
+    const res = await fetch('badwords.json');
+    if (res.ok) _badwords = await res.json();
+  } catch (e) { /* 필터 로드 실패 시 무시 */ }
+}
+loadBadwords();
+
+function containsBadword(text) {
+  const lower = text.toLowerCase();
+  if (_badwords.words && _badwords.words.some(w => lower.includes(w.toLowerCase()))) return true;
+  if (_badwords.patterns && _badwords.patterns.some(p => new RegExp(p, 'i').test(text))) return true;
+  return false;
+}
+
 function getCurrentThemeId() {
   return localStorage.getItem('pl_theme') || 'basic';
 }
@@ -209,6 +226,7 @@ function validateComment(text) {
   if (text.length > COMMENT_MAX) return (getLocaleString('commentTooLong') || '100자 이하로 입력하세요.').replace('100', COMMENT_MAX);
   if (/https?:\/\//i.test(text) || /www\./i.test(text)) return getLocaleString('urlNotAllowed') || 'URL은 입력할 수 없습니다.';
   if (/(.)\1{9,}/.test(text)) return getLocaleString('tooManyRepeats') || '반복 문자가 너무 많습니다.';
+  if (containsBadword(text)) return getLocaleString('badwordBlocked') || '부적절한 표현이 포함되어 있습니다.';
   return null;
 }
 

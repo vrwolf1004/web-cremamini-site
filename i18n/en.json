@@ -51,6 +51,7 @@
     "commentTooLong": "Maximum 100 characters.",
     "urlNotAllowed": "URLs are not allowed.",
     "tooManyRepeats": "Too many repeated characters.",
+    "badwordBlocked": "Your comment contains inappropriate language.",
     "cooldownWait": "seconds before retry.",
     "fruit": {
       "apple": "Apple",

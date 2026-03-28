@@ -51,6 +51,7 @@
   "commentTooLong": "Maximal 100 Zeichen.",
   "urlNotAllowed": "URLs sind nicht erlaubt.",
   "tooManyRepeats": "Zu viele wiederholte Zeichen.",
+  "badwordBlocked": "Ihr Kommentar enthält unangemessene Sprache.",
   "cooldownWait": "Sekunden vor erneutem Versuch.",
   "fruit": {
     "apple": "Apfel",

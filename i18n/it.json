@@ -51,6 +51,7 @@
   "commentTooLong": "Massimo 100 caratteri.",
   "urlNotAllowed": "Gli URL non sono consentiti.",
   "tooManyRepeats": "Troppi caratteri ripetuti.",
+  "badwordBlocked": "Il commento contiene linguaggio inappropriato.",
   "cooldownWait": "secondi prima di riprovare.",
   "fruit": {
     "apple": "Mela",

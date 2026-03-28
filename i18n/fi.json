@@ -51,6 +51,7 @@
   "commentTooLong": "Enintään 100 merkkiä.",
   "urlNotAllowed": "URL-osoitteet eivät ole sallittuja.",
   "tooManyRepeats": "Liian monta toistettua merkkiä.",
+  "badwordBlocked": "Kommenttisi sisältää sopimatonta kieltä.",
   "cooldownWait": "sekuntia ennen uudelleen yritystä.",
   "fruit": {
     "apple": "Omena",

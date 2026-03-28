@@ -51,6 +51,7 @@
   "commentTooLong": "100자 이하로 입력하세요.",
   "urlNotAllowed": "URL은 입력할 수 없습니다.",
   "tooManyRepeats": "반복 문자가 너무 많습니다.",
+  "badwordBlocked": "부적절한 표현이 포함되어 있습니다.",
   "cooldownWait": "초 후에 다시 시도하세요.",
   "fruit": {
     "apple": "사과",

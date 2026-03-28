@@ -51,6 +51,7 @@
   "commentTooLong": "最大100文字です。",
   "urlNotAllowed": "URLは許可されていません。",
   "tooManyRepeats": "繰り返し文字が多すぎます。",
+  "badwordBlocked": "不適切な表現が含まれています。",
   "cooldownWait": "秒後に再度お試しください。",
   "fruit": {
     "apple": "りんご",
