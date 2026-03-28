@@ -96,9 +96,9 @@
   "menuLangLabel": "언어 선택",
   "complete": "완료",
   "gridRows": [
-    {"name": "민준", "status": "활성"},
-    {"name": "서연", "status": "비활성"},
-    {"name": "지호", "status": "활성"},
-    {"name": "수아", "status": "대기중"}
+    {"name": "김준호", "status": "활성"},
+    {"name": "이지은", "status": "비활성"},
+    {"name": "박민수", "status": "활성"},
+    {"name": "최서은", "status": "대기중"}
   ]
 }

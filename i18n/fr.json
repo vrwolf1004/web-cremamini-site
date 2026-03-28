@@ -96,9 +96,9 @@
   "menuLangLabel": "Sélectionner la langue",
   "complete": "Terminer",
   "gridRows": [
-    {"name": "Gabriel", "status": "Actif"},
-    {"name": "Emma", "status": "Inactif"},
-    {"name": "Lucas", "status": "Actif"},
-    {"name": "Camille", "status": "En attente"}
+    {"name": "Jean", "status": "Actif"},
+    {"name": "Marie", "status": "Inactif"},
+    {"name": "Pierre", "status": "Actif"},
+    {"name": "Sophie", "status": "En attente"}
   ]
 }

@@ -96,9 +96,9 @@
   "menuLangLabel": "Valitse kieli",
   "complete": "Valmis",
   "gridRows": [
-    {"name": "James", "status": "Aktiivinen"},
-    {"name": "Emma", "status": "Passiivinen"},
-    {"name": "Liam", "status": "Aktiivinen"},
-    {"name": "Olivia", "status": "Odottava"}
+    {"name": "Jussi", "status": "Aktiivinen"},
+    {"name": "Liisa", "status": "Passiivinen"},
+    {"name": "Pekka", "status": "Aktiivinen"},
+    {"name": "Aino", "status": "Odottava"}
   ]
 }

@@ -96,9 +96,9 @@
   "menuLangLabel": "Seleziona lingua",
   "complete": "Fatto",
   "gridRows": [
-    {"name": "James", "status": "Attivo"},
-    {"name": "Emma", "status": "Inattivo"},
-    {"name": "Liam", "status": "Attivo"},
-    {"name": "Olivia", "status": "In sospeso"}
+    {"name": "Marco", "status": "Attivo"},
+    {"name": "Giulia", "status": "Inattivo"},
+    {"name": "Paolo", "status": "Attivo"},
+    {"name": "Lucia", "status": "In sospeso"}
   ]
 }

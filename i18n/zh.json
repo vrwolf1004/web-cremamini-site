@@ -96,9 +96,9 @@
   "menuLangLabel": "选择语言",
   "complete": "完成",
   "gridRows": [
-    {"name": "伟", "status": "活跃"},
-    {"name": "芳", "status": "未激活"},
-    {"name": "磊", "status": "活跃"},
-    {"name": "静", "status": "待处理"}
+    {"name": "张伟", "status": "活跃"},
+    {"name": "王芳", "status": "未激活"},
+    {"name": "李磊", "status": "活跃"},
+    {"name": "赵静", "status": "待处理"}
   ]
 }

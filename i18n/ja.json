@@ -96,9 +96,9 @@
   "menuLangLabel": "言語を選択",
   "complete": "完了",
   "gridRows": [
-    {"name": "蓮", "status": "アクティブ"},
-    {"name": "陽葵", "status": "非アクティブ"},
-    {"name": "蒼", "status": "アクティブ"},
-    {"name": "紬", "status": "保留中"}
+    {"name": "田中太郎", "status": "有効"},
+    {"name": "山田花子", "status": "無効"},
+    {"name": "鈴木健太", "status": "有効"},
+    {"name": "高橋美咲", "status": "保留中"}
   ]
 }

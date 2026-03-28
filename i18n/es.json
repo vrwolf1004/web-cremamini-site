@@ -96,9 +96,9 @@
   "menuLangLabel": "Seleccionar idioma",
   "complete": "Hecho",
   "gridRows": [
-    {"name": "Mateo", "status": "Activo"},
-    {"name": "Sofía", "status": "Inactivo"},
-    {"name": "Lucas", "status": "Activo"},
-    {"name": "Valentina", "status": "Pendiente"}
+    {"name": "Juan", "status": "Activo"},
+    {"name": "María", "status": "Inactivo"},
+    {"name": "Carlos", "status": "Activo"},
+    {"name": "Ana", "status": "Pendiente"}
   ]
 }

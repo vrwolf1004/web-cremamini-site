@@ -96,9 +96,9 @@
   "menuLangLabel": "Sprache auswählen",
   "complete": "Fertig",
   "gridRows": [
-    {"name": "James", "status": "Aktiv"},
-    {"name": "Emma", "status": "Inaktiv"},
-    {"name": "Liam", "status": "Aktiv"},
-    {"name": "Olivia", "status": "Ausstehend"}
+    {"name": "Hans", "status": "Aktiv"},
+    {"name": "Greta", "status": "Inaktiv"},
+    {"name": "Klaus", "status": "Aktiv"},
+    {"name": "Anna", "status": "Ausstehend"}
   ]
 }
