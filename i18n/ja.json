@@ -30,6 +30,7 @@
   "acc3Content": "フォントファミリ、サイズ、字間、行間をテーマに合わせて定義します。",
   "anonymousComments": "コメント",
   "menuLabel": "テーマ/言語",
+  "menuTitle": "メニュー",
   "anonymousNote": "匿名で投稿されます。更新後、削除権限が変更される可能性があります。",
   "submit": "送信",
   "clearAll": "全て削除"
