@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>색깔 심리학 - picklayer.net</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .page-container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    .page-header { text-align: center; margin-bottom: 40px; }
+    .page-header h1 { margin: 0; font-size: 2rem; }
+    .page-content { line-height: 1.8; color: var(--text); }
+    .page-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.3rem; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+    .page-content h3 { margin-top: 20px; margin-bottom: 10px; font-size: 1.1rem; }
+    .page-content p { margin: 10px 0; }
+    .page-content ul { margin: 10px 0; padding-left: 20px; }
+    .page-content li { margin: 5px 0; }
+    .lang-nav { text-align: center; margin-bottom: 30px; }
+    .lang-nav button { background: var(--accent); color: var(--accent-contrast); border: none; padding: 8px 12px; margin: 0 5px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+    .lang-nav button.active { opacity: 0.6; }
+    .lang-section { display: none; }
+    .lang-section.active { display: block; }
+    .color-box { display: inline-block; width: 30px; height: 30px; margin: 0 5px; vertical-align: middle; border-radius: 4px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body class="theme-basic">
+  <header class="site-header">
+    <img src="../assets/picklayer-light.svg" alt="picklayer.net" class="site-logo" style="height:48px;margin-bottom:8px">
+    <h1>색깔 심리학</h1>
+  </header>
+
+  <div class="page-container">
+    <div class="lang-nav">
+      <button class="lang-btn active" onclick="switchLang(this, 'ko')">한국어</button>
+      <button class="lang-btn" onclick="switchLang(this, 'en')">English</button>
+      <button class="lang-btn" onclick="switchLang(this, 'ja')">日本語</button>
+      <button class="lang-btn" onclick="switchLang(this, 'zh')">中文</button>
+      <button class="lang-btn" onclick="switchLang(this, 'es')">Español</button>
+    </div>
+
+    <!-- Korean -->
+    <div class="lang-section active" id="ko">
+      <div class="page-content">
+        <h2>색깔 심리학: 디자인 이해하기</h2>
+        <p>색깔은 우리의 감정과 지각에 강력한 영향을 미칩니다. picklayer.net의 테마들이 어떻게 색깔을 사용하는지 이해해봅시다.</p>
+
+        <h2>1. 색깔의 기본 심리학</h2>
+
+        <h3>🔴 빨강 (Red)</h3>
+        <p><span class="color-box" style="background-color: #FF0000;"></span></p>
+        <ul>
+          <li><strong>의미</strong>: 에너지, 열정, 긴급</li>
+          <li><strong>감정</strong>: 흥분, 위험, 사랑</li>
+          <li><strong>사용</strong>: 중요한 버튼, 에러 메시지, 중요 알림</li>
+        </ul>
+
+        <h3>🔵 파랑 (Blue)</h3>
+        <p><span class="color-box" style="background-color: #0000FF;"></span></p>
+        <ul>
+          <li><strong>의미</strong>: 신뢰, 안정성, 평온</li>
+          <li><strong>감정</strong>: 차분함, 전문성, 안심</li>
+          <li><strong>사용</strong>: 기본 UI, 배경, 신뢰도 강조</li>
+        </ul>
+
+        <h3>🟢 초록 (Green)</h3>
+        <p><span class="color-box" style="background-color: #00AA00;"></span></p>
+        <ul>
+          <li><strong>의미</strong>: 자연, 성장, 건강</li>
+          <li><strong>감정</strong>: 평화, 신선함, 생명력</li>
+          <li><strong>사용</strong>: 성공 메시지, 승인, 확인 버튼</li>
+        </ul>
+
+        <h3>🟡 노랑 (Yellow)</h3>
+        <p><span class="color-box" style="background-color: #FFFF00;"></span></p>
+        <ul>
+          <li><strong>의미</strong>: 밝음, 낙관, 경고</li>
+          <li><strong>감정</strong>: 행복, 주의, 에너지</li>
+          <li><strong>사용</strong>: 강조, 주의 알림, 긍정적 메시지</li>
+        </ul>
+
+        <h3>🟣 보라 (Purple)</h3>
+        <p><span class="color-box" style="background-color: #AA00AA;"></span></p>
+        <ul>
+          <li><strong>의미</strong>: 창의성, 신비, 럭셔리</li>
+          <li><strong>감정</strong>: 상상, 영감, 우아함</li>
+          <li><strong>사용</strong>: 창의적 콘텐츠, 프리미엄 느낌</li>
+        </ul>
+
+        <h3>⚫ 검정 (Black)</h3>
+        <p><span class="color-box" style="background-color: #000000;"></span></p>
+        <ul>
+          <li><strong>의미</strong>: 권력, 공식성, 우아함</li>
+          <li><strong>감정</strong>: 신중, 형식적, 고급스러움</li>
+          <li><strong>사용</strong>: 배경, 텍스트, 대비 강조</li>
+        </ul>
+
+        <h3>⚪ 흰색 (White)</h3>
+        <p><span class="color-box" style="background-color: #FFFFFF; border: 2px solid #999;"></span></p>
+        <ul>
+          <li><strong>의미</strong>: 순수성, 명확함, 공간감</li>
+          <li><strong>감정</strong>: 깔끔함, 단순함, 신선함</li>
+          <li><strong>사용</strong>: 여백, 배경, 가독성 강화</li>
+        </ul>
+
+        <h2>2. 대비 (Contrast)</h2>
+        <p>색깔의 대비는 사용자의 시선을 유도합니다.</p>
+        <ul>
+          <li><strong>높은 대비</strong>: Cyberpunk, Dark 테마 — 명확하고 집중력 강함</li>
+          <li><strong>낮은 대비</strong>: Minimalism, Scandinavian — 부드럽고 차분함</li>
+          <li><strong>따뜻한 색</strong>: Vaporwave, Memphis — 친근하고 활기찬 분위기</li>
+          <li><strong>차가운 색</strong>: Glass, Light — 현대적이고 전문적인 느낌</li>
+        </ul>
+
+        <h2>3. picklayer.net 테마별 색 전략</h2>
+
+        <h3>Light / Dark</h3>
+        <p>기본적인 색 대비: 어두운 텍스트 + 밝은 배경 (또는 반대)</p>
+        <p><strong>목표</strong>: 최대 가독성, 눈 피로 최소화</p>
+
+        <h3>Cyberpunk</h3>
+        <p>네온 핑크, 시안, 자주 — 고대비 + 미래적 느낌</p>
+        <p><strong>목표</strong>: 에너지, 흥미로움, 모던</p>
+
+        <h3>Vaporwave</h3>
+        <p>파스텔 핑크, 라벤더, 민트 — 복고풍 + 향수</p>
+        <p><strong>목표</strong>: 부드러움, 향수, 창의성</p>
+
+        <h3>Glass</h3>
+        <p>반투명한 계층 + 뉘앙스있는 색 — 모던하고 우아함</p>
+        <p><strong>목표</strong>: 세련됨, 깊이감, 공간감</p>
+
+        <h2>4. 색 심리학이 주는 영향</h2>
+
+        <h3>감정적 반응</h3>
+        <ul>
+          <li>🔴 빨강: 빠른 심박, 긴장감</li>
+          <li>🔵 파랑: 안정감, 신뢰</li>
+          <li>🟢 초록: 편안함, 안심</li>
+        </ul>
+
+        <h3>인지력 (Cognition)</h3>
+        <ul>
+          <li>높은 대비: 빠른 정보 처리</li>
+          <li>낮은 대비: 깊이있는 사고 유도</li>
+          <li>따뜻한 색: 가까워 보임</li>
+          <li>차가운 색: 멀리 보임</li>
+        </ul>
+
+        <h2>5. 실무 팁</h2>
+        <ul>
+          <li>💡 <strong>자신의 상태에 맞는 테마 선택</strong>: 에너지 필요? Cyberpunk. 편안함? Minimalism.</li>
+          <li>💡 <strong>시간대별 테마</strong>: 아침엔 Light, 저녁엔 Dark</li>
+          <li>💡 <strong>작업별 테마</strong>: 창의성? Vaporwave. 집중? Glass.</li>
+          <li>💡 <strong>대비도 고려</strong>: 눈 피로 많으면 높은 대비 테마 선택</li>
+        </ul>
+
+        <h2>6. 추가 학습</h2>
+        <p>색깔 심리학은 UI/UX 디자인의 핵심입니다. picklayer.net의 40개 테마를 경험하면서 각 색의 영향을 직접 느껴보세요!</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">마지막 수정: 2026년 3월 28일</p>
+      </div>
+    </div>
+
+    <!-- English -->
+    <div class="lang-section" id="en">
+      <div class="page-content">
+        <h2>Color Psychology: Understanding Design</h2>
+        <p>Color has a powerful influence on our emotions and perception. Let's understand how picklayer.net themes use color strategically.</p>
+
+        <h2>1. Basic Color Psychology</h2>
+
+        <h3>🔴 Red</h3>
+        <p><span class="color-box" style="background-color: #FF0000;"></span></p>
+        <ul>
+          <li><strong>Meaning</strong>: Energy, passion, urgency</li>
+          <li><strong>Emotion</strong>: Excitement, danger, love</li>
+          <li><strong>Usage</strong>: Important buttons, error messages, critical alerts</li>
+        </ul>
+
+        <h3>🔵 Blue</h3>
+        <p><span class="color-box" style="background-color: #0000FF;"></span></p>
+        <ul>
+          <li><strong>Meaning</strong>: Trust, stability, calm</li>
+          <li><strong>Emotion</strong>: Serenity, professionalism, reassurance</li>
+          <li><strong>Usage</strong>: Primary UI, backgrounds, trust emphasis</li>
+        </ul>
+
+        <h3>🟢 Green</h3>
+        <p><span class="color-box" style="background-color: #00AA00;"></span></p>
+        <ul>
+          <li><strong>Meaning</strong>: Nature, growth, health</li>
+          <li><strong>Emotion</strong>: Peace, freshness, vitality</li>
+          <li><strong>Usage</strong>: Success messages, approval, confirm buttons</li>
+        </ul>
+
+        <h3>🟡 Yellow</h3>
+        <p><span class="color-box" style="background-color: #FFFF00;"></span></p>
+        <ul>
+          <li><strong>Meaning</strong>: Brightness, optimism, warning</li>
+          <li><strong>Emotion</strong>: Happiness, caution, energy</li>
+          <li><strong>Usage</strong>: Emphasis, warning alerts, positive messages</li>
+        </ul>
+
+        <h3>🟣 Purple</h3>
+        <p><span class="color-box" style="background-color: #AA00AA;"></span></p>
+        <ul>
+          <li><strong>Meaning</strong>: Creativity, mystery, luxury</li>
+          <li><strong>Emotion</strong>: Imagination, inspiration, elegance</li>
+          <li><strong>Usage</strong>: Creative content, premium feel</li>
+        </ul>
+
+        <h3>⚫ Black</h3>
+        <p><span class="color-box" style="background-color: #000000;"></span></p>
+        <ul>
+          <li><strong>Meaning</strong>: Power, formality, elegance</li>
+          <li><strong>Emotion</strong>: Sophistication, formal, luxury</li>
+          <li><strong>Usage</strong>: Backgrounds, text, contrast emphasis</li>
+        </ul>
+
+        <h3>⚪ White</h3>
+        <p><span class="color-box" style="background-color: #FFFFFF; border: 2px solid #999;"></span></p>
+        <ul>
+          <li><strong>Meaning</strong>: Purity, clarity, spaciousness</li>
+          <li><strong>Emotion</strong>: Cleanliness, simplicity, freshness</li>
+          <li><strong>Usage</strong>: Whitespace, backgrounds, readability enhancement</li>
+        </ul>
+
+        <h2>2. Contrast</h2>
+        <p>Color contrast guides user attention.</p>
+        <ul>
+          <li><strong>High Contrast</strong>: Cyberpunk, Dark — Clear and focused</li>
+          <li><strong>Low Contrast</strong>: Minimalism, Scandinavian — Soft and calm</li>
+          <li><strong>Warm Colors</strong>: Vaporwave, Memphis — Friendly and vibrant</li>
+          <li><strong>Cool Colors</strong>: Glass, Light — Modern and professional</li>
+        </ul>
+
+        <h2>3. picklayer.net Theme Color Strategies</h2>
+
+        <h3>Light / Dark</h3>
+        <p>Basic color contrast: dark text + light background (or reverse)</p>
+        <p><strong>Goal</strong>: Maximum readability, minimal eye strain</p>
+
+        <h3>Cyberpunk</h3>
+        <p>Neon pink, cyan, purple — High contrast + futuristic feel</p>
+        <p><strong>Goal</strong>: Energy, excitement, modern</p>
+
+        <h3>Vaporwave</h3>
+        <p>Pastel pink, lavender, mint — Retro + nostalgic</p>
+        <p><strong>Goal</strong>: Softness, nostalgia, creativity</p>
+
+        <h3>Glass</h3>
+        <p>Translucent layers + nuanced colors — Modern and elegant</p>
+        <p><strong>Goal</strong>: Sophistication, depth, spaciousness</p>
+
+        <h2>4. Impact of Color Psychology</h2>
+
+        <h3>Emotional Response</h3>
+        <ul>
+          <li>🔴 Red: Increased heart rate, tension</li>
+          <li>🔵 Blue: Stability, trust</li>
+          <li>🟢 Green: Comfort, reassurance</li>
+        </ul>
+
+        <h3>Cognition</h3>
+        <ul>
+          <li>High contrast: Fast information processing</li>
+          <li>Low contrast: Deeper thinking induced</li>
+          <li>Warm colors: Appear closer</li>
+          <li>Cool colors: Appear distant</li>
+        </ul>
+
+        <h2>5. Practical Tips</h2>
+        <ul>
+          <li>💡 <strong>Choose theme matching your state</strong>: Need energy? Cyberpunk. Comfort? Minimalism.</li>
+          <li>💡 <strong>Time-based themes</strong>: Light in morning, Dark in evening</li>
+          <li>💡 <strong>Task-based themes</strong>: Creative work? Vaporwave. Focus? Glass.</li>
+          <li>💡 <strong>Consider contrast</strong>: Eye fatigue? Choose high-contrast themes</li>
+        </ul>
+
+        <h2>6. Further Learning</h2>
+        <p>Color psychology is fundamental to UI/UX design. Experience picklayer.net's 40 themes and feel each color's impact directly!</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">Last updated: March 28, 2026</p>
+      </div>
+    </div>
+
+    <!-- Japanese -->
+    <div class="lang-section" id="ja">
+      <div class="page-content">
+        <h2>色彩心理学: デザインを理解する</h2>
+        <p>色は私たちの感情と認識に強力な影響を与えます。picklayer.net のテーマがどのように色を戦略的に使用するかを理解しましょう。</p>
+
+        <h2>1. 基本的な色彩心理学</h2>
+
+        <h3>🔴 赤（Red）</h3>
+        <p><span class="color-box" style="background-color: #FF0000;"></span></p>
+        <ul>
+          <li><strong>意味</strong>: エネルギー、情熱、緊急性</li>
+          <li><strong>感情</strong>: 興奮、危険、愛</li>
+          <li><strong>用途</strong>: 重要なボタン、エラーメッセージ、重要なアラート</li>
+        </ul>
+
+        <h3>🔵 青（Blue）</h3>
+        <p><span class="color-box" style="background-color: #0000FF;"></span></p>
+        <ul>
+          <li><strong>意味</strong>: 信頼、安定性、穏やかさ</li>
+          <li><strong>感情</strong>: 落ち着き、プロフェッショナリズム、安心</li>
+          <li><strong>用途</strong>: プライマリUI、背景、信頼の強調</li>
+        </ul>
+
+        <h3>🟢 緑（Green）</h3>
+        <p><span class="color-box" style="background-color: #00AA00;"></span></p>
+        <ul>
+          <li><strong>意味</strong>: 自然、成長、健康</li>
+          <li><strong>感情</strong>: 平和、新鮮さ、活力</li>
+          <li><strong>用途</strong>: 成功メッセージ、承認、確認ボタン</li>
+        </ul>
+
+        <h3>🟡 黄（Yellow）</h3>
+        <p><span class="color-box" style="background-color: #FFFF00;"></span></p>
+        <ul>
+          <li><strong>意味</strong>: 明るさ、楽観、警告</li>
+          <li><strong>感情</strong>: 幸せ、注意、エネルギー</li>
+          <li><strong>用途</strong>: 強調、警告アラート、肯定的なメッセージ</li>
+        </ul>
+
+        <h3>🟣 紫（Purple）</h3>
+        <p><span class="color-box" style="background-color: #AA00AA;"></span></p>
+        <ul>
+          <li><strong>意味</strong>: 創造性、神秘性、高級感</li>
+          <li><strong>感情</strong>: 想像力、インスピレーション、優雅さ</li>
+          <li><strong>用途</strong>: クリエイティブコンテンツ、プレミアム感</li>
+        </ul>
+
+        <h3>⚫ 黒（Black）</h3>
+        <p><span class="color-box" style="background-color: #000000;"></span></p>
+        <ul>
+          <li><strong>意味</strong>: 力、形式性、優雅さ</li>
+          <li><strong>感情</strong>: 洗練、形式的、ラグジュアリー</li>
+          <li><strong>用途</strong>: 背景、テキスト、コントラスト強調</li>
+        </ul>
+
+        <h3>⚪ 白（White）</h3>
+        <p><span class="color-box" style="background-color: #FFFFFF; border: 2px solid #999;"></span></p>
+        <ul>
+          <li><strong>意味</strong>: 純粋性、明確さ、広さ</li>
+          <li><strong>感情</strong>: 清潔感、シンプルさ、新鮮さ</li>
+          <li><strong>用途</strong>: 空白、背景、読みやすさ向上</li>
+        </ul>
+
+        <h2>2. コントラスト</h2>
+        <p>色のコントラストはユーザーの注意を導きます。</p>
+        <ul>
+          <li><strong>高コントラスト</strong>: Cyberpunk、Dark — 明確で集中力がある</li>
+          <li><strong>低コントラスト</strong>: Minimalism、Scandinavian — 柔らかく落ち着いている</li>
+          <li><strong>暖色</strong>: Vaporwave、Memphis — 親しみやすく活気がある</li>
+          <li><strong>寒色</strong>: Glass、Light — モダンでプロフェッショナル</li>
+        </ul>
+
+        <h2>3. picklayer.net テーマの色戦略</h2>
+
+        <h3>Light / Dark</h3>
+        <p>基本的な色のコントラスト: 暗いテキスト + 明るい背景 (またはその逆)</p>
+        <p><strong>目標</strong>: 最大の読みやすさ、目の疲れを最小化</p>
+
+        <h3>Cyberpunk</h3>
+        <p>ネオンピンク、シアン、紫 — 高コントラスト + 未来的</p>
+        <p><strong>目標</strong>: エネルギー、興味深さ、モダン</p>
+
+        <h3>Vaporwave</h3>
+        <p>パステルピンク、ラベンダー、ミント — レトロ + 懐かしさ</p>
+        <p><strong>目標</strong>: 柔らかさ、懐かしさ、創造性</p>
+
+        <h3>Glass</h3>
+        <p>半透明のレイヤー + ニュアンスのある色 — モダンで優雅</p>
+        <p><strong>目標</strong>: 洗練、奥行き、広さ</p>
+
+        <h2>4. 色彩心理学の影響</h2>
+
+        <h3>感情的反応</h3>
+        <ul>
+          <li>🔴 赤: 心拍増加、緊張</li>
+          <li>🔵 青: 安定性、信頼</li>
+          <li>🟢 緑: 快適さ、安心</li>
+        </ul>
+
+        <h3>認知</h3>
+        <ul>
+          <li>高コントラスト: 情報処理が速い</li>
+          <li>低コントラスト: 深い思考を促進</li>
+          <li>暖色: 近く見える</li>
+          <li>寒色: 遠く見える</li>
+        </ul>
+
+        <h2>5. 実践的なヒント</h2>
+        <ul>
+          <li>💡 <strong>自分の状態に合ったテーマを選ぶ</strong>: エネルギーが必要? Cyberpunk. 快適さ? Minimalism.</li>
+          <li>💡 <strong>時間帯別テーマ</strong>: 朝は Light、夜は Dark</li>
+          <li>💡 <strong>タスク別テーマ</strong>: 創造的な作業? Vaporwave. 集中? Glass.</li>
+          <li>💡 <strong>コントラストを考慮</strong>: 目の疲れが多い場合は高コントラストテーマを選ぶ</li>
+        </ul>
+
+        <h2>6. さらに学ぶ</h2>
+        <p>色彩心理学はUI/UXデザインの基礎です。picklayer.net の 40 個のテーマを体験して、各色の影響を直接感じてみてください！</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">最終更新: 2026 年 3 月 28 日</p>
+      </div>
+    </div>
+
+    <!-- Chinese -->
+    <div class="lang-section" id="zh">
+      <div class="page-content">
+        <h2>色彩心理学：理解设计</h2>
+        <p>颜色对我们的情绪和感知有着强大的影响。让我们了解 picklayer.net 主题如何战略性地使用颜色。</p>
+
+        <h2>1. 基本色彩心理学</h2>
+
+        <h3>🔴 红色（Red）</h3>
+        <p><span class="color-box" style="background-color: #FF0000;"></span></p>
+        <ul>
+          <li><strong>含义</strong>: 能量、热情、紧急</li>
+          <li><strong>情感</strong>: 兴奋、危险、爱</li>
+          <li><strong>用途</strong>: 重要按钮、错误消息、关键警报</li>
+        </ul>
+
+        <h3>🔵 蓝色（Blue）</h3>
+        <p><span class="color-box" style="background-color: #0000FF;"></span></p>
+        <ul>
+          <li><strong>含义</strong>: 信任、稳定、平静</li>
+          <li><strong>情感</strong>: 宁静、专业性、放心</li>
+          <li><strong>用途</strong>: 主要 UI、背景、信任强调</li>
+        </ul>
+
+        <h3>🟢 绿色（Green）</h3>
+        <p><span class="color-box" style="background-color: #00AA00;"></span></p>
+        <ul>
+          <li><strong>含义</strong>: 自然、增长、健康</li>
+          <li><strong>情感</strong>: 和平、新鲜、活力</li>
+          <li><strong>用途</strong>: 成功消息、批准、确认按钮</li>
+        </ul>
+
+        <h3>🟡 黄色（Yellow）</h3>
+        <p><span class="color-box" style="background-color: #FFFF00;"></span></p>
+        <ul>
+          <li><strong>含义</strong>: 明亮、乐观、警告</li>
+          <li><strong>情感</strong>: 快乐、谨慎、能量</li>
+          <li><strong>用途</strong>: 强调、警告警报、正面消息</li>
+        </ul>
+
+        <h3>🟣 紫色（Purple）</h3>
+        <p><span class="color-box" style="background-color: #AA00AA;"></span></p>
+        <ul>
+          <li><strong>含义</strong>: 创意、神秘、奢华</li>
+          <li><strong>情感</strong>: 想象、灵感、优雅</li>
+          <li><strong>用途</strong>: 创意内容、高级感</li>
+        </ul>
+
+        <h3>⚫ 黑色（Black）</h3>
+        <p><span class="color-box" style="background-color: #000000;"></span></p>
+        <ul>
+          <li><strong>含义</strong>: 力量、正式、优雅</li>
+          <li><strong>情感</strong>: 洗练、正式、豪华</li>
+          <li><strong>用途</strong>: 背景、文本、对比强调</li>
+        </ul>
+
+        <h3>⚪ 白色（White）</h3>
+        <p><span class="color-box" style="background-color: #FFFFFF; border: 2px solid #999;"></span></p>
+        <ul>
+          <li><strong>含义</strong>: 纯净、清晰、开阔</li>
+          <li><strong>情感</strong>: 干净、简单、清新</li>
+          <li><strong>用途</strong>: 空白、背景、可读性增强</li>
+        </ul>
+
+        <h2>2. 对比</h2>
+        <p>颜色对比引导用户注意力。</p>
+        <ul>
+          <li><strong>高对比</strong>: Cyberpunk、Dark — 清晰且专注</li>
+          <li><strong>低对比</strong>: Minimalism、Scandinavian — 柔和且平静</li>
+          <li><strong>暖色</strong>: Vaporwave、Memphis — 亲切且充满活力</li>
+          <li><strong>冷色</strong>: Glass、Light — 现代且专业</li>
+        </ul>
+
+        <h2>3. picklayer.net 主题色彩策略</h2>
+
+        <h3>Light / Dark</h3>
+        <p>基本色彩对比：深色文本 + 浅色背景（或反之）</p>
+        <p><strong>目标</strong>: 最大可读性，最小眼睛疲劳</p>
+
+        <h3>Cyberpunk</h3>
+        <p>霓虹粉色、青色、紫色 — 高对比 + 未来感</p>
+        <p><strong>目标</strong>: 能量、兴趣、现代</p>
+
+        <h3>Vaporwave</h3>
+        <p>柔和粉色、薰衣草色、薄荷色 — 复古 + 怀旧</p>
+        <p><strong>目标</strong>: 柔和、怀旧、创意</p>
+
+        <h3>Glass</h3>
+        <p>半透明图层 + 细微色调 — 现代且优雅</p>
+        <p><strong>目标</strong>: 精致、深度、开阔</p>
+
+        <h2>4. 色彩心理学的影响</h2>
+
+        <h3>情感反应</h3>
+        <ul>
+          <li>🔴 红色: 心率加快、紧张</li>
+          <li>🔵 蓝色: 稳定性、信任</li>
+          <li>🟢 绿色: 舒适、放心</li>
+        </ul>
+
+        <h3>认知</h3>
+        <ul>
+          <li>高对比: 信息处理速度快</li>
+          <li>低对比: 促进深层思考</li>
+          <li>暖色: 显得更近</li>
+          <li>冷色: 显得更远</li>
+        </ul>
+
+        <h2>5. 实用建议</h2>
+        <ul>
+          <li>💡 <strong>选择适合您状态的主题</strong>: 需要能量？Cyberpunk。舒适？Minimalism。</li>
+          <li>💡 <strong>按时间选择</strong>: 早上 Light，晚上 Dark</li>
+          <li>💡 <strong>按任务选择</strong>: 创意工作？Vaporwave。集中？Glass。</li>
+          <li>💡 <strong>考虑对比度</strong>: 眼睛疲劳? 选择高对比主题</li>
+        </ul>
+
+        <h2>6. 进一步学习</h2>
+        <p>色彩心理学是 UI/UX 设计的基础。体验 picklayer.net 的 40 个主题，直接感受每种颜色的影响！</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">最后更新: 2026 年 3 月 28 日</p>
+      </div>
+    </div>
+
+    <!-- Spanish -->
+    <div class="lang-section" id="es">
+      <div class="page-content">
+        <h2>Psicología del Color: Entendiendo el Diseño</h2>
+        <p>El color tiene una poderosa influencia en nuestras emociones y percepción. Entendamos cómo los temas de picklayer.net usan el color estratégicamente.</p>
+
+        <h2>1. Psicología Básica del Color</h2>
+
+        <h3>🔴 Rojo (Red)</h3>
+        <p><span class="color-box" style="background-color: #FF0000;"></span></p>
+        <ul>
+          <li><strong>Significado</strong>: Energía, pasión, urgencia</li>
+          <li><strong>Emoción</strong>: Excitación, peligro, amor</li>
+          <li><strong>Uso</strong>: Botones importantes, mensajes de error, alertas críticas</li>
+        </ul>
+
+        <h3>🔵 Azul (Blue)</h3>
+        <p><span class="color-box" style="background-color: #0000FF;"></span></p>
+        <ul>
+          <li><strong>Significado</strong>: Confianza, estabilidad, calma</li>
+          <li><strong>Emoción</strong>: Serenidad, profesionalismo, seguridad</li>
+          <li><strong>Uso</strong>: UI primaria, fondos, énfasis en confianza</li>
+        </ul>
+
+        <h3>🟢 Verde (Green)</h3>
+        <p><span class="color-box" style="background-color: #00AA00;"></span></p>
+        <ul>
+          <li><strong>Significado</strong>: Naturaleza, crecimiento, salud</li>
+          <li><strong>Emoción</strong>: Paz, frescura, vitalidad</li>
+          <li><strong>Uso</strong>: Mensajes de éxito, aprobación, botones de confirmación</li>
+        </ul>
+
+        <h3>🟡 Amarillo (Yellow)</h3>
+        <p><span class="color-box" style="background-color: #FFFF00;"></span></p>
+        <ul>
+          <li><strong>Significado</strong>: Brillo, optimismo, advertencia</li>
+          <li><strong>Emoción</strong>: Felicidad, precaución, energía</li>
+          <li><strong>Uso</strong>: Énfasis, alertas de advertencia, mensajes positivos</li>
+        </ul>
+
+        <h3>🟣 Púrpura (Purple)</h3>
+        <p><span class="color-box" style="background-color: #AA00AA;"></span></p>
+        <ul>
+          <li><strong>Significado</strong>: Creatividad, misterio, lujo</li>
+          <li><strong>Emoción</strong>: Imaginación, inspiración, elegancia</li>
+          <li><strong>Uso</strong>: Contenido creativo, sensación premium</li>
+        </ul>
+
+        <h3>⚫ Negro (Black)</h3>
+        <p><span class="color-box" style="background-color: #000000;"></span></p>
+        <ul>
+          <li><strong>Significado</strong>: Poder, formalidad, elegancia</li>
+          <li><strong>Emoción</strong>: Sofisticación, formal, lujo</li>
+          <li><strong>Uso</strong>: Fondos, texto, énfasis en contraste</li>
+        </ul>
+
+        <h3>⚪ Blanco (White)</h3>
+        <p><span class="color-box" style="background-color: #FFFFFF; border: 2px solid #999;"></span></p>
+        <ul>
+          <li><strong>Significado</strong>: Pureza, claridad, amplitud</li>
+          <li><strong>Emoción</strong>: Limpieza, simplicidad, frescura</li>
+          <li><strong>Uso</strong>: Espacio en blanco, fondos, mejora de legibilidad</li>
+        </ul>
+
+        <h2>2. Contraste</h2>
+        <p>El contraste de color guía la atención del usuario.</p>
+        <ul>
+          <li><strong>Alto Contraste</strong>: Cyberpunk, Dark — Claro y enfocado</li>
+          <li><strong>Bajo Contraste</strong>: Minimalism, Scandinavian — Suave y tranquilo</li>
+          <li><strong>Colores Cálidos</strong>: Vaporwave, Memphis — Amigable y vibrante</li>
+          <li><strong>Colores Fríos</strong>: Glass, Light — Moderno y profesional</li>
+        </ul>
+
+        <h2>3. Estrategias de Color de Temas picklayer.net</h2>
+
+        <h3>Light / Dark</h3>
+        <p>Contraste de color básico: texto oscuro + fondo claro (o viceversa)</p>
+        <p><strong>Objetivo</strong>: Máxima legibilidad, mínima fatiga ocular</p>
+
+        <h3>Cyberpunk</h3>
+        <p>Rosa neón, cian, púrpura — Alto contraste + futurista</p>
+        <p><strong>Objetivo</strong>: Energía, emoción, moderno</p>
+
+        <h3>Vaporwave</h3>
+        <p>Rosa pastel, lavanda, menta — Retro + nostálgico</p>
+        <p><strong>Objetivo</strong>: Suavidad, nostalgia, creatividad</p>
+
+        <h3>Glass</h3>
+        <p>Capas translúcidas + colores matizados — Moderno y elegante</p>
+        <p><strong>Objetivo</strong>: Sofisticación, profundidad, amplitud</p>
+
+        <h2>4. Impacto de la Psicología del Color</h2>
+
+        <h3>Respuesta Emocional</h3>
+        <ul>
+          <li>🔴 Rojo: Frecuencia cardíaca aumentada, tensión</li>
+          <li>🔵 Azul: Estabilidad, confianza</li>
+          <li>🟢 Verde: Comodidad, tranquilidad</li>
+        </ul>
+
+        <h3>Cognición</h3>
+        <ul>
+          <li>Alto contraste: Procesamiento de información rápido</li>
+          <li>Bajo contraste: Pensamiento más profundo</li>
+          <li>Colores cálidos: Aparecen más cercanos</li>
+          <li>Colores fríos: Aparecen más distantes</li>
+        </ul>
+
+        <h2>5. Consejos Prácticos</h2>
+        <ul>
+          <li>💡 <strong>Elija tema según su estado</strong>: ¿Necesita energía? Cyberpunk. ¿Comodidad? Minimalism.</li>
+          <li>💡 <strong>Temas según la hora</strong>: Light por la mañana, Dark por la noche</li>
+          <li>💡 <strong>Temas según la tarea</strong>: ¿Trabajo creativo? Vaporwave. ¿Concentración? Glass.</li>
+          <li>💡 <strong>Considere el contraste</strong>: ¿Fatiga ocular? Elija temas de alto contraste</li>
+        </ul>
+
+        <h2>6. Aprendizaje Adicional</h2>
+        <p>La psicología del color es fundamental para el diseño UI/UX. ¡Experimente los 40 temas de picklayer.net y sienta directamente el impacto de cada color!</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">Última actualización: 28 de marzo de 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchLang(btn, lang) {
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.lang-section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(lang).classList.add('active');
+    }
+  </script>
+</body>
+</html>
