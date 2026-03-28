@@ -116,6 +116,15 @@ function initMobileCommentForm(){
       setTimeout(() => { errorEl.textContent = ''; }, 2000);
       return;
     }
+
+    const now = Date.now();
+    const elapsed = now - _lastCommentTime;
+    if (_lastCommentTime && elapsed < COMMENT_COOLDOWN) {
+      const wait = Math.ceil((COMMENT_COOLDOWN - elapsed) / 1000);
+      errorEl.textContent = `${wait}${getLocaleString('cooldownWait') || '초 후에 다시 시도하세요.'}`;
+      return;
+    }
+
     errorEl.textContent = '';
     submitBtn.disabled = true;
 
@@ -132,6 +141,8 @@ function initMobileCommentForm(){
       });
       input.value = '';
       charCount.textContent = '0 / 100';
+      _lastCommentTime = Date.now();
+      startCooldown(submitBtn);
       try{ renderComments(); }catch(e){}
     }catch(e){
       errorEl.textContent = getLocaleString('commentFailed') || '등록 실패';
