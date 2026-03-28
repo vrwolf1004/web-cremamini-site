@@ -97,6 +97,7 @@
   "menuThemeLabel": "Seleziona tema",
   "menuLangLabel": "Seleziona lingua",
   "complete": "Fatto",
+  "connectionError": "Connessione non riuscita",
   "gridRows": [
     {"name": "Marco", "status": "Attivo"},
     {"name": "Giulia", "status": "Inattivo"},

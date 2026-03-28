@@ -97,6 +97,7 @@
     "menuThemeLabel": "Select theme",
     "menuLangLabel": "Select language",
     "complete": "Done",
+    "connectionError": "Cannot connect",
     "gridRows": [
       {"name": "James", "status": "Active"},
       {"name": "Emma", "status": "Inactive"},

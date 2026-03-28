@@ -97,6 +97,7 @@
   "menuThemeLabel": "Design auswählen",
   "menuLangLabel": "Sprache auswählen",
   "complete": "Fertig",
+  "connectionError": "Verbindung fehlgeschlagen",
   "gridRows": [
     {"name": "Hans", "status": "Aktiv"},
     {"name": "Greta", "status": "Inaktiv"},

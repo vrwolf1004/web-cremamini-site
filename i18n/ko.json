@@ -97,6 +97,7 @@
   "menuThemeLabel": "테마 선택",
   "menuLangLabel": "언어 선택",
   "complete": "완료",
+  "connectionError": "접속이 안 됩니다",
   "gridRows": [
     {"name": "김준호", "status": "활성"},
     {"name": "이지은", "status": "비활성"},

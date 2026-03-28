@@ -460,10 +460,10 @@ function showCommentLoading(){
   });
 }
 
-function showCommentError(){
+function showCommentListError(){
   const lists = [$('#comment-list'), $('#mobile-comment-list')].filter(l => l);
   lists.forEach(list => {
-    list.innerHTML = `<div class="comment-error">접속이 안 됩니다</div>`;
+    list.innerHTML = `<div class="comment-error">${getLocaleString('connectionError') || '접속이 안 됩니다'}</div>`;
   });
 }
 
@@ -504,7 +504,7 @@ function subscribeComments() {
   _unsubscribeComments = onSnapshot(
     q,
     snap => renderCommentsList(snap.docs.map(d => ({ id: d.id, ...d.data() }))),
-    error => showCommentError()
+    error => showCommentListError()
   );
 }
 

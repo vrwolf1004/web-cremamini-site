@@ -97,6 +97,7 @@
   "menuThemeLabel": "Valitse teema",
   "menuLangLabel": "Valitse kieli",
   "complete": "Valmis",
+  "connectionError": "Yhteys epäonnistui",
   "gridRows": [
     {"name": "Jussi", "status": "Aktiivinen"},
     {"name": "Liisa", "status": "Passiivinen"},

@@ -97,6 +97,7 @@
   "menuThemeLabel": "テーマを選択",
   "menuLangLabel": "言語を選択",
   "complete": "完了",
+  "connectionError": "接続できません",
   "gridRows": [
     {"name": "田中太郎", "status": "有効"},
     {"name": "山田花子", "status": "無効"},

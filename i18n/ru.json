@@ -97,6 +97,7 @@
   "menuThemeLabel": "Выбрать тему",
   "menuLangLabel": "Выбрать язык",
   "complete": "Готово",
+  "connectionError": "Нет подключения",
   "gridRows": [
     {"name": "Иван", "status": "Активен"},
     {"name": "Мария", "status": "Неактивна"},

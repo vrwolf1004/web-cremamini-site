@@ -97,6 +97,7 @@
   "menuThemeLabel": "选择主题",
   "menuLangLabel": "选择语言",
   "complete": "完成",
+  "connectionError": "无法连接",
   "gridRows": [
     {"name": "张伟", "status": "活跃"},
     {"name": "王芳", "status": "未激活"},

@@ -97,6 +97,7 @@
   "menuThemeLabel": "Sélectionner le thème",
   "menuLangLabel": "Sélectionner la langue",
   "complete": "Terminer",
+  "connectionError": "Connexion impossible",
   "gridRows": [
     {"name": "Jean", "status": "Actif"},
     {"name": "Marie", "status": "Inactif"},
