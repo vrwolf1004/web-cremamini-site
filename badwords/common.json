@@ -1,0 +1,12 @@
+{
+  "lang": "common",
+  "words": [
+    "스팸", "광고", "홍보", "클릭하세요", "구매하세요",
+    "spam", "click here", "buy now", "free money", "casino",
+    "무료충전", "대출", "도박"
+  ],
+  "patterns": [
+    "\\b\\d{2,3}-\\d{3,4}-\\d{4}\\b",
+    "\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\\b"
+  ]
+}

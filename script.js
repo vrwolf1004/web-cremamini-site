@@ -195,9 +195,15 @@ const COMMENT_COOLDOWN = 30000; // 30초
 /* Badwords filter */
 let _badwords = { words: [], patterns: [] };
 async function loadBadwords() {
+  const files = ['badwords/common.json', 'badwords/ko.json', 'badwords/en.json'];
   try {
-    const res = await fetch('badwords.json');
-    if (res.ok) _badwords = await res.json();
+    const results = await Promise.allSettled(files.map(f => fetch(f).then(r => r.ok ? r.json() : null)));
+    results.forEach(r => {
+      if (r.status === 'fulfilled' && r.value) {
+        _badwords.words.push(...(r.value.words || []));
+        _badwords.patterns.push(...(r.value.patterns || []));
+      }
+    });
   } catch (e) { /* 필터 로드 실패 시 무시 */ }
 }
 loadBadwords();
