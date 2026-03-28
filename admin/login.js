@@ -78,7 +78,10 @@ function showDashboard() {
   const loginSection = document.getElementById('login-section');
   const dashboardSection = document.getElementById('dashboard-section');
 
-  if (loginSection) loginSection.hidden = true;
+  if (loginSection) {
+    loginSection.hidden = true;
+    loginSection.style.display = 'none';
+  }
   if (dashboardSection) dashboardSection.hidden = false;
 
   // 대시보드 초기화
