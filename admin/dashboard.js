@@ -47,6 +47,14 @@ async function loadReports() {
       return;
     }
 
+    // 익명 로그인 보장
+    const { auth, signInAnonymously } = window._firebase;
+    try {
+      await signInAnonymously(auth);
+    } catch (e) {
+      console.log('Already authenticated');
+    }
+
     const { db, collection: col, getDocs, query, orderBy } = window._firebase;
     const reportsRef = query(col(db, 'reports'), orderBy('time', 'desc'));
     const snapshot = await getDocs(reportsRef);
