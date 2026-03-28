@@ -192,13 +192,16 @@ body{margin:0;background:var(--bg);background-image:var(--bg-pattern, none);back
 .ad-section{padding:16px}
 .ad-content{display:flex;flex-direction:column}
 
-/* Mobile ad styles */
-.mobile-menu-ad-banner{padding:8px 12px;flex-shrink:0}
-.ad-content-mobile{display:flex;flex-direction:column}
-
 @media (max-width:880px){
-  /* Hide ad banner on mobile (shown in menu instead) */
+  /* Hide desktop ad banner on mobile */
   #desktop-ad-banner{display:none}
+  /* Show mobile main ad on mobile */
+  #mobile-main-ad-banner{display:block !important}
+}
+
+@media (min-width:881px){
+  /* Hide mobile ad on desktop */
+  #mobile-main-ad-banner{display:none}
 }
 
 /* Mobile accordion (in panel-sheet) */
