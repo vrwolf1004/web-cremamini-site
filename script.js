@@ -681,8 +681,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 
   // close mobile panel helper functions
-  function openMobilePanel(id){ const p=document.getElementById(id); if(p){ p.setAttribute('aria-hidden','false'); p.removeAttribute('inert'); } }
-  function closeMobilePanel(id){ const p=document.getElementById(id); if(p){ p.setAttribute('aria-hidden','true'); p.setAttribute('inert', ''); } }
+  function openMobilePanel(id){
+    const p=document.getElementById(id);
+    if(!p) return;
+    p.setAttribute('aria-hidden','false');
+    p.removeAttribute('inert');
+    // display 적용 후 다음 프레임에서 transform transition 트리거
+    requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ p.classList.add('panel-open'); }); });
+  }
+  function closeMobilePanel(id){
+    const p=document.getElementById(id);
+    if(!p) return;
+    p.classList.remove('panel-open');
+    const sheet=p.querySelector('.panel-sheet');
+    const handler=()=>{ p.setAttribute('aria-hidden','true'); p.setAttribute('inert',''); };
+    if(sheet) sheet.addEventListener('transitionend', handler, {once:true});
+    else handler();
+  }
 
 });
 

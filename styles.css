@@ -121,10 +121,12 @@ body{margin:0;background:var(--bg);background-image:var(--bg-pattern, none);back
 /* Mobile panel overlays - drawer from left */
 .mobile-panel{display:none;position:fixed;inset:0;z-index:1400;align-items:flex-start;justify-content:flex-start}
 .mobile-panel .panel-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.45)}
-.mobile-panel .panel-sheet{position:relative;background:var(--surface);width:80vw;max-width:300px;height:100vh;overflow:auto;border-radius:0;padding:16px;transform:translateX(-100%);transition:transform .28s ease}
+.mobile-panel .panel-sheet{position:relative;background:var(--surface);width:92vw;max-width:420px;height:100vh;overflow:auto;border-radius:0;padding:0;transform:translateX(-100%);transition:transform .3s ease}
 .mobile-panel[aria-hidden="false"]{display:flex}
-.mobile-panel[aria-hidden="false"] .panel-sheet{transform:translateX(0)}
-.mobile-panel .panel-close{position:absolute;right:12px;top:8px;border:none;background:transparent;font-size:20px}
+.mobile-panel.panel-open .panel-sheet{transform:translateX(0)}
+.mobile-panel .panel-close{position:absolute;right:12px;top:12px;border:none;background:transparent;font-size:20px;cursor:pointer}
+.mobile-panel .panel-header{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid var(--border-color, rgba(0,0,0,0.06));position:sticky;top:0;background:inherit;z-index:10}
+.mobile-panel .panel-title{font-size:1rem;font-weight:600;color:var(--text)}
 
 /* Off-canvas comments binder */
 .offcanvas{transition:transform .28s ease;position:relative}
@@ -180,7 +182,7 @@ body{margin:0;background:var(--bg);background-image:var(--bg-pattern, none);back
 .accordion-item.open .accordion-body{display:block}
 
 /* Mobile accordion (in panel-sheet) */
-.mobile-accordion{display:flex;flex-direction:column;gap:4px}
+.mobile-accordion{display:flex;flex-direction:column;gap:4px;padding:16px}
 .mobile-accordion .accordion-item{box-shadow:none}
 .mobile-accordion .accordion-header{padding:10px 12px;font-size:0.9rem;font-weight:500}
 .mobile-accordion .accordion-body{max-height:320px;overflow-y:auto;padding:8px 12px;font-size:0.85rem}
