@@ -1,0 +1,13 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bauhaus 스타일 프레첼 (기하학적) -->
+  <!-- 왼쪽 원 -->
+  <circle cx="8" cy="9" r="3" stroke="#D4A574" stroke-width="1.5" fill="none"/>
+  <!-- 오른쪽 원 -->
+  <circle cx="16" cy="9" r="3" stroke="#D4A574" stroke-width="1.5" fill="none"/>
+  <!-- 중앙 막대 -->
+  <rect x="10.5" y="7" width="3" height="10" fill="#D4A574"/>
+  <!-- 아래 교차점 -->
+  <circle cx="12" cy="15" r="2" fill="#D4A574"/>
+  <!-- 점장식 (Bauhaus 스타일) -->
+  <rect x="11" y="4" width="2" height="2" fill="#D4A574"/>
+</svg>

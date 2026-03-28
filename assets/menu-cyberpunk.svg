@@ -1,0 +1,24 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 글로우 푸드 (네온 라면) -->
+  <!-- 바깥쪽 글로우 -->
+  <ellipse cx="12" cy="9" rx="8" ry="4" fill="none" stroke="#FF006E" stroke-width="0.5" opacity="0.3"/>
+  <ellipse cx="12" cy="12" rx="8" ry="4" fill="none" stroke="#00F5FF" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- 메인 모양 -->
+  <path d="M4 9C4 7.89543 7.13401 7 12 7C16.866 7 20 7.89543 20 9V11C20 12.1046 16.866 13 12 13C7.13401 13 4 12.1046 4 11V9Z" fill="#FF006E" filter="url(#glow)"/>
+  <path d="M5 11C5 11.5523 8.58172 12 12 12C15.4183 12 19 11.5523 19 11V15C19 16.1046 15.866 17 12 17C8.13401 17 5 16.1046 5 15V11Z" fill="#00F5FF" filter="url(#glow)"/>
+
+  <!-- 젓가락 -->
+  <line x1="7" y1="5" x2="9" y2="15" stroke="#FFD700" stroke-width="1" filter="url(#glow)"/>
+  <line x1="15" y1="5" x2="17" y2="15" stroke="#FFD700" stroke-width="1" filter="url(#glow)"/>
+</svg>

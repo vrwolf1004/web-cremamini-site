@@ -1,0 +1,22 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Newtro 스타일 피자 (팝아트 느낌) -->
+  <!-- 피자 베이스 (삼각형) -->
+  <path d="M12 4L21 18H3L12 4Z" fill="#FF6B35" stroke="#FF6B35" stroke-width="0.5"/>
+
+  <!-- 치즈 하이라이트 -->
+  <path d="M12 6L19 16.5H5L12 6Z" fill="#FFD700"/>
+
+  <!-- 페퍼로니 -->
+  <circle cx="10" cy="10" r="1.2" fill="#C41E3A" opacity="0.9"/>
+  <circle cx="14" cy="10" r="1.2" fill="#C41E3A" opacity="0.9"/>
+  <circle cx="12" cy="13" r="1.2" fill="#C41E3A" opacity="0.9"/>
+  <circle cx="9" cy="14" r="1" fill="#C41E3A" opacity="0.8"/>
+  <circle cx="15" cy="14" r="1" fill="#C41E3A" opacity="0.8"/>
+
+  <!-- 팝아트 스타일 테두리 (굵은 선) -->
+  <path d="M12 4L21 18H3L12 4Z" fill="none" stroke="#000" stroke-width="1.5"/>
+
+  <!-- 브라이트 악센트 -->
+  <circle cx="12" cy="9" r="0.3" fill="#00FF00" opacity="0.7"/>
+  <circle cx="14" cy="14" r="0.3" fill="#00FF00" opacity="0.7"/>
+</svg>

@@ -1,0 +1,19 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rococo 스타일 크루아상 (화려함) -->
+  <!-- 메인 크루아상 모양 -->
+  <path d="M6 14C6 10 8 6 12 6C16 6 18 10 18 14C18 15 17.5 16 17 16"
+        stroke="#D4A574" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- 층 표현 (선) -->
+  <path d="M7 12C7 9.5 8.5 7 12 7C15.5 7 17 9.5 17 12"
+        stroke="#E8C4A0" stroke-width="1" fill="none" stroke-linecap="round"/>
+
+  <!-- 금색 장식 (Rococo 스타일) -->
+  <circle cx="5" cy="14" r="1.5" fill="#FFD700"/>
+  <circle cx="19" cy="14" r="1.5" fill="#FFD700"/>
+  <circle cx="12" cy="5" r="1" fill="#FFD700"/>
+
+  <!-- 꼬임 장식 -->
+  <path d="M8 10Q10 11 12 10" stroke="#FFD700" stroke-width="0.8" fill="none" opacity="0.7"/>
+  <path d="M14 13Q13 14 12 13" stroke="#FFD700" stroke-width="0.8" fill="none" opacity="0.7"/>
+</svg>

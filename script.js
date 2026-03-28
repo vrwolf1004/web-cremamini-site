@@ -76,6 +76,26 @@ function $(sel){return document.querySelector(sel)}
 function $all(sel){return Array.from(document.querySelectorAll(sel))}
 
 const DARK_THEMES = ['dark','cyberpunk'];
+const MENU_ICON_MAP = {
+  'basic': 'menu-basic.svg',
+  'flat': 'menu-flat.svg',
+  'dark': 'menu-dark.svg',
+  'midcentury': 'menu-midcentury.svg',
+  'bauhaus': 'menu-bauhaus.svg',
+  'cyberpunk': 'menu-cyberpunk.svg',
+  'vaporwave': 'menu-vaporwave.svg',
+  'rococo': 'menu-rococo.svg',
+  'artnouveau': 'menu-artnouveau.svg',
+  'newtro': 'menu-newtro.svg'
+};
+
+function updateMenuIcon(themeId){
+  const menuIcon = document.getElementById('menu-icon');
+  if(!menuIcon) return;
+  const iconFile = MENU_ICON_MAP[themeId] || 'menu-basic.svg';
+  menuIcon.src = 'assets/' + iconFile;
+}
+
 function setTheme(id){
   // load theme CSS then set class & UI state
   loadThemeCss(id);
@@ -87,6 +107,8 @@ function setTheme(id){
   const mobileMenuThemeList = document.getElementById('mobile-menu-theme-list');
   if(mobileMenuThemeList) mobileMenuThemeList.querySelectorAll('button').forEach(b=>b.classList.toggle('selected', b.dataset.id===id));
   const sel = $('#theme-select'); if(sel) sel.value = id;
+  // update menu icon to match theme
+  updateMenuIcon(id);
   // update intro area when theme changes
   try{ renderThemeIntro(id); }catch(e){}
   // 테마가 바뀌면 댓글 목록 갱신 (테마별 필터)
