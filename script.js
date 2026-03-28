@@ -398,6 +398,20 @@ function renderCommentsList(comments) {
   });
 }
 
+function showCommentLoading(){
+  const lists = [$('#comment-list'), $('#mobile-comment-list')].filter(l => l);
+  lists.forEach(list => {
+    list.innerHTML = `<div class="comment-loading">로딩 중...</div>`;
+  });
+}
+
+function showCommentError(){
+  const lists = [$('#comment-list'), $('#mobile-comment-list')].filter(l => l);
+  lists.forEach(list => {
+    list.innerHTML = `<div class="comment-error">접속이 안 됩니다</div>`;
+  });
+}
+
 function renderComments() { renderCommentsList(_cachedComments); }
 
 function openTranslateModal(text) {
@@ -429,9 +443,14 @@ function closeTranslateModal() {
 function subscribeComments() {
   if (!window._firebase) return;
   if (_unsubscribeComments) { _unsubscribeComments(); _unsubscribeComments = null; }
+  showCommentLoading();
   const { db, collection: col, onSnapshot, query, orderBy, limit } = window._firebase;
   const q = query(col(db, 'comments'), orderBy('time', 'desc'), limit(200));
-  _unsubscribeComments = onSnapshot(q, snap => renderCommentsList(snap.docs.map(d => ({ id: d.id, ...d.data() }))));
+  _unsubscribeComments = onSnapshot(
+    q,
+    snap => renderCommentsList(snap.docs.map(d => ({ id: d.id, ...d.data() }))),
+    error => showCommentError()
+  );
 }
 
 function initComments() {
