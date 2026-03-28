@@ -203,7 +203,15 @@ async function handleReportApprove(commentId) {
     if (!window._firebase) return;
 
     const { db, updateDoc, docRef } = window._firebase;
+
+    // 댓글 삭제
     await updateDoc(docRef(db, 'comments', commentId), { deleted: true });
+
+    // 해당 댓글의 모든 신고를 "approved"로 업데이트
+    const reportsToUpdate = currentReports.filter(r => r.commentId === commentId);
+    for (const report of reportsToUpdate) {
+      await updateDoc(docRef(db, 'reports', report.id), { status: 'approved' });
+    }
 
     alert('댓글이 삭제되었습니다.');
 
@@ -225,11 +233,25 @@ async function handleReportReject(commentId) {
   if (!confirm('이 신고를 반려하시겠습니까?')) return;
 
   try {
-    // 신고 기록은 유지하고, 댓글은 삭제하지 않음
+    if (!window._firebase) return;
+
+    const { db, updateDoc, docRef } = window._firebase;
+
+    // 해당 댓글의 모든 신고를 "rejected"로 업데이트
+    const reportsToUpdate = currentReports.filter(r => r.commentId === commentId);
+    for (const report of reportsToUpdate) {
+      await updateDoc(docRef(db, 'reports', report.id), { status: 'rejected' });
+    }
+
     alert('신고가 반려되었습니다.');
 
     const modal = document.getElementById('report-modal');
     if (modal) modal.hidden = true;
+
+    await loadReports();
+    await loadComments();
+    renderReportsList();
+    updateStats();
   } catch (e) {
     console.error('Failed to reject report:', e);
   }
@@ -237,8 +259,12 @@ async function handleReportReject(commentId) {
 
 function updateStats() {
   const totalReports = currentReports.length;
-  const commentIds = new Set(currentReports.map(r => r.commentId));
-  const pendingReports = commentIds.size;
+  // status가 없거나 "pending"인 신고들만 카운트 (처리 대기)
+  const pendingReports = new Set(
+    currentReports
+      .filter(r => !r.status || r.status === 'pending')
+      .map(r => r.commentId)
+  ).size;
   const resolvedReports = currentComments.filter(c => c.deleted).length;
 
   document.getElementById('total-reports').textContent = totalReports;
