@@ -178,6 +178,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if (backdrop) backdrop.addEventListener('click', closeTranslateModal);
   }
 
+  // 신고 모달 닫기
+  const reportCloseBtn = document.getElementById('report-close');
+  if (reportCloseBtn) reportCloseBtn.addEventListener('click', closeReportModal);
+  const reportSubmitBtn = document.getElementById('report-submit');
+  if (reportSubmitBtn) reportSubmitBtn.addEventListener('click', submitReport);
+  const reportModal = document.getElementById('report-modal');
+  if (reportModal) {
+    const backdrop = reportModal.querySelector('.modal-backdrop');
+    if (backdrop) backdrop.addEventListener('click', closeReportModal);
+  }
+
   // Update info button
   const updateInfoBtn = document.getElementById('update-info-btn');
   if(updateInfoBtn){

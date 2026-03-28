@@ -75,7 +75,7 @@ function createCommentEl(c, isReply) {
   if (!isReply) {
     const replyBtn = document.createElement('button');
     replyBtn.className = 'comment-reply-btn';
-    replyBtn.textContent = getLocaleString('reply') || '답글';
+    replyBtn.textContent = '💬 ' + (getLocaleString('reply') || '답글');
     replyBtn.addEventListener('click', () => toggleReplyForm(c.id, el));
     actions.appendChild(replyBtn);
   }
@@ -117,6 +117,15 @@ function createCommentEl(c, isReply) {
       }
     });
     actions.appendChild(del);
+  }
+
+  if (!c.deleted) {
+    const reportBtn = document.createElement('button');
+    reportBtn.className = 'comment-report-btn';
+    reportBtn.textContent = '🚩';
+    reportBtn.title = getLocaleString('reportComment') || '댓글 신고';
+    reportBtn.addEventListener('click', () => openReportModal(c.id, c.text));
+    actions.appendChild(reportBtn);
   }
 
   if (actions.children.length > 0) el.appendChild(actions);
@@ -257,6 +266,47 @@ function openTranslateModal(text) {
 function closeTranslateModal() {
   const modal = document.getElementById('translate-modal');
   if (modal) modal.setAttribute('aria-hidden', 'true');
+}
+
+function openReportModal(commentId, commentText) {
+  const modal = document.getElementById('report-modal');
+  if (!modal) return;
+  document.getElementById('report-comment-id').value = commentId;
+  document.getElementById('report-comment-text').textContent = commentText;
+  document.querySelectorAll('input[name="report-reason"]').forEach(r => r.checked = false);
+  modal.setAttribute('aria-hidden', 'false');
+}
+
+function closeReportModal() {
+  const modal = document.getElementById('report-modal');
+  if (modal) modal.setAttribute('aria-hidden', 'true');
+}
+
+async function submitReport() {
+  const { db, collection: col, addDoc, serverTimestamp } = window._firebase;
+  const commentId = document.getElementById('report-comment-id').value;
+  const reason = document.querySelector('input[name="report-reason"]:checked')?.value;
+
+  if (!reason) {
+    showToast(getLocaleString('selectReportReason') || '신고 사유를 선택해주세요', 'error');
+    return;
+  }
+
+  try {
+    const uid = await ensureAuth();
+    await addDoc(col(db, 'reports'), {
+      commentId,
+      reason,
+      uid,
+      time: serverTimestamp(),
+      themeId: getCurrentThemeId()
+    });
+    showToast(getLocaleString('reportSuccess') || '신고되었습니다. 감사합니다!', 'success');
+    closeReportModal();
+  } catch (e) {
+    showToast(getLocaleString('reportFailed') || '신고에 실패했습니다', 'error');
+    console.error(e);
+  }
 }
 
 function subscribeComments() {
