@@ -575,6 +575,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
         mobileMenuSaveBtn.addEventListener('click', ()=> closeMobilePanel('mobile-menu-panel'));
       }
 
+      // 모바일 메뉴 - 댓글 보기 버튼
+      const mobileMenuCommentsBtn = document.getElementById('mobile-menu-comments');
+      if(mobileMenuCommentsBtn){
+        mobileMenuCommentsBtn.addEventListener('click', ()=> {
+          closeMobilePanel('mobile-menu-panel');
+          const commentsPanel = document.getElementById('comments-panel');
+          if(commentsPanel){
+            commentsPanel.setAttribute('aria-hidden', 'false');
+            commentsPanel.removeAttribute('inert');
+          }
+        });
+      }
+
       // populate menu theme list with current selection highlighted
       if(mobileMenuThemeList){
         const currentTheme = localStorage.getItem('pl_theme') || THEMES[0].id;
