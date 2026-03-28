@@ -216,6 +216,29 @@
   margin-bottom: 6px;
 }
 
+.report-status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  color: white;
+}
+
+.report-status-badge.pending {
+  background: #6b7280;
+}
+
+.report-status-badge.approved {
+  background: #10b981;
+}
+
+.report-status-badge.rejected {
+  background: #f97316;
+}
+
 .report-count {
   text-align: right;
 }

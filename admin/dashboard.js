@@ -132,6 +132,9 @@ function renderReportsList() {
     const reasons = reports.map(r => r.reason || 'unknown');
     const uniqueReasons = [...new Set(reasons)];
 
+    // 신고 상태 (모두 같다고 가정)
+    const status = reports[0]?.status || 'pending';
+
     return `
       <div class="report-item" onclick="openReportModal('${commentId}')">
         <div class="report-info">
@@ -142,6 +145,7 @@ function renderReportsList() {
           </p>
           <div>
             ${uniqueReasons.map(reason => `<span class="report-reason-badge">${escapeHtml(getReasonLabel(reason))}</span>`).join('')}
+            <span class="report-status-badge ${status}">${getStatusLabel(status)}</span>
           </div>
         </div>
         <div class="report-count">
@@ -280,6 +284,15 @@ function getReasonLabel(reason) {
     'other': '기타'
   };
   return labels[reason] || reason;
+}
+
+function getStatusLabel(status) {
+  const labels = {
+    'pending': '대기 중',
+    'approved': '승인됨',
+    'rejected': '반려됨'
+  };
+  return labels[status] || '대기 중';
 }
 
 function escapeHtml(text) {
