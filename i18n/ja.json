@@ -28,7 +28,8 @@
   "acc2Content": "Primary、Surface、Accentなど意味ベースの色トークンを使って一貫性を保ちます。",
   "acc3Title": "タイポグラフィ",
   "acc3Content": "フォントファミリ、サイズ、字間、行間をテーマに合わせて定義します。",
-  "anonymousComments": "匿名コメント",
+  "anonymousComments": "コメント",
+  "menuLabel": "テーマ/言語",
   "anonymousNote": "匿名で投稿されます。更新後、削除権限が変更される可能性があります。",
   "submit": "送信",
   "clearAll": "全て削除"

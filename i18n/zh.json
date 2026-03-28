@@ -28,7 +28,8 @@
   "acc2Content": "使用Primary、Surface、Accent等语义化颜色标记保持一致性。",
   "acc3Title": "排版",
   "acc3Content": "根据主题定义字体系列、大小、字间距和行高。",
-  "anonymousComments": "匿名评论",
+  "anonymousComments": "评论",
+  "menuLabel": "主题/语言",
   "anonymousNote": "评论是匿名的。刷新后您的删除权限可能会改变。",
   "submit": "提交",
   "clearAll": "清除全部"

@@ -28,7 +28,8 @@
   "acc2Content": "Use semantic color tokens like Primary, Surface, and Accent to maintain consistency.",
   "acc3Title": "Typography",
   "acc3Content": "Define font family, size, letter spacing, and line height to match the theme.",
-  "anonymousComments": "Anonymous comments",
+  "anonymousComments": "Comments",
+  "menuLabel": "Theme/Language",
   "anonymousNote": "Comments are anonymous. Refresh may change your deletion rights.",
   "submit": "Submit",
   "clearAll": "Clear all"
