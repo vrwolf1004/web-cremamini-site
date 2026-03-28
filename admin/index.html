@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PickLayer Admin - 신고 관리</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase Initialization -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    import {
+      getFirestore, collection, addDoc, getDocs,
+      onSnapshot, query, orderBy, limit, where,
+      writeBatch, serverTimestamp, deleteDoc, doc, updateDoc
+    } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAWrM8lWdoIpaE02ykOy4p6EAkZ3GmQ750",
+      authDomain: "picklayer-net.firebaseapp.com",
+      projectId: "picklayer-net",
+      storageBucket: "picklayer-net.firebasestorage.app",
+      messagingSenderId: "211408708354",
+      appId: "1:211408708354:web:edf682db8b5cb3e859981b"
+    };
+    const app = initializeApp(firebaseConfig);
+    window._firebase = {
+      db: getFirestore(app),
+      auth: getAuth(app),
+      signInAnonymously,
+      collection, addDoc, getDocs,
+      onSnapshot, query, orderBy, limit, where,
+      writeBatch, serverTimestamp, deleteDoc, updateDoc,
+      docRef: doc
+    };
+  </script>
+</head>
+<body class="admin-page">
+  <!-- 로그인 섹션 -->
+  <div id="login-section" class="admin-container">
+    <div class="login-box">
+      <h1>PickLayer Admin</h1>
+      <p class="subtitle">신고 관리 대시보드</p>
+
+      <form id="login-form">
+        <div class="form-group">
+          <input
+            type="password"
+            id="admin-password"
+            class="form-input"
+            placeholder="관리자 패스워드"
+            required
+            autofocus
+          >
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+      </form>
+
+      <div id="login-error" class="error-message"></div>
+    </div>
+  </div>
+
+  <!-- 대시보드 섹션 -->
+  <div id="dashboard-section" class="admin-page-content" hidden>
+    <!-- 헤더 -->
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <h1>PickLayer Admin Dashboard</h1>
+        <p class="session-info">세션 시간: <span id="session-timer">30:00</span></p>
+      </div>
+      <button id="logout-btn" class="btn btn-ghost">로그아웃</button>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="admin-main">
+      <!-- 통계 카드 -->
+      <section class="stats-section">
+        <div class="stat-card">
+          <h3>전체 신고</h3>
+          <p class="stat-number" id="total-reports">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>처리 대기</h3>
+          <p class="stat-number" id="pending-reports">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>처리 완료</h3>
+          <p class="stat-number" id="resolved-reports">0</p>
+        </div>
+      </section>
+
+      <!-- 신고 목록 -->
+      <section class="reports-section">
+        <div class="section-header">
+          <h2>신고된 댓글</h2>
+          <div class="filter-bar">
+            <select id="filter-status" class="select-input">
+              <option value="all">모든 상태</option>
+              <option value="pending">처리 대기</option>
+              <option value="resolved">처리 완료</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="reports-list" class="reports-list">
+          <p class="empty-message">신고된 댓글이 없습니다.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 모달: 신고 상세 -->
+  <div id="report-modal" class="modal" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button id="modal-close" class="modal-close-btn">×</button>
+
+      <h2>신고 상세</h2>
+
+      <div class="report-detail">
+        <div class="detail-section">
+          <h3>원본 댓글</h3>
+          <div id="modal-comment-text" class="comment-preview"></div>
+          <p class="comment-meta" id="modal-comment-meta"></p>
+        </div>
+
+        <div class="detail-section">
+          <h3>신고 사유</h3>
+          <div id="modal-report-reasons" class="report-reasons-list"></div>
+        </div>
+
+        <div class="detail-section">
+          <h3>신고자 수</h3>
+          <p id="modal-report-count">0명</p>
+        </div>
+
+        <div class="modal-actions">
+          <button id="modal-approve-btn" class="btn btn-primary">승인 (삭제)</button>
+          <button id="modal-reject-btn" class="btn btn-ghost">반려 (유지)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
