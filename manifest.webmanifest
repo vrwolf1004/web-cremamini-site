@@ -1,6 +1,6 @@
 {
-  "name": "PickLayers",
-  "short_name": "PickLayers",
+  "name": "picklayer.net",
+  "short_name": "picklayer.net",
   "description": "테마 미리보기와 익명 댓글 데모",
   "icons": [
     { "src": "assets/icons/favicon-192x192.png", "sizes": "192x192", "type": "image/png" },

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Simple layered-square SVG favicon for PickLayers -->
+<!-- Simple layered-square SVG favicon for picklayer.net -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="title">
-  <title id="title">PickLayers</title>
+  <title id="title">picklayer.net</title>
   <rect x="6" y="6" width="44" height="44" rx="6" fill="#EDE7F6" />
   <rect x="14" y="14" width="44" height="44" rx="6" fill="#D1C4E9" transform="rotate(-6 36 36)" />
   <rect x="22" y="22" width="44" height="44" rx="6" fill="#7E57C2" transform="rotate(-12 44 44)" />

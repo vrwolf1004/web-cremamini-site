@@ -1,4 +1,4 @@
-# PickLayers — Themes Playground (site)
+# picklayer.net — Themes Playground (site)
 
 간단한 정적 데모입니다.
 
