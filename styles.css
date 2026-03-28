@@ -125,8 +125,8 @@ body{margin:0;background:var(--bg);background-image:var(--bg-pattern, none);back
 .mobile-panel[aria-hidden="false"]{display:flex}
 .mobile-panel.panel-open .panel-sheet{transform:translateX(0)}
 .mobile-panel .panel-close{position:relative;border:none;background:transparent;font-size:28px;cursor:pointer;padding:12px;height:auto;width:auto;right:auto;top:auto}
-.mobile-panel .panel-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border-color, rgba(0,0,0,0.06));background:var(--surface);flex-shrink:0}
-.mobile-panel .panel-title{font-size:1.1rem;font-weight:600;color:var(--text)}
+.mobile-panel .panel-header{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--border-color, rgba(0,0,0,0.06));background:var(--surface);flex-shrink:0}
+.mobile-panel .panel-title{font-size:1rem;font-weight:600;color:var(--text)}
 
 /* Off-canvas comments binder */
 .offcanvas{transition:transform .28s ease;position:relative}
@@ -185,10 +185,11 @@ body{margin:0;background:var(--bg);background-image:var(--bg-pattern, none);back
 .mobile-accordion{display:flex;flex-direction:column;gap:4px;padding:12px 16px;overflow:hidden;flex:1}
 .mobile-accordion .accordion-item{box-shadow:none;display:flex;flex-direction:column;min-height:0}
 .mobile-accordion .accordion-header{padding:10px 12px;font-size:0.9rem;font-weight:500;flex-shrink:0}
-.mobile-accordion .accordion-body{max-height:none;overflow-y:auto;padding:8px 12px;font-size:0.85rem}
+.mobile-accordion .accordion-body{display:none;max-height:none;padding:8px 12px;font-size:0.85rem}
+.mobile-accordion .accordion-item.open .accordion-body{display:flex;flex-direction:column}
 /* Mobile menu accordion: auto height, always visible */
 #mobile-acc-menu{flex:0 auto}
-#mobile-acc-menu .accordion-body{display:block;overflow:visible}
+#mobile-acc-menu .accordion-body{display:flex;flex-direction:column;overflow:visible}
 /* Mobile comments accordion: fill remaining space, scrollable */
 #mobile-acc-comments{flex:1;min-height:0}
 #mobile-acc-comments .accordion-body{flex:1;min-height:0;overflow-y:auto}
