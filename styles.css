@@ -95,7 +95,7 @@ body{margin:0;background:var(--bg);background-image:var(--bg-pattern, none);back
 }
 
 /* Mobile menu button (fixed) */
-.mobile-menu-btn{display:none;position:fixed;right:16px;top:120px;z-index:1700;background:var(--accent);color:var(--accent-contrast);border:none;padding:12px 14px;border-radius:10px;font-size:20px;cursor:pointer;box-shadow:var(--shadow)}
+.mobile-menu-btn{display:none;position:fixed;right:16px;top:135px;z-index:1700;background:var(--accent);color:var(--accent-contrast);border:none;padding:12px 14px;border-radius:10px;font-size:20px;cursor:pointer;box-shadow:var(--shadow)}
 .mobile-menu-btn:hover{opacity:0.9}
 
 /* Mobile menu items */
