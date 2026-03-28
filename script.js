@@ -686,6 +686,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(!p) return;
     p.setAttribute('aria-hidden','false');
     p.removeAttribute('inert');
+    // 메뉴 열릴 때 햄버거 버튼 숨기기
+    const btn=document.getElementById('mobile-menu-btn');
+    if(btn) btn.style.display='none';
     // display 적용 후 다음 프레임에서 transform transition 트리거
     requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ p.classList.add('panel-open'); }); });
   }
@@ -694,7 +697,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(!p) return;
     p.classList.remove('panel-open');
     const sheet=p.querySelector('.panel-sheet');
-    const handler=()=>{ p.setAttribute('aria-hidden','true'); p.setAttribute('inert',''); };
+    const handler=()=>{
+      p.setAttribute('aria-hidden','true');
+      p.setAttribute('inert','');
+      // 메뉴 닫힐 때 햄버거 버튼 표시
+      const btn=document.getElementById('mobile-menu-btn');
+      if(btn) btn.style.display='';
+    };
     if(sheet) sheet.addEventListener('transitionend', handler, {once:true});
     else handler();
   }
