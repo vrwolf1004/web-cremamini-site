@@ -750,21 +750,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
     else handler();
   }
 
-  // Update info button (footer)
+  // Update info button (footer) - fetch from updates.json
   const updateInfoBtn = document.getElementById('update-info-btn');
   if(updateInfoBtn){
-    updateInfoBtn.addEventListener('click', ()=>{
-      const updates = [
-        '✨ 모바일 광고 위치 변경 (메뉴 → 기본화면 하단)',
-        '🎨 모바일 패널 헤더 padding 조정',
-        '📱 광고 구조 최종 정리 (PC/모바일 환경별 분리)',
-        '🔘 버튼 반응형 개선 (여러 줄 자동 처리)',
-        '📝 토스트 버튼 텍스트 "기본"으로 변경',
-        '🌐 언어별 메뉴 아이콘 (테마 무관)',
-        '✅ Google AdSense 광고 준비 완료'
-      ];
-      const message = updates.join('\n');
-      showToast(message, 'info');
+    updateInfoBtn.addEventListener('click', async ()=>{
+      try{
+        const res = await fetch('updates.json', {cache: 'no-cache'});
+        if(!res.ok) throw new Error('HTTP ' + res.status);
+        const updates = await res.json();
+        const message = updates.map(u=> `${u.title}\n${u.items.join('\n')}`).join('\n\n');
+        showToast(message, 'info');
+      }catch(e){
+        console.error('updates.json load failed:', e);
+        showToast('업데이트 정보를 불러올 수 없습니다', 'error');
+      }
     });
   }
 
