@@ -78,7 +78,13 @@
   </section>
 
   <!-- Mobile menu button (fixed) -->
-  <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open menu">☰</button>
+  <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
 
   <!-- Mobile menu panel -->
   <div id="mobile-menu-panel" class="mobile-panel" aria-hidden="true" inert>
@@ -103,6 +109,17 @@
           </div>
         </div>
 
+        <!-- Ad banner in mobile menu -->
+        <div class="mobile-menu-ad-banner">
+          <div class="ad-content-mobile">
+            <div style="background: white; padding: 12px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+              <div style="font-weight: 600; font-size: 0.9rem; color: #1f1f1f; margin-bottom: 6px;">새로운 디자인 시스템!</div>
+              <div style="font-size: 0.8rem; color: #5f6368; margin-bottom: 8px; line-height: 1.3;">크로스 플랫폼 UI 컴포넌트</div>
+              <div style="color: #1a73e8; font-size: 0.85rem; font-weight: 500; cursor: pointer; display: inline-block;">자세히 →</div>
+            </div>
+            <div style="font-size: 0.65rem; color: #9aa0a6; margin-top: 6px; text-align: right;">광고</div>
+          </div>
+        </div>
 
         <!-- Comments accordion -->
         <div class="accordion-item" id="mobile-acc-comments">
@@ -329,6 +346,18 @@
         <button class="btn" id="translate-google" data-i18n="openGoogleTranslate">Google 번역 열기</button>
         <button class="btn ghost" id="translate-close" data-i18n="confirmCancel">닫기</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Mobile bottom ad banner -->
+  <div id="mobile-bottom-ad-banner">
+    <div class="ad-content-mobile">
+      <div style="background: white; padding: 12px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+        <div style="font-weight: 600; font-size: 0.9rem; color: #1f1f1f; margin-bottom: 6px;">새로운 디자인 시스템!</div>
+        <div style="font-size: 0.8rem; color: #5f6368; margin-bottom: 8px; line-height: 1.3;">크로스 플랫폼 UI 컴포넌트</div>
+        <div style="color: #1a73e8; font-size: 0.85rem; font-weight: 500; cursor: pointer; display: inline-block;">자세히 →</div>
+      </div>
+      <div style="font-size: 0.65rem; color: #9aa0a6; margin-top: 6px; text-align: right;">광고</div>
     </div>
   </div>
 
