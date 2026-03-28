@@ -936,6 +936,7 @@ function initMobileCommentForm(){
     submitBtn.disabled = true;
 
     try{
+      const { db, collection, addDoc, serverTimestamp } = window._firebase;
       await ensureAuth();
       const themeId = getCurrentThemeId();
       await addDoc(collection(db, 'comments'), {
