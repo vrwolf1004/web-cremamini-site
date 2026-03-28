@@ -187,9 +187,10 @@ body{margin:0;background:var(--bg);background-image:var(--bg-pattern, none);back
 .mobile-accordion .accordion-header{padding:10px 12px;font-size:0.9rem;font-weight:500;flex-shrink:0}
 .mobile-accordion .accordion-body{display:none;max-height:none;padding:8px 12px;font-size:0.85rem}
 .mobile-accordion .accordion-item.open .accordion-body{display:flex;flex-direction:column}
-/* Mobile menu accordion: auto height, always visible */
+/* Mobile menu accordion: auto height, toggleable */
 #mobile-acc-menu{flex:0 auto}
-#mobile-acc-menu .accordion-body{display:flex;flex-direction:column;overflow:visible}
+#mobile-acc-menu .accordion-body{overflow:visible}
+#mobile-acc-menu.open .accordion-body{display:flex;flex-direction:column}
 /* Mobile comments accordion: fill remaining space, scrollable */
 #mobile-acc-comments{flex:1;min-height:0}
 #mobile-acc-comments .accordion-body{flex:1;min-height:0;overflow-y:auto}
