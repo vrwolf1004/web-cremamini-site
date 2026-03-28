@@ -57,6 +57,8 @@ function applyTranslations(){
   if(langSelect) langSelect.value = CURRENT_LANG;
   // update menu icon to match language
   updateMenuIcon(CURRENT_LANG);
+  // re-render data table with new locale rows
+  initDataTable();
 }
 
 // helper to resolve dotted keys like "fruit.apple" from LOCALE
