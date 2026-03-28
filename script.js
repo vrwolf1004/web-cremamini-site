@@ -195,7 +195,12 @@ const COMMENT_COOLDOWN = 30000; // 30초
 /* Badwords filter */
 let _badwords = { words: [], patterns: [] };
 async function loadBadwords() {
-  const files = ['badwords/common.json', 'badwords/ko.json', 'badwords/en.json'];
+  const files = [
+    'badwords/common.json',
+    'badwords/ko.json', 'badwords/en.json', 'badwords/ja.json', 'badwords/zh.json',
+    'badwords/fr.json', 'badwords/es.json', 'badwords/de.json', 'badwords/it.json',
+    'badwords/ru.json', 'badwords/fi.json'
+  ];
   try {
     const results = await Promise.allSettled(files.map(f => fetch(f).then(r => r.ok ? r.json() : null)));
     results.forEach(r => {

@@ -1,0 +1,12 @@
+{
+  "lang": "fi",
+  "words": [
+    "perkele", "vittu", "saatana", "jumalauta", "helvetti",
+    "paska", "kusipää", "idiootti", "tyhmä", "hölmö",
+    "turpa kiinni", "haista vittu"
+  ],
+  "patterns": [
+    "v+i+t+t+u",
+    "p+e+r+k+e+l+e"
+  ]
+}

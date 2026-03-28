@@ -1,0 +1,12 @@
+{
+  "lang": "de",
+  "words": [
+    "scheiße", "scheiß", "arschloch", "wichser", "hurensohn",
+    "fick dich", "verpiss dich", "idiot", "blödmann", "trottel",
+    "dummkopf", "vollidiot", "depp"
+  ],
+  "patterns": [
+    "sch+ei+ß",
+    "a+r+s+c+h"
+  ]
+}

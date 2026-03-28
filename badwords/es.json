@@ -1,0 +1,12 @@
+{
+  "lang": "es",
+  "words": [
+    "mierda", "puta", "cabrón", "pendejo", "coño", "joder",
+    "hostia", "gilipollas", "imbécil", "idiota", "estúpido",
+    "vete a la mierda", "hijo de puta"
+  ],
+  "patterns": [
+    "m+i+e+r+d+a",
+    "p+u+t+a"
+  ]
+}

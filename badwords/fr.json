@@ -1,0 +1,12 @@
+{
+  "lang": "fr",
+  "words": [
+    "merde", "putain", "connard", "salaud", "con", "conne",
+    "enculé", "va te faire foutre", "fils de pute", "batard",
+    "crétin", "idiot", "imbécile"
+  ],
+  "patterns": [
+    "m+e+r+d+e",
+    "p+u+t+a+i+n"
+  ]
+}

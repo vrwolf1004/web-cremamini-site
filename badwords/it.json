@@ -1,0 +1,12 @@
+{
+  "lang": "it",
+  "words": [
+    "cazzo", "vaffanculo", "stronzo", "bastardo", "puttana",
+    "coglione", "merda", "figlio di puttana", "idiota", "imbecille",
+    "stupido", "deficiente"
+  ],
+  "patterns": [
+    "c+a+z+z+o",
+    "m+e+r+d+a"
+  ]
+}
