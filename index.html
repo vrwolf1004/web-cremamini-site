@@ -270,18 +270,6 @@
       </section>
     </article>
 
-    <!-- Mobile ad banner (below article on mobile) -->
-    <div id="mobile-main-ad-banner" class="card ad-section">
-      <div class="ad-content">
-        <div style="background: white; padding: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-          <div style="font-weight: 600; font-size: 1rem; color: #1f1f1f; margin-bottom: 8px;">새로운 디자인 시스템 완성!</div>
-          <div style="font-size: 0.9rem; color: #5f6368; margin-bottom: 12px; line-height: 1.5;">크로스 플랫폼 UI 컴포넌트로 프로젝트를 빠르게 시작하세요.</div>
-          <div style="color: #1a73e8; font-size: 0.95rem; font-weight: 500; cursor: pointer; display: inline-block;">자세히 보기 →</div>
-        </div>
-        <div style="font-size: 0.75rem; color: #9aa0a6; margin-top: 10px; text-align: right;">광고</div>
-      </div>
-    </div>
-
     <!-- Sidebar: Ad banner + Comments -->
     <div class="sidebar">
       <!-- Desktop ad banner (above comments) -->
@@ -315,6 +303,18 @@
 
     <button id="comments-toggle" class="binder" aria-label="Open comments">💬</button>
   </main>
+
+  <!-- Mobile ad banner (below article on mobile, outside container) -->
+  <div id="mobile-main-ad-banner" class="card ad-section" style="max-width:980px;margin:8px auto;padding:0 12px">
+    <div class="ad-content">
+      <div style="background: white; padding: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+        <div style="font-weight: 600; font-size: 1rem; color: #1f1f1f; margin-bottom: 8px;">새로운 디자인 시스템 완성!</div>
+        <div style="font-size: 0.9rem; color: #5f6368; margin-bottom: 12px; line-height: 1.5;">크로스 플랫폼 UI 컴포넌트로 프로젝트를 빠르게 시작하세요.</div>
+        <div style="color: #1a73e8; font-size: 0.95rem; font-weight: 500; cursor: pointer; display: inline-block;">자세히 보기 →</div>
+      </div>
+      <div style="font-size: 0.75rem; color: #9aa0a6; margin-top: 10px; text-align: right;">광고</div>
+    </div>
+  </div>
 
   <!-- Confirm dialog -->
   <div id="confirm-modal" class="modal" aria-hidden="true">
