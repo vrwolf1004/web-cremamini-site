@@ -16,6 +16,8 @@
 html,body{height:100%}
 html{overflow-x:hidden}
 body{margin:0;overflow-x:hidden;background:var(--bg);background-image:var(--bg-pattern, none);background-size:var(--bg-size, auto);color:var(--text);-webkit-font-smoothing:antialiased}
+p,li,span,label,td,th,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word;word-break:break-word}
+.btn{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .site-header{padding:28px 20px;text-align:center}
 .site-header h1{margin:.1rem 0;font-size:1.4rem}
 .site-logo{display:block;height:48px;margin:0 auto 8px}
