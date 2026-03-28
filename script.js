@@ -574,10 +574,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
 
       // 저장 버튼
-      const mobileMenuSaveBtn = document.getElementById('mobile-menu-save');
-      if(mobileMenuSaveBtn){
-        mobileMenuSaveBtn.addEventListener('click', ()=> closeMobilePanel('mobile-menu-panel'));
-      }
 
       // 모바일 메뉴 - 댓글 보기 버튼
       const mobileMenuCommentsBtn = document.getElementById('mobile-menu-comments');
@@ -764,6 +760,15 @@ function initMobileAccordion(){
       const icon = header.querySelector('.accordion-icon');
       item.classList.toggle('open');
       icon.textContent = item.classList.contains('open') ? '▲' : '▼';
+
+      // 익명 댓글 클릭 시 메뉴 아코디언 닫기
+      if(item.id === 'mobile-acc-comments'){
+        const menuItem = document.getElementById('mobile-acc-menu');
+        if(menuItem && menuItem.classList.contains('open')){
+          menuItem.classList.remove('open');
+          menuItem.querySelector('.accordion-icon').textContent = '▼';
+        }
+      }
     });
   });
 }
