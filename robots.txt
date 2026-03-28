@@ -1,0 +1,14 @@
+# Crema-Mini Theme Playground
+# https://www.picklayer.net
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Sitemap
+Sitemap: https://www.picklayer.net/sitemap.xml
+
+# Crawl delay (존중하는 봇들만)
+Crawl-delay: 1
