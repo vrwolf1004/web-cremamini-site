@@ -546,7 +546,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
       // initial intro: show all or selected
       const saved = localStorage.getItem('pl_theme');
-      renderThemeIntro(saved || null);
+      const initialTheme = saved || 'basic';
+
+      // Hide loading overlay after theme CSS is fully loaded
+      const loadingOverlay = document.getElementById('loading-overlay');
+      loadThemeCss(initialTheme, () => {
+        if(loadingOverlay) {
+          loadingOverlay.classList.add('hidden');
+          setTimeout(() => loadingOverlay.style.display = 'none', 200);
+        }
+      });
+
+      renderThemeIntro(initialTheme);
 
       // mobile menu button and panels (after THEMES loaded)
       const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -667,24 +678,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
   function openMobilePanel(id){ const p=document.getElementById(id); if(p){ p.setAttribute('aria-hidden','false'); p.removeAttribute('inert'); } }
   function closeMobilePanel(id){ const p=document.getElementById(id); if(p){ p.setAttribute('aria-hidden','true'); p.setAttribute('inert', ''); } }
 
-  // hide loading spinner when all initialization is complete
-  const loadingOverlay = document.getElementById('loading-overlay');
-  if(loadingOverlay) {
-    loadingOverlay.classList.add('hidden');
-    setTimeout(() => loadingOverlay.style.display = 'none', 200);
-  }
 });
 
 /* Dynamically load theme CSS file (single link element) */
-function loadThemeCss(id){
+function loadThemeCss(id, onLoaded){
   const existing = document.getElementById('theme-link');
   const href = `theme/${id}.css`;
   if(existing){
-    if(existing.getAttribute('href') === href) return;
+    if(existing.getAttribute('href') === href){
+      if(onLoaded) onLoaded();
+      return;
+    }
     existing.setAttribute('href', href);
+    if(onLoaded) existing.onload = onLoaded;
   }else{
     const link = document.createElement('link');
     link.rel = 'stylesheet'; link.id = 'theme-link'; link.href = href;
+    if(onLoaded) link.onload = onLoaded;
     document.head.appendChild(link);
   }
 }
