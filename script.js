@@ -105,7 +105,7 @@ function renderThemePicker(){
   });
   // mobile select
   select.addEventListener('change', ()=> setTheme(select.value));
-  const saved = localStorage.getItem('pl_theme') || (THEMES[0] && THEMES[0].id) || FALLBACK_THEMES[0].id; setTheme(saved);
+  const saved = localStorage.getItem('pl_theme') || 'basic'; setTheme(saved);
 }
 
 function renderThemeIntro(selectedId){
@@ -369,30 +369,32 @@ function toggleReplyForm(parentId, parentEl) {
 
 function renderCommentsList(comments) {
   _cachedComments = comments;
-  const list = $('#comment-list');
-  if (!list) return; // 목록 요소 없으면 조용히 반환
-  list.innerHTML = '';
+  const lists = [$('#comment-list'), $('#mobile-comment-list')].filter(l => l);
+  if (lists.length === 0) return;
 
   const themeId = getCurrentThemeId();
   const themed = comments.filter(c => (c.themeId || 'basic') === themeId);
 
-  if (themed.length === 0) {
-    list.innerHTML = `<div class="comment-empty">${getLocaleString('noComments') || '아직 댓글이 없습니다.'}</div>`;
-    return;
-  }
-
-  const topLevel = themed.filter(c => !c.parentId);
-  const replies = themed.filter(c => !!c.parentId);
-
-  topLevel.forEach(c => {
-    const el = createCommentEl(c, false);
-    const myReplies = replies.filter(r => r.parentId === c.id);
-    if (myReplies.length > 0) {
-      const repliesEl = document.createElement('div'); repliesEl.className = 'comment-replies';
-      myReplies.forEach(r => repliesEl.appendChild(createCommentEl(r, true)));
-      el.appendChild(repliesEl);
+  lists.forEach(list => {
+    list.innerHTML = '';
+    if (themed.length === 0) {
+      list.innerHTML = `<div class="comment-empty">${getLocaleString('noComments') || '아직 댓글이 없습니다.'}</div>`;
+      return;
     }
-    list.appendChild(el);
+
+    const topLevel = themed.filter(c => !c.parentId);
+    const replies = themed.filter(c => !!c.parentId);
+
+    topLevel.forEach(c => {
+      const el = createCommentEl(c, false);
+      const myReplies = replies.filter(r => r.parentId === c.id);
+      if (myReplies.length > 0) {
+        const repliesEl = document.createElement('div'); repliesEl.className = 'comment-replies';
+        myReplies.forEach(r => repliesEl.appendChild(createCommentEl(r, true)));
+        el.appendChild(repliesEl);
+      }
+      list.appendChild(el);
+    });
   });
 }
 
@@ -525,6 +527,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
       initToasts();
       initTabs();
       initAccordion();
+      initMobileAccordion();
+      initMobileCommentForm();
       // language selector handler
       const langSelect = document.getElementById('lang-select');
       if(langSelect){
@@ -753,6 +757,72 @@ function initAccordion(){
         header.querySelector('.accordion-icon').textContent = '▲';
       }
     });
+  });
+}
+
+// Mobile accordion toggle (independent, not mutually exclusive)
+function initMobileAccordion(){
+  const mobileAcc = document.querySelector('.mobile-accordion');
+  if(!mobileAcc) return;
+  mobileAcc.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      const icon = header.querySelector('.accordion-icon');
+      item.classList.toggle('open');
+      icon.textContent = item.classList.contains('open') ? '▲' : '▼';
+    });
+  });
+}
+
+// Mobile comment form handler
+function initMobileCommentForm(){
+  const form = document.getElementById('mobile-comment-form');
+  if(!form) return;
+
+  const input = document.getElementById('mobile-comment-input');
+  const charCount = document.getElementById('mobile-comment-char-count');
+  const errorEl = document.getElementById('mobile-comment-error');
+  const submitBtn = document.getElementById('mobile-comment-submit');
+
+  // 문자 수 업데이트
+  input.addEventListener('input', () => {
+    const len = input.value.length;
+    charCount.textContent = len + ' / 100';
+    charCount.classList.toggle('warn', len > 80);
+  });
+
+  // 폼 제출
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    const err = validateComment(text);
+    if(err){
+      errorEl.textContent = getLocaleString(err) || err;
+      setTimeout(() => { errorEl.textContent = ''; }, 2000);
+      return;
+    }
+    errorEl.textContent = '';
+    submitBtn.disabled = true;
+
+    try{
+      await ensureAuth();
+      const themeId = getCurrentThemeId();
+      await addDoc(collection(db, 'comments'), {
+        text,
+        uid: _currentUid,
+        time: serverTimestamp(),
+        parentId: null,
+        themeId
+      });
+      input.value = '';
+      charCount.textContent = '0 / 100';
+      try{ renderComments(); }catch(e){}
+    }catch(e){
+      errorEl.textContent = getLocaleString('commentFailed') || '등록 실패';
+      console.error(e);
+    }finally{
+      submitBtn.disabled = false;
+    }
   });
 }
 

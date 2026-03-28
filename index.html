@@ -84,12 +84,44 @@
   <div id="mobile-menu-panel" class="mobile-panel" aria-hidden="true" inert>
     <div class="panel-backdrop" data-target="mobile-menu-panel"></div>
     <div class="panel-sheet">
-      <h4 data-i18n="menuThemeLabel">테마 선택</h4>
-      <div id="mobile-menu-theme-list" class="theme-list"></div>
-      <h4 data-i18n="menuLangLabel" style="margin-top:16px;">언어 선택</h4>
-      <div id="mobile-menu-lang-select" class="lang-select-mobile"></div>
-      <button id="mobile-menu-comments" class="btn" data-i18n="anonymousComments" style="margin-top:32px;width:100%;">익명 댓글</button>
-      <button id="mobile-menu-save" class="btn-save" data-i18n="complete" style="margin-top:12px;width:100%;">완료</button>
+      <div class="accordion mobile-accordion">
+        <!-- Menu accordion -->
+        <div class="accordion-item open" id="mobile-acc-menu">
+          <button class="accordion-header" data-accordion="mobile-acc-menu">
+            <span data-i18n="menuLabel">메뉴</span>
+            <span class="accordion-icon">▲</span>
+          </button>
+          <div class="accordion-body">
+            <h5 data-i18n="menuThemeLabel" style="margin:0 0 8px 0;font-size:0.9rem;">테마 선택</h5>
+            <div id="mobile-menu-theme-list" class="theme-list"></div>
+            <h5 data-i18n="menuLangLabel" style="margin:12px 0 8px 0;font-size:0.9rem;">언어 선택</h5>
+            <div id="mobile-menu-lang-select" class="lang-select-mobile"></div>
+          </div>
+        </div>
+
+        <!-- Comments accordion -->
+        <div class="accordion-item" id="mobile-acc-comments">
+          <button class="accordion-header" data-accordion="mobile-acc-comments">
+            <span data-i18n="anonymousComments">익명 댓글</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-body">
+            <form id="mobile-comment-form" class="comment-form">
+              <textarea id="mobile-comment-input" placeholder="" rows="2" maxlength="100" data-i18n-placeholder="textareaPlaceholder"></textarea>
+              <div class="comment-meta-row">
+                <span id="mobile-comment-error" class="comment-error"></span>
+                <span id="mobile-comment-char-count">0 / 100</span>
+              </div>
+              <div class="form-row">
+                <button id="mobile-comment-submit" type="submit" class="btn" data-i18n="submit" style="width:100%;">등록</button>
+              </div>
+            </form>
+            <div id="mobile-comment-list" class="comment-list" style="margin-top:12px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <button id="mobile-menu-save" class="btn-save" data-i18n="complete" style="margin-top:32px;width:100%;">완료</button>
     </div>
   </div>
 
