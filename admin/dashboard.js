@@ -55,8 +55,8 @@ async function loadReports() {
       console.log('Already authenticated');
     }
 
-    const { db, collection: col, getDocs, query, orderBy } = window._firebase;
-    const reportsRef = query(col(db, 'reports'), orderBy('time', 'desc'));
+    const { db, collection: col, getDocs, query, orderBy, limit } = window._firebase;
+    const reportsRef = query(col(db, 'reports'), orderBy('time', 'desc'), limit(50));
     const snapshot = await getDocs(reportsRef);
 
     currentReports = snapshot.docs.map(doc => ({
@@ -77,8 +77,8 @@ async function loadComments() {
       return;
     }
 
-    const { db, collection: col, getDocs } = window._firebase;
-    const commentsRef = col(db, 'comments');
+    const { db, collection: col, getDocs, query, limit } = window._firebase;
+    const commentsRef = query(col(db, 'comments'), limit(100));
     const snapshot = await getDocs(commentsRef);
 
     currentComments = snapshot.docs.map(doc => ({
