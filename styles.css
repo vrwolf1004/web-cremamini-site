@@ -188,11 +188,12 @@ body{margin:0;background:var(--bg);background-image:var(--bg-pattern, none);back
 /* Desktop ad section (above comments) */
 .ad-section{padding:16px;margin-bottom:18px}
 .ad-content{display:flex;flex-direction:column}
+#desktop-ad-banner{grid-column:2;grid-row:1}
 
 /* Mobile ad styles */
 .mobile-menu-ad-banner{padding:8px 12px;flex-shrink:0}
 .ad-content-mobile{display:flex;flex-direction:column}
-#mobile-bottom-ad-banner{display:none;position:fixed;bottom:0;left:0;right:0;padding:12px;background:var(--bg);border-top:1px solid var(--border-color, rgba(0,0,0,0.08));z-index:100}
+#mobile-bottom-ad-banner{display:none;padding:12px 0;background:var(--bg);border-top:1px solid var(--border-color, rgba(0,0,0,0.08))}
 
 @media (max-width:880px){
   /* Hide ad banner on mobile */

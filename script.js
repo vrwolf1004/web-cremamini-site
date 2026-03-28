@@ -55,6 +55,8 @@ function applyTranslations(){
   // update lang select UI label (if present)
   const langSelect = document.getElementById('lang-select');
   if(langSelect) langSelect.value = CURRENT_LANG;
+  // update menu icon to match language
+  updateMenuIcon(CURRENT_LANG);
 }
 
 // helper to resolve dotted keys like "fruit.apple" from LOCALE
@@ -76,23 +78,24 @@ function $(sel){return document.querySelector(sel)}
 function $all(sel){return Array.from(document.querySelectorAll(sel))}
 
 const DARK_THEMES = ['dark','cyberpunk'];
-const MENU_ICON_MAP = {
-  'basic': 'menu-basic.svg',
-  'flat': 'menu-flat.svg',
-  'dark': 'menu-dark.svg',
-  'midcentury': 'menu-midcentury.svg',
-  'bauhaus': 'menu-bauhaus.svg',
-  'cyberpunk': 'menu-cyberpunk.svg',
-  'vaporwave': 'menu-vaporwave.svg',
-  'rococo': 'menu-rococo.svg',
-  'artnouveau': 'menu-artnouveau.svg',
-  'newtro': 'menu-newtro.svg'
+// 언어별 메뉴 아이콘 (테마와 무관)
+const MENU_ICON_MAP_LANG = {
+  'ko': 'menu-basic.svg',      // 한국어 - 햄버거
+  'en': 'menu-basic.svg',      // 영어 - 햄버거
+  'ja': 'menu-vaporwave.svg',  // 일본어 - 라면
+  'zh': 'menu-vaporwave.svg',  // 중국어 - 라면
+  'fr': 'menu-rococo.svg',     // 프랑스어 - 크루아상
+  'es': 'menu-newtro.svg',     // 스페인어 - 피자
+  'de': 'menu-bauhaus.svg',    // 독일어 - 프레첼
+  'it': 'menu-newtro.svg',     // 이탈리아어 - 피자
+  'ru': 'menu-cyberpunk.svg',  // 러시아어 - 라면
+  'fi': 'menu-flat.svg'        // 핀란드어 - 샌드위치
 };
 
-function updateMenuIcon(themeId){
+function updateMenuIcon(lang){
   const menuIcon = document.getElementById('menu-icon');
   if(!menuIcon) return;
-  const iconFile = MENU_ICON_MAP[themeId] || 'menu-basic.svg';
+  const iconFile = MENU_ICON_MAP_LANG[lang] || 'menu-basic.svg';
   menuIcon.src = 'assets/' + iconFile;
 }
 
@@ -107,8 +110,6 @@ function setTheme(id){
   const mobileMenuThemeList = document.getElementById('mobile-menu-theme-list');
   if(mobileMenuThemeList) mobileMenuThemeList.querySelectorAll('button').forEach(b=>b.classList.toggle('selected', b.dataset.id===id));
   const sel = $('#theme-select'); if(sel) sel.value = id;
-  // update menu icon to match theme
-  updateMenuIcon(id);
   // update intro area when theme changes
   try{ renderThemeIntro(id); }catch(e){}
   // 테마가 바뀌면 댓글 목록 갱신 (테마별 필터)
