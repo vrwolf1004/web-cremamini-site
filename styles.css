@@ -85,6 +85,22 @@ body{margin:0;background:var(--bg);background-image:var(--bg-pattern, none);back
 
 .sr{position:absolute;left:-10000px}
 
+/* Loading spinner */
+.loading-overlay{position:fixed;inset:0;background:rgba(255,255,255,0.95);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.3s ease}
+.loading-overlay.hidden{opacity:0;pointer-events:none}
+.sp-color-shift{display:flex;gap:6px;align-items:center}
+.sp-color-shift span{width:10px;height:10px;border-radius:50%;animation:sp-color-shift-anim 2s linear infinite}
+.sp-color-shift span:nth-child(2){animation-delay:.3s}
+.sp-color-shift span:nth-child(3){animation-delay:.6s}
+.sp-color-shift span:nth-child(4){animation-delay:.9s}
+@keyframes sp-color-shift-anim{
+  0%{background:#7c6aff;transform:scale(1)}
+  25%{background:#ff6aab;transform:scale(1.2)}
+  50%{background:#f5c800;transform:scale(1)}
+  75%{background:#6affd4;transform:scale(1.2)}
+  100%{background:#7c6aff;transform:scale(1)}
+}
+
 /* Responsive */
 @media (max-width:880px){
   .site-header{padding:28px 20px 0;}

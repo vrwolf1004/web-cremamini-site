@@ -504,6 +504,10 @@ function initComments() {
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
+  // show loading spinner
+  const loadingOverlay = document.getElementById('loading-overlay');
+  if(loadingOverlay) loadingOverlay.style.display = 'flex';
+
   // load manifest first, then render picker
   // load chosen language first (URL ?lang= -> localStorage -> navigator), then themes and UI
   const urlParams = new URLSearchParams(location.search);
@@ -666,6 +670,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
   // close mobile panel helper functions
   function openMobilePanel(id){ const p=document.getElementById(id); if(p){ p.setAttribute('aria-hidden','false'); p.removeAttribute('inert'); } }
   function closeMobilePanel(id){ const p=document.getElementById(id); if(p){ p.setAttribute('aria-hidden','true'); p.setAttribute('inert', ''); } }
+
+  // hide loading spinner when all initialization is complete
+  setTimeout(() => {
+    const loadingOverlay = document.getElementById('loading-overlay');
+    if(loadingOverlay) {
+      loadingOverlay.classList.add('hidden');
+      setTimeout(() => loadingOverlay.style.display = 'none', 300);
+    }
+  }, 100);
 });
 
 /* Dynamically load theme CSS file (single link element) */
