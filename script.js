@@ -757,17 +757,18 @@ function initMobileAccordion(){
   mobileAcc.querySelectorAll('.accordion-header').forEach(header => {
     header.addEventListener('click', () => {
       const item = header.parentElement;
-      const icon = header.querySelector('.accordion-icon');
-      item.classList.toggle('open');
-      icon.textContent = item.classList.contains('open') ? '▲' : '▼';
+      const isCurrentlyOpen = item.classList.contains('open');
 
-      // 익명 댓글 클릭 시 메뉴 아코디언 닫기
-      if(item.id === 'mobile-acc-comments'){
-        const menuItem = document.getElementById('mobile-acc-menu');
-        if(menuItem && menuItem.classList.contains('open')){
-          menuItem.classList.remove('open');
-          menuItem.querySelector('.accordion-icon').textContent = '▼';
-        }
+      // 모든 아코디언 항목 닫기
+      mobileAcc.querySelectorAll('.accordion-item').forEach(accItem => {
+        accItem.classList.remove('open');
+        accItem.querySelector('.accordion-icon').textContent = '▼';
+      });
+
+      // 클릭한 항목이 열려있지 않았으면 열기
+      if(!isCurrentlyOpen) {
+        item.classList.add('open');
+        header.querySelector('.accordion-icon').textContent = '▲';
       }
     });
   });
