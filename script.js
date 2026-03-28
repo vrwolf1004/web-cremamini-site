@@ -676,13 +676,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
   function closeMobilePanel(id){ const p=document.getElementById(id); if(p){ p.setAttribute('aria-hidden','true'); p.setAttribute('inert', ''); } }
 
   // hide loading spinner when all initialization is complete
-  setTimeout(() => {
-    const loadingOverlay = document.getElementById('loading-overlay');
-    if(loadingOverlay) {
-      loadingOverlay.classList.add('hidden');
-      setTimeout(() => loadingOverlay.style.display = 'none', 300);
-    }
-  }, 100);
+  const loadingOverlay = document.getElementById('loading-overlay');
+  if(loadingOverlay) {
+    loadingOverlay.classList.add('hidden');
+    setTimeout(() => loadingOverlay.style.display = 'none', 200);
+  }
 });
 
 /* Dynamically load theme CSS file (single link element) */
