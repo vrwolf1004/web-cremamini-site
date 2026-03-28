@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About - PickLayers</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .page-container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    .page-header { text-align: center; margin-bottom: 40px; }
+    .page-header h1 { margin: 0; font-size: 2rem; }
+    .page-content { line-height: 1.8; color: var(--text); }
+    .page-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.3rem; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+    .page-content h3 { margin-top: 20px; margin-bottom: 10px; font-size: 1.1rem; }
+    .page-content p { margin: 10px 0; }
+    .page-content ul { margin: 10px 0; padding-left: 20px; }
+    .page-content li { margin: 5px 0; }
+    .lang-nav { text-align: center; margin-bottom: 30px; flex-wrap: wrap; }
+    .lang-nav button { background: var(--accent); color: var(--accent-contrast); border: none; padding: 8px 12px; margin: 5px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+    .lang-nav button.active { opacity: 0.6; }
+    .lang-section { display: none; }
+    .lang-section.active { display: block; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; }
+    .feature-card { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 8px; }
+    .feature-card h4 { margin-top: 0; color: var(--accent); }
+  </style>
+</head>
+<body class="theme-basic">
+  <header class="site-header">
+    <img src="assets/picklayer-light.svg" alt="PickLayers" class="site-logo" style="height:48px;margin-bottom:8px">
+    <h1>About PickLayers</h1>
+  </header>
+
+  <div class="page-container">
+    <div class="lang-nav">
+      <button class="lang-btn active" onclick="switchLang(this, 'ko')">한국어</button>
+      <button class="lang-btn" onclick="switchLang(this, 'en')">English</button>
+      <button class="lang-btn" onclick="switchLang(this, 'ja')">日本語</button>
+      <button class="lang-btn" onclick="switchLang(this, 'zh')">中文</button>
+      <button class="lang-btn" onclick="switchLang(this, 'fr')">Français</button>
+      <button class="lang-btn" onclick="switchLang(this, 'es')">Español</button>
+      <button class="lang-btn" onclick="switchLang(this, 'de')">Deutsch</button>
+      <button class="lang-btn" onclick="switchLang(this, 'it')">Italiano</button>
+      <button class="lang-btn" onclick="switchLang(this, 'ru')">Русский</button>
+      <button class="lang-btn" onclick="switchLang(this, 'fi')">Suomi</button>
+    </div>
+
+    <!-- Korean -->
+    <div class="lang-section active" id="ko">
+      <div class="page-content">
+        <h2>PickLayers에 대해</h2>
+        <p>PickLayers는 크로스 플랫폼 디자인 시스템으로, 다양한 스타일과 테마를 지원하는 UI 컴포넌트 라이브러리입니다.</p>
+
+        <h2>목표</h2>
+        <p>개발자와 디자이너가 빠르게 고품질의 사용자 인터페이스를 만들 수 있도록 지원합니다. 일관된 디자인 언어를 통해 사용자 경험을 향상시키는 것이 우리의 목표입니다.</p>
+
+        <h2>주요 기능</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h4>🎨 12개 테마</h4>
+            <p>Basic, Dark, Flat, Minimalism 등 다양한 디자인 스타일</p>
+          </div>
+          <div class="feature-card">
+            <h4>🌍 10개 언어</h4>
+            <p>전 세계 사용자를 위한 다국어 지원</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 반응형</h4>
+            <p>모바일부터 데스크탑까지 모든 기기 대응</p>
+          </div>
+          <div class="feature-card">
+            <h4>💬 익명 댓글</h4>
+            <p>Firebase 기반의 실시간 익명 댓글 시스템</p>
+          </div>
+        </div>
+
+        <h2>기술 스택</h2>
+        <ul>
+          <li><strong>Frontend:</strong> HTML5, CSS3, Vanilla JavaScript</li>
+          <li><strong>Backend:</strong> Firebase (Authentication, Firestore)</li>
+          <li><strong>Hosting:</strong> Cloudflare Pages, Firebase Hosting</li>
+          <li><strong>Localization:</strong> i18n (10개 언어)</li>
+        </ul>
+
+        <h2>연락처</h2>
+        <p>질문이나 피드백은 GitHub 또는 이메일로 부탁드립니다.</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">마지막 수정: 2026년 3월 28일</p>
+      </div>
+    </div>
+
+    <!-- English -->
+    <div class="lang-section" id="en">
+      <div class="page-content">
+        <h2>About PickLayers</h2>
+        <p>PickLayers is a cross-platform design system that provides UI component libraries supporting various styles and themes.</p>
+
+        <h2>Goal</h2>
+        <p>We help developers and designers create high-quality user interfaces quickly. Our goal is to improve user experience through consistent design language.</p>
+
+        <h2>Key Features</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h4>🎨 12 Themes</h4>
+            <p>Various design styles including Basic, Dark, Flat, Minimalism</p>
+          </div>
+          <div class="feature-card">
+            <h4>🌍 10 Languages</h4>
+            <p>Multilingual support for users worldwide</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 Responsive</h4>
+            <p>Compatible with all devices from mobile to desktop</p>
+          </div>
+          <div class="feature-card">
+            <h4>💬 Anonymous Comments</h4>
+            <p>Real-time anonymous comment system powered by Firebase</p>
+          </div>
+        </div>
+
+        <h2>Technology Stack</h2>
+        <ul>
+          <li><strong>Frontend:</strong> HTML5, CSS3, Vanilla JavaScript</li>
+          <li><strong>Backend:</strong> Firebase (Authentication, Firestore)</li>
+          <li><strong>Hosting:</strong> Cloudflare Pages, Firebase Hosting</li>
+          <li><strong>Localization:</strong> i18n (10 languages)</li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>Please send questions or feedback via GitHub or email.</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">Last updated: March 28, 2026</p>
+      </div>
+    </div>
+
+    <!-- Japanese -->
+    <div class="lang-section" id="ja">
+      <div class="page-content">
+        <h2>PickLayersについて</h2>
+        <p>PickLayersは、様々なスタイルとテーマをサポートするUIコンポーネントライブラリを提供するクロスプラットフォームデザインシステムです。</p>
+
+        <h2>目標</h2>
+        <p>開発者とデザイナーが高品質なユーザーインターフェースを素早く作成できるようにサポートします。一貫したデザイン言語を通じてユーザー体験を向上させることが目標です。</p>
+
+        <h2>主な機能</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h4>🎨 12個のテーマ</h4>
+            <p>Basic、Dark、Flat、Minimalismなど様々なデザインスタイル</p>
+          </div>
+          <div class="feature-card">
+            <h4>🌍 10言語対応</h4>
+            <p>世界中のユーザーのための多言語サポート</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 レスポンシブ</h4>
+            <p>モバイルからデスクトップまで全デバイス対応</p>
+          </div>
+          <div class="feature-card">
+            <h4>💬 匿名コメント</h4>
+            <p>Firebase搭載のリアルタイム匿名コメントシステム</p>
+          </div>
+        </div>
+
+        <h2>テクノロジースタック</h2>
+        <ul>
+          <li><strong>Frontend:</strong> HTML5、CSS3、Vanilla JavaScript</li>
+          <li><strong>Backend:</strong> Firebase (Authentication、Firestore)</li>
+          <li><strong>Hosting:</strong> Cloudflare Pages、Firebase Hosting</li>
+          <li><strong>Localization:</strong> i18n (10言語)</li>
+        </ul>
+
+        <h2>お問い合わせ</h2>
+        <p>ご質問やご意見はGitHubまたはメールでお願いします。</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">最終更新: 2026年3月28日</p>
+      </div>
+    </div>
+
+    <!-- Chinese -->
+    <div class="lang-section" id="zh">
+      <div class="page-content">
+        <h2>关于 PickLayers</h2>
+        <p>PickLayers是一个跨平台设计系统,提供支持各种样式和主题的UI组件库。</p>
+
+        <h2>目标</h2>
+        <p>我们帮助开发人员和设计师快速创建高质量的用户界面。我们的目标是通过一致的设计语言改善用户体验。</p>
+
+        <h2>主要功能</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h4>🎨 12种主题</h4>
+            <p>包括Basic、Dark、Flat、Minimalism等各种设计风格</p>
+          </div>
+          <div class="feature-card">
+            <h4>🌍 10种语言</h4>
+            <p>为全球用户提供多语言支持</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 响应式</h4>
+            <p>从移动设备到桌面设备的完整兼容</p>
+          </div>
+          <div class="feature-card">
+            <h4>💬 匿名评论</h4>
+            <p>由Firebase驱动的实时匿名评论系统</p>
+          </div>
+        </div>
+
+        <h2>技术栈</h2>
+        <ul>
+          <li><strong>Frontend:</strong> HTML5、CSS3、原生JavaScript</li>
+          <li><strong>Backend:</strong> Firebase (Authentication、Firestore)</li>
+          <li><strong>Hosting:</strong> Cloudflare Pages、Firebase Hosting</li>
+          <li><strong>Localization:</strong> i18n (10种语言)</li>
+        </ul>
+
+        <h2>联系方式</h2>
+        <p>请通过GitHub或电子邮件发送问题或反馈。</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">最后更新: 2026年3月28日</p>
+      </div>
+    </div>
+
+    <!-- French -->
+    <div class="lang-section" id="fr">
+      <div class="page-content">
+        <h2>À propos de PickLayers</h2>
+        <p>PickLayers est un système de conception multiplateforme qui fournit des bibliothèques de composants d'interface utilisateur supportant divers styles et thèmes.</p>
+
+        <h2>Objectif</h2>
+        <p>Nous aidons les développeurs et les concepteurs à créer rapidement des interfaces utilisateur de haute qualité. Notre objectif est d'améliorer l'expérience utilisateur par un langage de conception cohérent.</p>
+
+        <h2>Caractéristiques principales</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h4>🎨 12 Thèmes</h4>
+            <p>Divers styles de conception incluant Basic, Dark, Flat, Minimalism</p>
+          </div>
+          <div class="feature-card">
+            <h4>🌍 10 Langues</h4>
+            <p>Support multilingue pour les utilisateurs du monde entier</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 Réactif</h4>
+            <p>Compatible avec tous les appareils du mobile au bureau</p>
+          </div>
+          <div class="feature-card">
+            <h4>💬 Commentaires Anonymes</h4>
+            <p>Système de commentaires anonymes en temps réel alimenté par Firebase</p>
+          </div>
+        </div>
+
+        <h2>Pile technologique</h2>
+        <ul>
+          <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript vanille</li>
+          <li><strong>Backend:</strong> Firebase (Authentification, Firestore)</li>
+          <li><strong>Hébergement:</strong> Cloudflare Pages, Firebase Hosting</li>
+          <li><strong>Localisation:</strong> i18n (10 langues)</li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>Veuillez envoyer vos questions ou commentaires via GitHub ou email.</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">Dernière mise à jour: 28 mars 2026</p>
+      </div>
+    </div>
+
+    <!-- Spanish -->
+    <div class="lang-section" id="es">
+      <div class="page-content">
+        <h2>Acerca de PickLayers</h2>
+        <p>PickLayers es un sistema de diseño multiplataforma que proporciona bibliotecas de componentes de interfaz de usuario que admiten varios estilos y temas.</p>
+
+        <h2>Objetivo</h2>
+        <p>Ayudamos a desarrolladores y diseñadores a crear interfaces de usuario de alta calidad rápidamente. Nuestro objetivo es mejorar la experiencia del usuario a través de un lenguaje de diseño coherente.</p>
+
+        <h2>Características principales</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h4>🎨 12 Temas</h4>
+            <p>Varios estilos de diseño incluyendo Basic, Dark, Flat, Minimalism</p>
+          </div>
+          <div class="feature-card">
+            <h4>🌍 10 Idiomas</h4>
+            <p>Soporte multilingüe para usuarios en todo el mundo</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 Responsivo</h4>
+            <p>Compatible con todos los dispositivos desde móvil hasta escritorio</p>
+          </div>
+          <div class="feature-card">
+            <h4>💬 Comentarios Anónimos</h4>
+            <p>Sistema de comentarios anónimos en tiempo real impulsado por Firebase</p>
+          </div>
+        </div>
+
+        <h2>Pila tecnológica</h2>
+        <ul>
+          <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript vanilla</li>
+          <li><strong>Backend:</strong> Firebase (Autenticación, Firestore)</li>
+          <li><strong>Alojamiento:</strong> Cloudflare Pages, Firebase Hosting</li>
+          <li><strong>Localización:</strong> i18n (10 idiomas)</li>
+        </ul>
+
+        <h2>Contacto</h2>
+        <p>Por favor envíe sus preguntas o comentarios a través de GitHub o correo electrónico.</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">Última actualización: 28 de marzo de 2026</p>
+      </div>
+    </div>
+
+    <!-- German -->
+    <div class="lang-section" id="de">
+      <div class="page-content">
+        <h2>Über PickLayers</h2>
+        <p>PickLayers ist ein plattformübergreifendes Designsystem, das UI-Komponentenbibliotheken mit verschiedenen Stilen und Themen bereitstellt.</p>
+
+        <h2>Ziel</h2>
+        <p>Wir helfen Entwicklern und Designern, schnell benutzerfreundliche Oberflächen von hoher Qualität zu erstellen. Unser Ziel ist es, das Benutzererlebnis durch konsistente Designsprache zu verbessern.</p>
+
+        <h2>Hauptmerkmale</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h4>🎨 12 Themen</h4>
+            <p>Verschiedene Designstile einschließlich Basic, Dark, Flat, Minimalism</p>
+          </div>
+          <div class="feature-card">
+            <h4>🌍 10 Sprachen</h4>
+            <p>Mehrsprachige Unterstützung für Benutzer weltweit</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 Responsiv</h4>
+            <p>Kompatibel mit allen Geräten vom Mobilgerät bis zum Desktop</p>
+          </div>
+          <div class="feature-card">
+            <h4>💬 Anonyme Kommentare</h4>
+            <p>Echtzeit-Anonymkommentarsystem mit Firebase</p>
+          </div>
+        </div>
+
+        <h2>Technologie-Stack</h2>
+        <ul>
+          <li><strong>Frontend:</strong> HTML5, CSS3, Vanilla JavaScript</li>
+          <li><strong>Backend:</strong> Firebase (Authentifizierung, Firestore)</li>
+          <li><strong>Hosting:</strong> Cloudflare Pages, Firebase Hosting</li>
+          <li><strong>Lokalisierung:</strong> i18n (10 Sprachen)</li>
+        </ul>
+
+        <h2>Kontakt</h2>
+        <p>Bitte senden Sie Ihre Fragen oder Rückmeldungen per GitHub oder E-Mail.</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">Zuletzt aktualisiert: 28. März 2026</p>
+      </div>
+    </div>
+
+    <!-- Italian -->
+    <div class="lang-section" id="it">
+      <div class="page-content">
+        <h2>Chi siamo</h2>
+        <p>PickLayers è un sistema di progettazione multipiattaforma che fornisce librerie di componenti UI che supportano vari stili e temi.</p>
+
+        <h2>Obiettivo</h2>
+        <p>Aiutiamo sviluppatori e designer a creare rapidamente interfacce utente di alta qualità. Il nostro obiettivo è migliorare l'esperienza dell'utente attraverso un linguaggio di progettazione coerente.</p>
+
+        <h2>Caratteristiche principali</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h4>🎨 12 Temi</h4>
+            <p>Vari stili di progettazione inclusi Basic, Dark, Flat, Minimalism</p>
+          </div>
+          <div class="feature-card">
+            <h4>🌍 10 Lingue</h4>
+            <p>Supporto multilingue per utenti in tutto il mondo</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 Reattivo</h4>
+            <p>Compatibile con tutti i dispositivi da mobile a desktop</p>
+          </div>
+          <div class="feature-card">
+            <h4>💬 Commenti Anonimi</h4>
+            <p>Sistema di commenti anonimi in tempo reale powered da Firebase</p>
+          </div>
+        </div>
+
+        <h2>Stack Tecnologico</h2>
+        <ul>
+          <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript vanilla</li>
+          <li><strong>Backend:</strong> Firebase (Autenticazione, Firestore)</li>
+          <li><strong>Hosting:</strong> Cloudflare Pages, Firebase Hosting</li>
+          <li><strong>Localizzazione:</strong> i18n (10 lingue)</li>
+        </ul>
+
+        <h2>Contatti</h2>
+        <p>Si prega di inviare domande o commenti tramite GitHub o email.</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">Ultimo aggiornamento: 28 marzo 2026</p>
+      </div>
+    </div>
+
+    <!-- Russian -->
+    <div class="lang-section" id="ru">
+      <div class="page-content">
+        <h2>О PickLayers</h2>
+        <p>PickLayers - это кроссплатформенная система дизайна, которая предоставляет библиотеки компонентов пользовательского интерфейса, поддерживающие различные стили и темы.</p>
+
+        <h2>Цель</h2>
+        <p>Мы помогаем разработчикам и дизайнерам быстро создавать высококачественные пользовательские интерфейсы. Наша цель - улучшить пользовательский опыт благодаря согласованному языку дизайна.</p>
+
+        <h2>Основные возможности</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h4>🎨 12 Тем</h4>
+            <p>Различные стили дизайна, включая Basic, Dark, Flat, Minimalism</p>
+          </div>
+          <div class="feature-card">
+            <h4>🌍 10 Языков</h4>
+            <p>Многоязычная поддержка для пользователей во всем мире</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 Адаптивный</h4>
+            <p>Совместимость со всеми устройствами от мобильных до настольных</p>
+          </div>
+          <div class="feature-card">
+            <h4>💬 Анонимные Комментарии</h4>
+            <p>Система анонимных комментариев в реальном времени на Firebase</p>
+          </div>
+        </div>
+
+        <h2>Технологический стек</h2>
+        <ul>
+          <li><strong>Frontend:</strong> HTML5, CSS3, Vanilla JavaScript</li>
+          <li><strong>Backend:</strong> Firebase (Аутентификация, Firestore)</li>
+          <li><strong>Хостинг:</strong> Cloudflare Pages, Firebase Hosting</li>
+          <li><strong>Локализация:</strong> i18n (10 языков)</li>
+        </ul>
+
+        <h2>Контакты</h2>
+        <p>Пожалуйста, отправляйте вопросы и отзывы через GitHub или по электронной почте.</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">Последнее обновление: 28 марта 2026 г.</p>
+      </div>
+    </div>
+
+    <!-- Finnish -->
+    <div class="lang-section" id="fi">
+      <div class="page-content">
+        <h2>Tietoja PickLayersista</h2>
+        <p>PickLayers on alustojen välinen suunnittelujärjestelmä, joka tarjoaa käyttöliittymäkomponenttikirjastoja, jotka tukevat erilaisia tyylejä ja teemoja.</p>
+
+        <h2>Tavoite</h2>
+        <p>Auttamme kehittäjiä ja suunnittelijoita luomaan nopeasti korkealaatuisia käyttöliittymiä. Tavoitteemme on parantaa käyttäjäkokemusta johdonmukaisen suunnittelukielen avulla.</p>
+
+        <h2>Pääominaisuudet</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h4>🎨 12 Teemaa</h4>
+            <p>Erilaisia suunnittelutyylejä mukaan lukien Basic, Dark, Flat, Minimalism</p>
+          </div>
+          <div class="feature-card">
+            <h4>🌍 10 Kieltä</h4>
+            <p>Monikielinen tuki käyttäjille maailmanlaajuisesti</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 Reagoiva</h4>
+            <p>Yhteensopiva kaikkien laitteiden kanssa matkapuhelimesta pöytäkoneeseen</p>
+          </div>
+          <div class="feature-card">
+            <h4>💬 Anonyyrit Kommentit</h4>
+            <p>Reaaliaikainen anonyymikommenttijärjestelmä Firebasella</p>
+          </div>
+        </div>
+
+        <h2>Teknologiapiino</h2>
+        <ul>
+          <li><strong>Frontend:</strong> HTML5, CSS3, Vanilla JavaScript</li>
+          <li><strong>Backend:</strong> Firebase (Todentaminen, Firestore)</li>
+          <li><strong>Hosting:</strong> Cloudflare Pages, Firebase Hosting</li>
+          <li><strong>Lokalisointi:</strong> i18n (10 kieltä)</li>
+        </ul>
+
+        <h2>Yhteyshenkilö</h2>
+        <p>Lähetä kysymykset tai palaute GitHubin tai sähköpostin kautta.</p>
+
+        <p style="margin-top: 40px; color: var(--muted); font-size: 0.9rem;">Viimeksi päivitetty: 28. maaliskuuta 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p><small>© 2026 PickLayer.net. <a href="index.html" style="color:inherit;text-decoration:none">Home</a> | <a href="privacy.html" style="color:inherit;text-decoration:none">Privacy</a> | <a href="terms.html" style="color:inherit;text-decoration:none">Terms</a></small></p>
+  </footer>
+
+  <script>
+    function switchLang(btn, lang) {
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.lang-section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(lang).classList.add('active');
+    }
+  </script>
+</body>
+</html>
