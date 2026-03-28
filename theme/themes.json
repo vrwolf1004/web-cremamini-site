@@ -5,6 +5,7 @@
   {"id":"midcentury","name":"Midcentury","category":"Classic","description":"1950–60년대 미드센추리 모던, 따뜻한 색감과 기하학적 요소가 특징입니다."},
   {"id":"bauhaus","name":"Bauhaus","category":"Classic","description":"기하학과 삼원색을 활용한 기능미 중심의 디자인입니다."},
   {"id":"cyberpunk","name":"Cyberpunk","category":"Trendy","description":"네온과 디지털 감성의 강렬한 테마입니다."},
+  {"id":"vaporwave","name":"Vaporwave","category":"Trendy","description":"80–90년대의 복고 감성으로 자주색과 분홍색 팔레트의 환몽적 테마입니다."},
   {"id":"rococo","name":"Rococo","category":"Classic","description":"화려한 장식과 곡선이 특징인 로코코 스타일로 우아하고 화사한 테마입니다."},
   {"id":"artnouveau","name":"Art Nouveau","category":"Classic","description":"유려한 곡선과 자연 모티프를 활용한 장식적이고 우아한 테마입니다."},
   {"id":"newtro","name":"Newtro","category":"Trendy","description":"뉴트로(새로운 레트로) 감성으로 현대적인 색감과 복고적 요소를 결합한 테마입니다."}

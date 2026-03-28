@@ -1,19 +1,19 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Vaporwave 스타일 라면 (80년대 글로우) -->
   <!-- 그릇 -->
-  <path d="M3 10C3 8.89543 5.91 7 12 7C18.09 7 21 8.89543 21 10V14C21 15.6569 18.6274 17 12 17C5.37258 17 3 15.6569 3 14V10Z" fill="#C77DFF" opacity="0.7"/>
+  <path d="M3 10C3 8.89543 5.91 7 12 7C18.09 7 21 8.89543 21 10V14C21 15.6569 18.6274 17 12 17C5.37258 17 3 15.6569 3 14V10Z" fill="white" opacity="0.7"/>
 
   <!-- 국물 파도 -->
-  <path d="M5 11Q12 10 19 11" stroke="#FFC0FA" stroke-width="1" fill="none" opacity="0.8"/>
-  <path d="M5 13Q12 12 19 13" stroke="#00F5FF" stroke-width="1" fill="none" opacity="0.8"/>
+  <path d="M5 11Q12 10 19 11" stroke="white" stroke-width="1" fill="none" opacity="0.8"/>
+  <path d="M5 13Q12 12 19 13" stroke="white" stroke-width="1" fill="none" opacity="0.8"/>
 
   <!-- 면 (불규칙 곡선) -->
-  <path d="M6 9Q8 7 10 9" stroke="#FFD60A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M14 9Q16 7 18 9" stroke="#FFD60A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M7 12Q9 10 11 12" stroke="#FFD60A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M13 12Q15 10 17 12" stroke="#FFD60A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M6 9Q8 7 10 9" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M14 9Q16 7 18 9" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M7 12Q9 10 11 12" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M13 12Q15 10 17 12" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
   <!-- 토핑 (김) -->
-  <rect x="8" y="11" width="2" height="3" fill="#2D1B4E" opacity="0.6" rx="0.5"/>
-  <rect x="14" y="11" width="2" height="3" fill="#2D1B4E" opacity="0.6" rx="0.5"/>
+  <rect x="8" y="11" width="2" height="3" fill="white" opacity="0.6" rx="0.5"/>
+  <rect x="14" y="11" width="2" height="3" fill="white" opacity="0.6" rx="0.5"/>
 </svg>
