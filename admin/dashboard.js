@@ -42,20 +42,24 @@ function hideLoadingBar() {
 }
 
 async function initDashboard() {
-  // 로딩 상태 시작
+  console.log('[대시보드] 초기화 시작');
+
+  // 1️⃣ 로딩 상태 시작
   showLoadingBar();
 
-  // 3초 후 "페이지 로딩중..." 토스트 표시
+  // 2️⃣ 3초 후 진행 상황 표시
   dashboardLoadingTimer = setTimeout(() => {
-    showToast('페이지 로딩중...', 'info', 0);
+    showToast('데이터 로드 중...', 'info', 0);
   }, LOADING_TIMEOUT);
 
   try {
-    // 신고 및 댓글 데이터 로드
+    // 3️⃣ 데이터 로드
+    console.log('[대시보드] 데이터 로드 중...');
     await loadReports();
     await loadComments();
+    console.log(`[대시보드] 신고 ${currentReports.length}개, 댓글 ${currentComments.length}개 로드`);
 
-    // 필터 이벤트
+    // 4️⃣ UI 이벤트 바인딩
     const filterSelect = document.getElementById('filter-status');
     if (filterSelect) {
       filterSelect.addEventListener('change', (e) => {
@@ -64,7 +68,6 @@ async function initDashboard() {
       });
     }
 
-    // 모달 닫기
     const modalCloseBtn = document.getElementById('modal-close');
     const modal = document.getElementById('report-modal');
     const backdrop = document.querySelector('.modal-backdrop');
@@ -81,16 +84,19 @@ async function initDashboard() {
       });
     }
 
-    // 초기 렌더링
+    // 5️⃣ 화면 렌더링
+    console.log('[대시보드] 화면 렌더링 중...');
     renderReportsList();
     updateStats();
+    console.log('[대시보드] 렌더링 완료');
 
-    // 로딩 완료
+    // 6️⃣ 로딩 완료
     if (dashboardLoadingTimer) clearTimeout(dashboardLoadingTimer);
     hideLoadingBar();
     showToast('페이지 로딩완료', 'success', 2000);
+    console.log('[대시보드] 완료!');
   } catch (error) {
-    console.error('Failed to initialize dashboard:', error);
+    console.error('[대시보드] 오류 발생:', error);
     if (dashboardLoadingTimer) clearTimeout(dashboardLoadingTimer);
     hideLoadingBar();
     showToast('대시보드 로딩 실패', 'error', 3000);

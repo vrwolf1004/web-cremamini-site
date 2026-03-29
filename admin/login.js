@@ -72,32 +72,40 @@ function initLoginPage() {
       return;
     }
 
-    // 로딩 시작
+    // 1️⃣ 로그인 로딩 시작
+    console.log('[로그인] 패스워드 검증 완료, 로딩 시작');
     showLoadingBar();
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
 
-    // 3초 후 "접속 대기중..." 토스트 표시
+    // 2️⃣ 3초 후 진행 상황 표시
     loginLoadingTimer = setTimeout(() => {
-      showToast('접속 대기중...', 'info', 0);
+      showToast('접속 처리 중...', 'info', 0);
+      console.log('[로그인] 3초 대기 - 접속 처리 중 토스트 표시');
     }, LOADING_TIMEOUT);
 
-    // 로그인 성공
-    // 로딩 타이머 정리
-    if (loginLoadingTimer) clearTimeout(loginLoadingTimer);
-
-    // 로딩바 숨김
-    hideLoadingBar();
-
-    // "접속 완료" 토스트 표시
-    showToast('접속 완료', 'success', 2000);
-
-    setAdminToken();
-
-    // 약간의 딜레이 후 대시보드로 이동
+    // 3️⃣ 로그인 처리 시뮬레이션 (실제로는 서버 통신)
     setTimeout(() => {
-      showDashboard();
-    }, 500);
+      console.log('[로그인] 처리 완료');
+
+      // 4️⃣ 로딩 타이머 정리
+      if (loginLoadingTimer) clearTimeout(loginLoadingTimer);
+
+      // 5️⃣ 로딩바 숨김
+      hideLoadingBar();
+
+      // 6️⃣ 성공 토스트 표시
+      showToast('접속 완료', 'success', 2000);
+      console.log('[로그인] 접속 완료 토스트 표시');
+
+      setAdminToken();
+
+      // 7️⃣ 대시보드로 이동
+      setTimeout(() => {
+        console.log('[로그인] 대시보드로 이동');
+        showDashboard();
+      }, 500);
+    }, 1000);
   });
 }
 
@@ -142,6 +150,9 @@ function showDashboard() {
     loginSection.style.display = 'none';
   }
   if (dashboardSection) dashboardSection.hidden = false;
+
+  // 로딩바 초기화
+  hideLoadingBar();
 
   // 대시보드 초기화
   initDashboard();
