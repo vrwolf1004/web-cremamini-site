@@ -1,4 +1,5 @@
 // ── Entry point (DOMContentLoaded) ────────────────────────────
+import { showToast } from './common.js';
 import { loadLocale, applyTranslations } from './i18n.js';
 import { loadThemesManifest, renderThemePicker, setTheme, renderThemeIntro, initFormSamples, initDataTable, initConfirmDialog, initToasts, initTabs, initAccordion, initMobileAccordion, initMobileCommentForm, loadThemeCss } from './ui.js';
 import { initComments, renderComments, openTranslateModal, closeTranslateModal, openReportModal, closeReportModal, submitReport } from './comments.js';

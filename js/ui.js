@@ -85,7 +85,7 @@ function renderThemeIntro(selectedId){
   const t = (window._themes || []).find(x=>x.id===selectedId) || FALLBACK_THEMES.find(x=>x.id===selectedId);
   if(t){
     container.innerHTML = `<p>${getLocalizedThemeDesc(t.id,t.description)}</p>`;
-    if(pageTitle) pageTitle.textContent = (LOCALE && LOCALE['pageTitle']) ? t.name : t.name;
+    if(pageTitle) pageTitle.textContent = (window._locale && window._locale['pageTitle']) ? t.name : t.name;
   }else{
     container.innerHTML = `<h4>테마</h4><p>설명 없음</p>`;
     if(pageTitle) pageTitle.textContent = '샘플 페이지';
