@@ -197,7 +197,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const res = await fetch('updates.json', {cache: 'no-cache'});
         if(!res.ok) throw new Error('HTTP ' + res.status);
         const updates = await res.json();
-        const message = updates.map(u=> `${u.title}\n${u.items.join('\n')}`).join('\n\n');
+
+        // 최신 업데이트 1개만 표시
+        if (updates.length === 0) throw new Error('No updates found');
+        const latest = updates[0];
+        const message = `🆕 ${latest.title}\n\n${latest.items.join('\n')}`;
         showToast(message, 'info');
       }catch(e){
         console.error('updates.json load failed:', e);

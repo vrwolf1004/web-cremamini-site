@@ -8,17 +8,30 @@ let dashboardLoadingTimer = null;
 // ── 토스트 유틸리티 (login.js와 공유) ───────────────────────────────
 function showToast(message, type = 'info', duration = 3000) {
   const container = document.getElementById('toast-container');
+
+  // 이전 토스트들 제거 (중복 방지)
+  const prevToasts = container.querySelectorAll('.toast');
+  prevToasts.forEach(t => {
+    t.style.animation = 'slideInRight 0.3s ease-out reverse';
+    setTimeout(() => t.remove(), 300);
+  });
+
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
   toast.textContent = message;
 
   container.appendChild(toast);
 
+  // duration이 0이어도 반드시 제거
+  const removeToast = () => {
+    toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+    setTimeout(() => toast.remove(), 300);
+  };
+
   if (duration > 0) {
-    setTimeout(() => {
-      toast.style.animation = 'slideInRight 0.3s ease-out reverse';
-      setTimeout(() => toast.remove(), 300);
-    }, duration);
+    setTimeout(removeToast, duration);
+  } else {
+    // duration=0인 경우, 다음 토스트가 나올 때 제거됨 (위의 prevToasts 로직)
   }
 
   return toast;
