@@ -2,8 +2,44 @@
 
 const ADMIN_PASSWORD = 'picklayer2024admin'; // 환경변수로 관리할 수 있음
 const SESSION_TIMEOUT = 30 * 60 * 1000; // 30분
+const LOADING_TIMEOUT = 3000; // 3초
 
 let sessionTimer = null;
+let loginLoadingTimer = null;
+
+// ── 토스트 유틸리티 ───────────────────────────────────────────────
+function showToast(message, type = 'info', duration = 3000) {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+
+  container.appendChild(toast);
+
+  if (duration > 0) {
+    setTimeout(() => {
+      toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+      setTimeout(() => toast.remove(), 300);
+    }, duration);
+  }
+
+  return toast;
+}
+
+// ── 로딩바 유틸리티 ───────────────────────────────────────────────
+function showLoadingBar() {
+  const loadingBar = document.getElementById('loading-bar');
+  if (loadingBar) {
+    loadingBar.classList.remove('hidden');
+  }
+}
+
+function hideLoadingBar() {
+  const loadingBar = document.getElementById('loading-bar');
+  if (loadingBar) {
+    loadingBar.classList.add('hidden');
+  }
+}
 
 function initLoginPage() {
   const form = document.getElementById('login-form');
@@ -36,9 +72,32 @@ function initLoginPage() {
       return;
     }
 
+    // 로딩 시작
+    showLoadingBar();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+
+    // 3초 후 "접속 대기중..." 토스트 표시
+    loginLoadingTimer = setTimeout(() => {
+      showToast('접속 대기중...', 'info', 0);
+    }, LOADING_TIMEOUT);
+
     // 로그인 성공
+    // 로딩 타이머 정리
+    if (loginLoadingTimer) clearTimeout(loginLoadingTimer);
+
+    // 로딩바 숨김
+    hideLoadingBar();
+
+    // "접속 완료" 토스트 표시
+    showToast('접속 완료', 'success', 2000);
+
     setAdminToken();
-    showDashboard();
+
+    // 약간의 딜레이 후 대시보드로 이동
+    setTimeout(() => {
+      showDashboard();
+    }, 500);
   });
 }
 

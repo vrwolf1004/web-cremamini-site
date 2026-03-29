@@ -3,41 +3,98 @@
 let currentReports = [];
 let currentComments = [];
 let currentFilter = 'all';
+let dashboardLoadingTimer = null;
+
+const LOADING_TIMEOUT = 3000; // 3초
+
+// ── 토스트 유틸리티 (login.js와 중복되므로 체크) ───────────────────
+function showToast(message, type = 'info', duration = 3000) {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+
+  container.appendChild(toast);
+
+  if (duration > 0) {
+    setTimeout(() => {
+      toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+      setTimeout(() => toast.remove(), 300);
+    }, duration);
+  }
+
+  return toast;
+}
+
+// ── 로딩바 유틸리티 ───────────────────────────────────────────────
+function showLoadingBar() {
+  const loadingBar = document.getElementById('loading-bar');
+  if (loadingBar) {
+    loadingBar.classList.remove('hidden');
+  }
+}
+
+function hideLoadingBar() {
+  const loadingBar = document.getElementById('loading-bar');
+  if (loadingBar) {
+    loadingBar.classList.add('hidden');
+  }
+}
 
 async function initDashboard() {
-  // 신고 및 댓글 데이터 로드
-  await loadReports();
-  await loadComments();
+  // 로딩 상태 시작
+  showLoadingBar();
 
-  // 필터 이벤트
-  const filterSelect = document.getElementById('filter-status');
-  if (filterSelect) {
-    filterSelect.addEventListener('change', (e) => {
-      currentFilter = e.target.value;
-      renderReportsList();
-    });
+  // 3초 후 "페이지 로딩중..." 토스트 표시
+  dashboardLoadingTimer = setTimeout(() => {
+    showToast('페이지 로딩중...', 'info', 0);
+  }, LOADING_TIMEOUT);
+
+  try {
+    // 신고 및 댓글 데이터 로드
+    await loadReports();
+    await loadComments();
+
+    // 필터 이벤트
+    const filterSelect = document.getElementById('filter-status');
+    if (filterSelect) {
+      filterSelect.addEventListener('change', (e) => {
+        currentFilter = e.target.value;
+        renderReportsList();
+      });
+    }
+
+    // 모달 닫기
+    const modalCloseBtn = document.getElementById('modal-close');
+    const modal = document.getElementById('report-modal');
+    const backdrop = document.querySelector('.modal-backdrop');
+
+    if (modalCloseBtn) {
+      modalCloseBtn.addEventListener('click', () => {
+        if (modal) modal.hidden = true;
+      });
+    }
+
+    if (backdrop) {
+      backdrop.addEventListener('click', () => {
+        if (modal) modal.hidden = true;
+      });
+    }
+
+    // 초기 렌더링
+    renderReportsList();
+    updateStats();
+
+    // 로딩 완료
+    if (dashboardLoadingTimer) clearTimeout(dashboardLoadingTimer);
+    hideLoadingBar();
+    showToast('페이지 로딩완료', 'success', 2000);
+  } catch (error) {
+    console.error('Failed to initialize dashboard:', error);
+    if (dashboardLoadingTimer) clearTimeout(dashboardLoadingTimer);
+    hideLoadingBar();
+    showToast('대시보드 로딩 실패', 'error', 3000);
   }
-
-  // 모달 닫기
-  const modalCloseBtn = document.getElementById('modal-close');
-  const modal = document.getElementById('report-modal');
-  const backdrop = document.querySelector('.modal-backdrop');
-
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener('click', () => {
-      if (modal) modal.hidden = true;
-    });
-  }
-
-  if (backdrop) {
-    backdrop.addEventListener('click', () => {
-      if (modal) modal.hidden = true;
-    });
-  }
-
-  // 초기 렌더링
-  renderReportsList();
-  updateStats();
 }
 
 async function loadReports() {
