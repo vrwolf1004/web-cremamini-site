@@ -267,7 +267,7 @@ function initConfirmDialog(){
   function hide(){ modal.setAttribute('aria-hidden','true'); }
   if(open) open.addEventListener('click', ()=> show());
   if(cancel) cancel.addEventListener('click', ()=> hide());
-  if(ok) ok.addEventListener('click', ()=>{ hide(); showToast((LOCALE && LOCALE.confirmDone) || '확인되었습니다', 'success'); });
+  if(ok) ok.addEventListener('click', ()=>{ hide(); showToast((window._locale && window._locale.confirmDone) || '확인되었습니다', 'success'); });
   modal.querySelector('.modal-backdrop')?.addEventListener('click', ()=> hide());
 }
 
