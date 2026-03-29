@@ -5,9 +5,7 @@ let currentComments = [];
 let currentFilter = 'all';
 let dashboardLoadingTimer = null;
 
-const LOADING_TIMEOUT = 3000; // 3초
-
-// ── 토스트 유틸리티 (login.js와 중복되므로 체크) ───────────────────
+// ── 토스트 유틸리티 (login.js와 공유) ───────────────────────────────
 function showToast(message, type = 'info', duration = 3000) {
   const container = document.getElementById('toast-container');
   const toast = document.createElement('div');
