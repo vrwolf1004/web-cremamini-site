@@ -26,3 +26,6 @@ function containsBadword(text) {
   if (_badwords.patterns && _badwords.patterns.some(p => new RegExp(p, 'i').test(text))) return true;
   return false;
 }
+
+// ── 모듈 export ────────────────────────────────────────────────
+export { containsBadword };

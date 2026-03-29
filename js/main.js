@@ -1,4 +1,8 @@
 // ── Entry point (DOMContentLoaded) ────────────────────────────
+import { loadLocale, applyTranslations } from './i18n.js';
+import { loadThemesManifest, renderThemePicker, setTheme, renderThemeIntro, initFormSamples, initDataTable, initConfirmDialog, initToasts, initTabs, initAccordion, initMobileAccordion, initMobileCommentForm, loadThemeCss } from './ui.js';
+import { initComments, renderComments, openTranslateModal, closeTranslateModal, openReportModal, closeReportModal, submitReport } from './comments.js';
+
 document.addEventListener('DOMContentLoaded', ()=>{
   const urlParams = new URLSearchParams(location.search);
   const urlLang = urlParams.get('lang');
@@ -68,10 +72,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
       if(mobileMenuBtn && mobileMenuPanel){
         mobileMenuBtn.addEventListener('click', ()=> {
           openMobilePanel('mobile-menu-panel');
-          const currentTheme = localStorage.getItem('pl_theme') || THEMES[0].id;
+          const currentTheme = localStorage.getItem('pl_theme') || (window._themes && window._themes[0] ? window._themes[0].id : 'basic');
           mobileMenuThemeList.querySelectorAll('button').forEach(b=> b.classList.toggle('selected', b.dataset.id===currentTheme));
           const desktopLang = document.getElementById('lang-select');
-          const currentLang = desktopLang ? desktopLang.value : CURRENT_LANG;
+          const currentLang = desktopLang ? desktopLang.value : (window._currentLang || 'en');
           mobileMenuLangSelect.querySelectorAll('button').forEach(b=> b.classList.toggle('selected', b.dataset.lang===currentLang));
         });
         mobileMenuPanel.querySelectorAll('[data-target]').forEach(b=> b.addEventListener('click', (e)=> closeMobilePanel(e.target.dataset.target)));
@@ -90,8 +94,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
 
       if(mobileMenuThemeList){
-        const currentTheme = localStorage.getItem('pl_theme') || THEMES[0].id;
-        THEMES.forEach(t=>{
+        const currentTheme = localStorage.getItem('pl_theme') || (window._themes && window._themes[0] ? window._themes[0].id : 'basic');
+        (window._themes || []).forEach(t=>{
           const btn = document.createElement('button');
           btn.type='button'; btn.textContent=t.name; btn.dataset.id=t.id;
           if(t.id === currentTheme) btn.classList.add('selected');
@@ -102,7 +106,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
       if(mobileMenuLangSelect){
         const desktopLang = document.getElementById('lang-select');
-        const currentLang = desktopLang ? desktopLang.value : CURRENT_LANG;
+        const currentLang = desktopLang ? desktopLang.value : (window._currentLang || 'en');
         if(desktopLang){
           Array.from(desktopLang.options).forEach(o=>{
             const btn = document.createElement('button');
@@ -146,7 +150,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
 
       if(mobileThemeList && mobileThemeSelect){
-        THEMES.forEach(t=>{
+        (window._themes || []).forEach(t=>{
           const btn = document.createElement('button'); btn.type='button'; btn.textContent=t.name; btn.dataset.id=t.id; btn.addEventListener('click', ()=>{ setTheme(t.id); });
           mobileThemeList.appendChild(btn);
           const opt = document.createElement('option'); opt.value=t.id; opt.textContent=t.name; mobileThemeSelect.appendChild(opt);

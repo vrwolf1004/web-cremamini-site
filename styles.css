@@ -95,9 +95,7 @@ p,li,span,label,td,th,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word;word-break:brea
 
 .sr{position:absolute;left:-10000px}
 
-/* Loading spinner */
-.loading-overlay{position:fixed;inset:0;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg, #ffffff, #f0f4ff);display:flex !important;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.2s ease}
-.loading-overlay.hidden{opacity:0;pointer-events:none}
+/* Loading spinner (로딩 오버레이는 css/loading-overlay.css에서 공통 관리) */
 .sp-color-shift{display:flex;gap:6px;align-items:center}
 .sp-color-shift span{width:10px;height:10px;border-radius:50%;animation:sp-color-shift-anim 2s linear infinite}
 .sp-color-shift span:nth-child(2){animation-delay:.3s}

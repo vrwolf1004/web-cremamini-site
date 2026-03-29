@@ -1,4 +1,8 @@
 // ── Theme ──────────────────────────────────────────────────────
+import { THEMES, DARK_THEMES, MENU_ICON_MAP_LANG, FALLBACK_THEMES } from './globals.js';
+import { $, $all } from './common.js';
+import { getLocaleString, LOCALE } from './i18n.js';
+
 async function loadThemesManifest(){
   try{
     const res = await fetch('theme/themes.json', {cache: 'no-cache'});
@@ -87,3 +91,6 @@ function getLocalizedThemeDesc(id,fallback){
   if(LOCALE && LOCALE.themes && LOCALE.themes[id]) return LOCALE.themes[id];
   return fallback || '';
 }
+
+// ── 모듈 export ────────────────────────────────────────────────
+export { loadThemesManifest, loadThemeCss, updateMenuIcon, setTheme, renderThemePicker, renderThemeIntro, getLocalizedThemeDesc };

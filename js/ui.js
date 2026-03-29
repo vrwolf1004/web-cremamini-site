@@ -1,23 +1,113 @@
-// ── UI components ──────────────────────────────────────────────
-function showToast(message, type='info', timeout=3000){
-  let container = document.getElementById('toast-container');
-  if(!container){
-    container = document.createElement('div'); container.id='toast-container'; container.className='toast-container'; document.body.appendChild(container);
+// ── Theme & UI Components (통합) ──────────────────────────────
+import { showToast, $, $all } from './common.js';
+import { DARK_THEMES, MENU_ICON_MAP_LANG, FALLBACK_THEMES } from './globals.js';
+import { getLocaleString, loadLocale } from './i18n.js';
+import { containsBadword } from './badwords.js';
+
+// ════════════════════════════════════════════════════════════════
+// THEME FUNCTIONS
+// ════════════════════════════════════════════════════════════════
+
+async function loadThemesManifest(){
+  try{
+    const res = await fetch('theme/themes.json', {cache: 'no-cache'});
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    window._themes = await res.json();
+  }catch(e){
+    console.warn('themes.json load failed, using fallback themes', e);
+    window._themes = FALLBACK_THEMES;
   }
-  const toast = document.createElement('div'); toast.className = 'toast ' + type; toast.textContent = message;
-  container.appendChild(toast);
-  requestAnimationFrame(()=> toast.classList.add('visible'));
-  const tid = setTimeout(()=>{ toast.classList.remove('visible'); setTimeout(()=> toast.remove(),300); }, timeout);
-  toast.addEventListener('click', ()=>{ clearTimeout(tid); toast.classList.remove('visible'); setTimeout(()=> toast.remove(),200); });
 }
+
+function loadThemeCss(id, onLoaded){
+  const existing = document.getElementById('theme-link');
+  const href = `theme/${id}.css`;
+  if(existing){
+    if(existing.getAttribute('href') === href){
+      if(onLoaded) onLoaded();
+      return;
+    }
+    existing.setAttribute('href', href);
+    if(onLoaded) existing.onload = onLoaded;
+  }else{
+    const link = document.createElement('link');
+    link.rel = 'stylesheet'; link.id = 'theme-link'; link.href = href;
+    if(onLoaded) link.onload = onLoaded;
+    document.head.appendChild(link);
+  }
+}
+
+function updateMenuIcon(lang){
+  const menuIcon = document.getElementById('menu-icon');
+  if(!menuIcon) { console.warn('menu-icon element not found'); return; }
+  const iconFile = MENU_ICON_MAP_LANG[lang] || 'menu-basic.svg';
+  console.log('updateMenuIcon:', lang, '→', iconFile);
+  menuIcon.src = 'assets/' + iconFile;
+}
+
+function setTheme(id){
+  loadThemeCss(id);
+  document.body.className = 'theme-' + id;
+  document.documentElement.style.colorScheme = DARK_THEMES.includes(id) ? 'dark' : 'light';
+  localStorage.setItem('pl_theme', id);
+  $all('#theme-list button').forEach(b=>b.classList.toggle('selected', b.dataset.id===id));
+  const mobileMenuThemeList = document.getElementById('mobile-menu-theme-list');
+  if(mobileMenuThemeList) mobileMenuThemeList.querySelectorAll('button').forEach(b=>b.classList.toggle('selected', b.dataset.id===id));
+  const sel = $('#theme-select'); if(sel) sel.value = id;
+  try{ renderThemeIntro(id); }catch(e){}
+  try{ renderComments(); }catch(e){}
+}
+
+function renderThemePicker(){
+  const list = $('#theme-list');
+  const select = $('#theme-select');
+  (window._themes || []).forEach(t=>{
+    const btn = document.createElement('button');
+    btn.type='button'; btn.textContent=t.name; btn.dataset.id=t.id;
+    btn.addEventListener('click', ()=> setTheme(t.id));
+    list.appendChild(btn);
+    const opt = document.createElement('option'); opt.value=t.id; opt.textContent=`${t.name} — ${t.category}`; select.appendChild(opt);
+  });
+  select.addEventListener('change', ()=> setTheme(select.value));
+  const saved = localStorage.getItem('pl_theme') || 'basic'; setTheme(saved);
+}
+
+function renderThemeIntro(selectedId){
+  const container = document.getElementById('theme-intro');
+  const pageTitle = document.getElementById('page-title');
+  if(!container) return;
+  if(!selectedId){
+    const header = (window._locale && window._locale['themeListHeader']) ? window._locale['themeListHeader'] : 'Theme introductions';
+    container.innerHTML = `<h4>${header}</h4><ul>${(window._themes || []).map(t=>`<li><strong>${t.name}</strong> — ${getLocalizedThemeDesc(t.id,t.description)}</li>`).join('')}</ul>`;
+    if(pageTitle) pageTitle.textContent = (window._locale && window._locale['pageTitle']) ? window._locale['pageTitle'] : 'Sample Page';
+    return;
+  }
+  const t = (window._themes || []).find(x=>x.id===selectedId) || FALLBACK_THEMES.find(x=>x.id===selectedId);
+  if(t){
+    container.innerHTML = `<p>${getLocalizedThemeDesc(t.id,t.description)}</p>`;
+    if(pageTitle) pageTitle.textContent = (LOCALE && LOCALE['pageTitle']) ? t.name : t.name;
+  }else{
+    container.innerHTML = `<h4>테마</h4><p>설명 없음</p>`;
+    if(pageTitle) pageTitle.textContent = '샘플 페이지';
+  }
+}
+
+function getLocalizedThemeDesc(id,fallback){
+  if(window._locale && window._locale.themes && window._locale.themes[id]) return window._locale.themes[id];
+  return fallback || '';
+}
+
+// ════════════════════════════════════════════════════════════════
+// UI FUNCTIONS
+// ════════════════════════════════════════════════════════════════
 
 function initToasts(){
   const b = document.getElementById('show-toast');
   const s = document.getElementById('show-success-toast');
   const e = document.getElementById('show-error-toast');
-  if(b) b.addEventListener('click', ()=> showToast((LOCALE && LOCALE.toastInfo) || '간단한 안내 메시지입니다.'));
-  if(s) s.addEventListener('click', ()=> showToast((LOCALE && LOCALE.toastSuccess) || '성공했습니다', 'success'));
-  if(e) e.addEventListener('click', ()=> showToast((LOCALE && LOCALE.toastError) || '오류가 발생했습니다', 'error'));
+  if(b) b.addEventListener('click', ()=> showToast((window._locale && window._locale.toastInfo) || '간단한 안내 메시지입니다.'));
+  if(s) s.addEventListener('click', ()=> showToast((window._locale && window._locale.toastSuccess) || '성공했습니다', 'success'));
+  if(e) e.addEventListener('click', ()=> showToast((window._locale && window._locale.toastError) || '오류가 발생했습니다', 'error'));
 }
 
 function initFormSamples(){
@@ -26,10 +116,10 @@ function initFormSamples(){
   if(range && rangeVal){ range.addEventListener('input', ()=> rangeVal.textContent = range.value); rangeVal.textContent = range.value }
 
   const primary = document.getElementById('primary-btn');
-  if(primary) primary.addEventListener('click', ()=> alert((LOCALE && LOCALE.btnPrimaryClick) || 'Primary 버튼 클릭'));
+  if(primary) primary.addEventListener('click', ()=> alert((window._locale && window._locale.btnPrimaryClick) || 'Primary 버튼 클릭'));
 
   const ghost = document.getElementById('ghost-btn');
-  if(ghost) ghost.addEventListener('click', ()=> alert((LOCALE && LOCALE.btnGhostClick) || 'Ghost 버튼 클릭'));
+  if(ghost) ghost.addEventListener('click', ()=> alert((window._locale && window._locale.btnGhostClick) || 'Ghost 버튼 클릭'));
 
   const input = document.getElementById('sample-input'); if(input) input.addEventListener('change', ()=> console.log('input:', input.value));
 }
@@ -37,7 +127,7 @@ function initFormSamples(){
 function initDataTable(){
   const tbody = document.querySelector('#sample-table tbody');
   if(!tbody) return;
-  const rawRows = (LOCALE && LOCALE.gridRows) || [
+  const rawRows = (window._locale && window._locale.gridRows) || [
     {name:'Alice', status:'Active'}, {name:'Bob', status:'Inactive'},
     {name:'Charlie', status:'Active'}, {name:'Daisy', status:'Pending'}
   ];
@@ -180,3 +270,14 @@ function initConfirmDialog(){
   if(ok) ok.addEventListener('click', ()=>{ hide(); showToast((LOCALE && LOCALE.confirmDone) || '확인되었습니다', 'success'); });
   modal.querySelector('.modal-backdrop')?.addEventListener('click', ()=> hide());
 }
+
+// ════════════════════════════════════════════════════════════════
+// 모듈 export
+// ════════════════════════════════════════════════════════════════
+export {
+  // Theme
+  loadThemesManifest, loadThemeCss, updateMenuIcon, setTheme, renderThemePicker, renderThemeIntro, getLocalizedThemeDesc,
+  // UI
+  initToasts, initFormSamples, initDataTable, initAccordion,
+  initMobileAccordion, initMobileCommentForm, initTabs, initConfirmDialog
+};

@@ -39,16 +39,16 @@ function showToast(message, type = 'info', duration = 3000) {
 
 // ── 로딩바 유틸리티 ───────────────────────────────────────────────
 function showLoadingBar() {
-  const loadingBar = document.getElementById('loading-bar');
-  if (loadingBar) {
-    loadingBar.classList.remove('hidden');
+  const loadingOverlay = document.getElementById('loading-overlay');
+  if (loadingOverlay) {
+    loadingOverlay.classList.remove('hidden');
   }
 }
 
 function hideLoadingBar() {
-  const loadingBar = document.getElementById('loading-bar');
-  if (loadingBar) {
-    loadingBar.classList.add('hidden');
+  const loadingOverlay = document.getElementById('loading-overlay');
+  if (loadingOverlay) {
+    loadingOverlay.classList.add('hidden');
   }
 }
 

@@ -465,30 +465,7 @@
   }
 }
 
-/* 로딩바 */
-.loading-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), #3b82f6);
-  animation: indeterminate 1.5s infinite;
-  z-index: 2999;
-}
-
-.loading-bar.hidden {
-  display: none;
-}
-
-@keyframes indeterminate {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
+/* 로딩 오버레이는 css/loading-overlay.css에서 공통 관리 */
 
 /* 모바일 차단 */
 @media (max-width: 768px) {

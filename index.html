@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>picklayer.net — Themes Playground</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/loading-overlay.css">
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
@@ -44,13 +45,8 @@
       'allow_google_signals': true
     });
   </script>
-  <script defer src="js/globals.js"></script>
-  <script defer src="js/i18n.js"></script>
-  <script defer src="js/theme.js"></script>
-  <script defer src="js/badwords.js"></script>
-  <script defer src="js/ui.js"></script>
-  <script defer src="js/comments.js"></script>
-  <script defer src="js/main.js"></script>
+  <!-- ES6 modules -->
+  <script type="module" src="js/main.js"></script>
   <meta name="description" content="테마 미리보기와 익명 댓글 데모">
   <link rel="icon" href="assets/picklayer-symbol.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/picklayer-symbol.svg">

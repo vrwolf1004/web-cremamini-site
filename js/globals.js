@@ -17,9 +17,8 @@ const FALLBACK_THEMES = [
   { id: 'organic', name: 'Organic', category: 'Nature' }
 ];
 
-// ── DOM helpers ────────────────────────────────────────────────
-function $(sel){ return document.querySelector(sel) }
-function $all(sel){ return Array.from(document.querySelectorAll(sel)) }
+// ── DOM helpers (common.js에서 import) ────────────────────────────
+// import { $, $all } from './common.js'
 
 // ── Theme constants ────────────────────────────────────────────
 const DARK_THEMES = ['dark','cyberpunk'];
@@ -45,3 +44,21 @@ let _currentThemeId = 'basic';
 let _unsubscribeComments = null;
 const COMMENT_MAX = 100;
 const COMMENT_COOLDOWN = 30000;
+
+// ── Initialize window properties for mutable state ────────────
+if (!window._themes) window._themes = null;
+if (!window._locale) window._locale = null;
+if (!window._currentLang) window._currentLang = 'en';
+if (!window._cachedComments) window._cachedComments = [];
+if (!window._currentUid) window._currentUid = null;
+if (!window._lastCommentTime) window._lastCommentTime = 0;
+if (!window._submitting) window._submitting = false;
+if (!window._currentThemeId) window._currentThemeId = 'basic';
+if (!window._unsubscribeComments) window._unsubscribeComments = null;
+
+// ── 모듈 export ────────────────────────────────────────────────
+export {
+  FALLBACK_THEMES,
+  DARK_THEMES, MENU_ICON_MAP_LANG,
+  COMMENT_MAX, COMMENT_COOLDOWN
+};

@@ -1,14 +1,19 @@
 // ── Comments ───────────────────────────────────────────────────
+import { $, $all, showToast } from './common.js';
+import { COMMENT_MAX, COMMENT_COOLDOWN } from './globals.js';
+import { getLocaleString } from './i18n.js';
+import { containsBadword } from './badwords.js';
+
 function getCurrentThemeId() {
   return localStorage.getItem('pl_theme') || 'basic';
 }
 
 async function ensureAuth() {
-  if (_currentUid) return _currentUid;
+  if (window._currentUid) return window._currentUid;
   const { auth, signInAnonymously } = window._firebase;
   const cred = await signInAnonymously(auth);
-  _currentUid = cred.user.uid;
-  return _currentUid;
+  window._currentUid = cred.user.uid;
+  return window._currentUid;
 }
 
 function validateComment(text) {
@@ -80,7 +85,7 @@ function createCommentEl(c, isReply) {
     actions.appendChild(replyBtn);
   }
 
-  if (_currentUid && c.uid === _currentUid && !c.deleted) {
+  if (window._currentUid && c.uid === window._currentUid && !c.deleted) {
     const del = document.createElement('button');
     del.className = 'comment-delete';
     del.textContent = '×';
@@ -166,8 +171,8 @@ function toggleReplyForm(parentId, parentEl) {
     if (err) { charEl.style.color = 'var(--error, #e53e3e)'; charEl.textContent = err; return; }
 
     const now = Date.now();
-    const elapsed = now - _lastCommentTime;
-    if (_lastCommentTime && elapsed < COMMENT_COOLDOWN) {
+    const elapsed = now - window._lastCommentTime;
+    if (window._lastCommentTime && elapsed < COMMENT_COOLDOWN) {
       charEl.style.color = 'var(--error, #e53e3e)';
       const wait = Math.ceil((COMMENT_COOLDOWN - elapsed) / 1000);
       charEl.textContent = `${wait}${getLocaleString('cooldownWait') || '초 후 시도하세요.'}`;
@@ -183,7 +188,7 @@ function toggleReplyForm(parentId, parentEl) {
         parentId,
         themeId: getCurrentThemeId()
       });
-      _lastCommentTime = Date.now();
+      window._lastCommentTime = Date.now();
       form.remove();
     } catch (e) {
       charEl.style.color = 'var(--error, #e53e3e)';
@@ -202,7 +207,7 @@ function toggleReplyForm(parentId, parentEl) {
 }
 
 function renderCommentsList(comments) {
-  _cachedComments = comments;
+  window._cachedComments = comments;
   const lists = [$('#comment-list'), $('#mobile-comment-list')].filter(l => l);
   if (lists.length === 0) return;
 
@@ -255,7 +260,7 @@ function openTranslateModal(text) {
   modal.setAttribute('aria-hidden', 'false');
   if (googleBtn) {
     googleBtn.onclick = () => {
-      const targetLang = CURRENT_LANG || 'ko';
+      const targetLang = window._currentLang || 'ko';
       const encodedText = encodeURIComponent(text);
       const url = `https://translate.google.com/?sl=auto&tl=${targetLang}&text=${encodedText}&op=translate`;
       window.open(url, '_blank');
@@ -311,11 +316,11 @@ async function submitReport() {
 
 function subscribeComments() {
   if (!window._firebase) return;
-  if (_unsubscribeComments) { _unsubscribeComments(); _unsubscribeComments = null; }
+  if (window._unsubscribeComments) { window._unsubscribeComments(); window._unsubscribeComments = null; }
   showCommentLoading();
   const { db, collection: col, onSnapshot, query, orderBy, limit } = window._firebase;
   const q = query(col(db, 'comments'), orderBy('time', 'desc'), limit(200));
-  _unsubscribeComments = onSnapshot(
+  window._unsubscribeComments = onSnapshot(
     q,
     snap => renderCommentsList(snap.docs.map(d => ({ id: d.id, ...d.data() }))),
     error => showCommentListError()
@@ -350,22 +355,22 @@ function initComments() {
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    if (_submitting) return;
+    if (window._submitting) return;
 
     const text = input.value.trim();
     const err = validateComment(text);
     if (err) { showCommentError(err); return; }
 
     const now = Date.now();
-    const elapsed = now - _lastCommentTime;
-    if (_lastCommentTime && elapsed < COMMENT_COOLDOWN) {
+    const elapsed = now - window._lastCommentTime;
+    if (window._lastCommentTime && elapsed < COMMENT_COOLDOWN) {
       const wait = Math.ceil((COMMENT_COOLDOWN - elapsed) / 1000);
       showCommentError(`${wait}${getLocaleString('cooldownWait') || '초 후에 다시 시도하세요.'}`);
       return;
     }
 
     try {
-      _submitting = true;
+      window._submitting = true;
       submitBtn.disabled = true;
       const uid = await ensureAuth();
       await addDoc(col(db, 'comments'), {
@@ -377,13 +382,20 @@ function initComments() {
       input.value = '';
       charCount.textContent = `0 / ${COMMENT_MAX}`;
       showCommentError('');
-      _lastCommentTime = Date.now();
+      window._lastCommentTime = Date.now();
       startCooldown(submitBtn);
     } catch (err) {
       showCommentError('등록에 실패했습니다. 다시 시도해주세요.');
       submitBtn.disabled = false;
     } finally {
-      _submitting = false;
+      window._submitting = false;
     }
   });
 }
+
+// ── 모듈 export ────────────────────────────────────────────────
+export {
+  initComments, renderComments, openTranslateModal, closeTranslateModal,
+  openReportModal, closeReportModal, submitReport, validateComment, startCooldown,
+  getCurrentThemeId, ensureAuth, showCommentError, subscribeComments
+};
