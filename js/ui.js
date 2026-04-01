@@ -72,15 +72,27 @@ function setTheme(id){
 function renderThemePicker(){
   const list = $('#theme-list');
   const select = $('#theme-select');
+  console.log('[renderThemePicker] Starting. list element:', list ? 'found' : 'NOT FOUND', 'select element:', select ? 'found' : 'NOT FOUND');
+  
   (window._themes || []).forEach(t=>{
     const btn = document.createElement('button');
     btn.type='button'; btn.textContent=t.name; btn.dataset.id=t.id;
-    btn.addEventListener('click', ()=> setTheme(t.id));
+    btn.addEventListener('click', ()=> {
+      console.log('[renderThemePicker] Theme button clicked:', t.id);
+      setTheme(t.id);
+    });
     list.appendChild(btn);
     const opt = document.createElement('option'); opt.value=t.id; opt.textContent=`${t.name} — ${t.category}`; select.appendChild(opt);
   });
-  select.addEventListener('change', ()=> setTheme(select.value));
-  const saved = localStorage.getItem('pl_theme') || 'basic'; setTheme(saved);
+  
+  select.addEventListener('change', ()=> {
+    console.log('[renderThemePicker] Select changed to:', select.value);
+    setTheme(select.value);
+  });
+  
+  const saved = localStorage.getItem('pl_theme') || 'basic';
+  console.log('[renderThemePicker] Initial theme from localStorage:', saved);
+  setTheme(saved);
 }
 
 function renderThemeIntro(selectedId){
