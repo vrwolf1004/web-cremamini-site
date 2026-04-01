@@ -208,11 +208,17 @@ function toggleReplyForm(parentId, parentEl) {
 
 function renderCommentsList(comments) {
   window._cachedComments = comments;
+  console.log('[renderCommentsList] Total cached comments:', comments.length);
   const lists = [$('#comment-list'), $('#mobile-comment-list')].filter(l => l);
-  if (lists.length === 0) return;
+  if (lists.length === 0) {
+    console.warn('[renderCommentsList] No comment list elements found');
+    return;
+  }
 
   const themeId = getCurrentThemeId();
+  console.log('[renderCommentsList] Current theme:', themeId);
   const themed = comments.filter(c => (c.themeId || 'basic') === themeId);
+  console.log('[renderCommentsList] Comments filtered for theme:', themed.length, 'comments');
 
   lists.forEach(list => {
     list.innerHTML = '';
@@ -222,6 +228,7 @@ function renderCommentsList(comments) {
     }
     const topLevel = themed.filter(c => !c.parentId);
     const replies = themed.filter(c => !!c.parentId);
+    console.log('[renderCommentsList] Top-level:', topLevel.length, 'Replies:', replies.length);
     topLevel.forEach(c => {
       const el = createCommentEl(c, false);
       const myReplies = replies.filter(r => r.parentId === c.id);
@@ -249,7 +256,10 @@ function showCommentListError(){
   });
 }
 
-function renderComments() { renderCommentsList(window._cachedComments || []); }
+function renderComments() { 
+  console.log('[renderComments] Called. Cached comments:', window._cachedComments ? window._cachedComments.length : 0);
+  renderCommentsList(window._cachedComments || []); 
+}
 
 function openTranslateModal(text) {
   const modal = document.getElementById('translate-modal');

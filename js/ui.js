@@ -46,16 +46,27 @@ function updateMenuIcon(lang){
 }
 
 function setTheme(id){
+  console.log('[setTheme] Theme changed:', id);
   loadThemeCss(id);
   document.body.className = 'theme-' + id;
   document.documentElement.style.colorScheme = DARK_THEMES.includes(id) ? 'dark' : 'light';
   localStorage.setItem('pl_theme', id);
+  console.log('[setTheme] localStorage pl_theme set to:', id);
   $all('#theme-list button').forEach(b=>b.classList.toggle('selected', b.dataset.id===id));
   const mobileMenuThemeList = document.getElementById('mobile-menu-theme-list');
   if(mobileMenuThemeList) mobileMenuThemeList.querySelectorAll('button').forEach(b=>b.classList.toggle('selected', b.dataset.id===id));
   const sel = $('#theme-select'); if(sel) sel.value = id;
-  try{ renderThemeIntro(id); }catch(e){}
-  try{ renderComments(); }catch(e){}
+  try{ 
+    console.log('[setTheme] Calling renderThemeIntro...');
+    renderThemeIntro(id); 
+  }catch(e){}
+  try{ 
+    console.log('[setTheme] Calling renderComments...');
+    renderComments(); 
+    console.log('[setTheme] renderComments completed');
+  }catch(e){
+    console.error('[setTheme] renderComments error:', e);
+  }
 }
 
 function renderThemePicker(){
