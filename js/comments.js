@@ -9,11 +9,22 @@ function getCurrentThemeId() {
 }
 
 async function ensureAuth() {
-  if (window._currentUid) return window._currentUid;
-  const { auth, signInAnonymously } = window._firebase;
-  const cred = await signInAnonymously(auth);
-  window._currentUid = cred.user.uid;
-  return window._currentUid;
+  if (window._currentUid) {
+    console.log('[ensureAuth] Using cached uid:', window._currentUid);
+    return window._currentUid;
+  }
+  
+  try {
+    console.log('[ensureAuth] Signing in anonymously...');
+    const { auth, signInAnonymously } = window._firebase;
+    const cred = await signInAnonymously(auth);
+    window._currentUid = cred.user.uid;
+    console.log('[ensureAuth] Anonymous sign-in successful, uid:', window._currentUid);
+    return window._currentUid;
+  } catch (e) {
+    console.error('[ensureAuth] Sign-in failed:', e);
+    throw e;
+  }
 }
 
 function validateComment(text) {
@@ -325,15 +336,33 @@ async function submitReport() {
 }
 
 function subscribeComments() {
-  if (!window._firebase) return;
-  if (window._unsubscribeComments) { window._unsubscribeComments(); window._unsubscribeComments = null; }
+  if (!window._firebase) {
+    console.warn('[subscribeComments] Firebase not initialized');
+    return;
+  }
+  
+  if (window._unsubscribeComments) {
+    console.log('[subscribeComments] Cleaning up previous subscription');
+    window._unsubscribeComments();
+    window._unsubscribeComments = null;
+  }
+  
   showCommentLoading();
   const { db, collection: col, onSnapshot, query, orderBy, limit } = window._firebase;
   const q = query(col(db, 'comments'), orderBy('time', 'desc'), limit(200));
+  
+  console.log('[subscribeComments] Setting up Firebase listener...');
   window._unsubscribeComments = onSnapshot(
     q,
-    snap => renderCommentsList(snap.docs.map(d => ({ id: d.id, ...d.data() }))),
-    error => showCommentListError()
+    snap => {
+      const comments = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      console.log('[subscribeComments] Received comments snapshot:', comments.length, 'comments');
+      renderCommentsList(comments);
+    },
+    error => {
+      console.error('[subscribeComments] Firebase error:', error);
+      showCommentListError();
+    }
   );
 }
 
@@ -380,21 +409,38 @@ function initComments() {
     }
 
     try {
+      console.log('[initComments] Submitting comment...');
       window._submitting = true;
       submitBtn.disabled = true;
+      
+      console.log('[initComments] Ensuring auth...');
       const uid = await ensureAuth();
+      console.log('[initComments] Auth successful, uid:', uid);
+      
+      console.log('[initComments] Firebase object:', window._firebase ? 'exists' : 'NOT FOUND');
+      const { db, collection: col, addDoc, serverTimestamp } = window._firebase;
+      
+      const themeId = getCurrentThemeId();
+      console.log('[initComments] Adding comment - text:', text.substring(0, 50), '..., theme:', themeId);
+      
       await addDoc(col(db, 'comments'), {
         text, uid,
         time: serverTimestamp(),
         parentId: null,
-        themeId: getCurrentThemeId()
+        themeId
       });
+      
+      console.log('[initComments] Comment added successfully');
       input.value = '';
       charCount.textContent = `0 / ${COMMENT_MAX}`;
       showCommentError('');
       window._lastCommentTime = Date.now();
       startCooldown(submitBtn);
     } catch (err) {
+      console.error('[initComments] Comment submission error:', err);
+      console.error('[initComments] Error name:', err.name);
+      console.error('[initComments] Error message:', err.message);
+      console.error('[initComments] Error code:', err.code);
       showCommentError('등록에 실패했습니다. 다시 시도해주세요.');
       submitBtn.disabled = false;
     } finally {
