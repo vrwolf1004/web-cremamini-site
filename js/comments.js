@@ -249,7 +249,7 @@ function showCommentListError(){
   });
 }
 
-function renderComments() { renderCommentsList(_cachedComments); }
+function renderComments() { renderCommentsList(window._cachedComments || []); }
 
 function openTranslateModal(text) {
   const modal = document.getElementById('translate-modal');
