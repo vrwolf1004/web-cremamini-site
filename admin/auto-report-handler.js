@@ -104,8 +104,8 @@ function findAutoDeleteCandidates(allReports) {
 }
 
 /**
- * 자동 신고 처리 실행 (목업)
- * 실제 DB가 준비되면 Firestore updateDoc으로 교체
+ * 자동 신고 처리 실행
+ * Firebase Firestore와 실제 연동
  *
  * @param {Array} allReports - 전체 신고 배열
  * @param {Array} allComments - 전체 댓글 배열
@@ -137,46 +137,56 @@ async function executeAutoReportHandler(allReports, allComments) {
       reportCount: decision.reportCount,
       weightedScore: decision.score,
       reason: decision.reason,
-      status: 'scheduled_for_deletion',
+      status: 'auto_deleted',
       timestamp: new Date().toISOString()
     };
 
-    details.push(detail);
-
-    console.log(`[자동 신고 처리] 댓글 삭제 대기열에 추가`);
+    console.log(`[자동 신고 처리] 댓글 자동 삭제 처리`);
     console.log(`  - commentId: ${commentId}`);
     console.log(`  - 신고 수: ${decision.reportCount}명`);
     console.log(`  - 가중치 점수: ${decision.score}점`);
     console.log(`  - 사유: ${decision.reason}`);
     console.log(`  - 텍스트: "${detail.comment}"`);
 
-    // 🔮 실제 구현 시 (DB 준비 후):
-    //
-    // try {
-    //   const { db, updateDoc, docRef } = window._firebase;
-    //
-    //   // 1. 댓글 삭제
-    //   await updateDoc(docRef(db, 'comments', commentId), {
-    //     deleted: true,
-    //     autoDeleted: true,
-    //     autoDeleteReason: decision.reason
-    //   });
-    //
-    //   // 2. 신고들을 'auto_approved'로 업데이트
-    //   for (const report of reports) {
-    //     await updateDoc(docRef(db, 'reports', report.id), {
-    //       status: 'auto_approved',
-    //       processedAt: new Date()
-    //     });
-    //   }
-    // } catch (error) {
-    //   console.error(`[자동 신고 처리] 실패: ${commentId}`, error);
-    //   detail.status = 'failed';
-    //   detail.error = error.message;
-    // }
+    try {
+      if (!window._firebase) {
+        throw new Error('Firebase not initialized');
+      }
+
+      const { db, updateDoc, docRef } = window._firebase;
+
+      // 1. 댓글 삭제 표시
+      await updateDoc(docRef(db, 'comments', commentId), {
+        deleted: true,
+        autoDeleted: true,
+        autoDeleteReason: decision.reason,
+        autoDeleteScore: decision.score,
+        autoDeletedAt: new Date()
+      });
+
+      console.log(`  ✅ 댓글 삭제 완료: ${commentId}`);
+
+      // 2. 신고들을 'auto_approved'로 업데이트
+      for (const report of reports) {
+        await updateDoc(docRef(db, 'reports', report.id), {
+          status: 'auto_approved',
+          processedAt: new Date()
+        });
+      }
+
+      console.log(`  ✅ 신고 ${reports.length}개 자동 승인 완료`);
+      detail.status = 'auto_deleted_success';
+
+    } catch (error) {
+      console.error(`[자동 신고 처리] 실패: ${commentId}`, error);
+      detail.status = 'failed';
+      detail.error = error.message;
+    }
+
+    details.push(detail);
   }
 
-  console.log(`[자동 신고 처리] 완료: ${details.length}개 댓글 처리 대기`);
+  console.log(`[자동 신고 처리] 완료: ${details.length}개 댓글 자동 처리`);
 
   return {
     processed: details.length,
