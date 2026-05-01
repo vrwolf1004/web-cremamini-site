@@ -121,6 +121,8 @@
   "howToOptionB": "Option B: Collez le code dans votre fichier CSS ou",
   "howToOptionBTag": "balise.",
   "howToClose": "Fermer",
+  "supportTitle": "⭐ Soutenir PicHunter",
+  "supportIssueTitle": "📞 Problèmes et suggestions",
   "gridRows": [
     {"name": "Jean", "status": "Actif"},
     {"name": "Marie", "status": "Inactif"},

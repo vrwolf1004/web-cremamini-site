@@ -121,6 +121,8 @@
   "howToOptionB": "オプション B: CSS ファイルまたは",
   "howToOptionBTag": "タグにコードを貼り付けます。",
   "howToClose": "閉じる",
+  "supportTitle": "⭐ PicHunter を応援する",
+  "supportIssueTitle": "📞 問題と提案",
   "gridRows": [
     {"name": "田中太郎", "status": "有効"},
     {"name": "山田花子", "status": "無効"},

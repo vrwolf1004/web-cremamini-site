@@ -121,6 +121,8 @@
   "howToOptionB": "Вариант B: Вставьте код в файл CSS или",
   "howToOptionBTag": "тег.",
   "howToClose": "Закрыть",
+  "supportTitle": "⭐ Поддержите PicHunter",
+  "supportIssueTitle": "📞 Проблемы и предложения",
   "gridRows": [
     {"name": "Иван", "status": "Активен"},
     {"name": "Мария", "status": "Неактивна"},

@@ -340,4 +340,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .toast.error{background:#dc2626;color:#fff}
 .toast.info{background:rgba(0,0,0,0.8);color:#fff}
 
+/* Support Section */
+.support-section{padding:16px 0}
+.support-header{margin-bottom:14px}
+.support-title{font-weight:600;font-size:0.95rem;color:var(--text);margin:0;padding:0 8px}
+.support-grid{display:flex;flex-direction:column;gap:10px}
+.support-card{display:block;padding:12px;background:var(--header-bg);border-radius:8px;text-decoration:none;border:1px solid var(--border-color,rgba(0,0,0,0.08));transition:all 0.2s ease;cursor:pointer}
+.support-card:hover{background:rgba(0,0,0,0.05);box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.support-card-title{font-size:0.9rem;color:var(--text);margin:0;font-weight:500}
+
 

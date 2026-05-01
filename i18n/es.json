@@ -121,6 +121,8 @@
   "howToOptionB": "Opción B: Pega el código en tu archivo CSS o",
   "howToOptionBTag": "etiqueta.",
   "howToClose": "Cerrar",
+  "supportTitle": "⭐ Apoya a PicHunter",
+  "supportIssueTitle": "📞 Problemas y sugerencias",
   "gridRows": [
     {"name": "Juan", "status": "Activo"},
     {"name": "María", "status": "Inactivo"},
