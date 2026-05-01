@@ -161,9 +161,11 @@ async function renderThemeIntro(selectedId){
         const ratingBtn = document.createElement('button');
         ratingBtn.type = 'button';
         ratingBtn.style.cssText = 'background: transparent; border: none; font-size: 1rem; cursor: pointer; color: #ffd700; text-shadow: 0 0 4px rgba(0,0,0,0.5); padding: 4px 3px; border-radius: 4px; transition: all 0.2s ease;';
-        ratingBtn.innerHTML = '⭐'.repeat(i);
+        ratingBtn.innerHTML = '☆'.repeat(i);
         ratingBtn.title = `Rate ${i}/5`;
         ratingBtn.addEventListener('click', ()=> rateTheme(t.id, i));
+        ratingBtn.addEventListener('mouseenter', () => ratingBtn.innerHTML = '⭐'.repeat(i));
+        ratingBtn.addEventListener('mouseleave', () => ratingBtn.innerHTML = '☆'.repeat(i));
         ratingContainer.appendChild(ratingBtn);
       }
     }
