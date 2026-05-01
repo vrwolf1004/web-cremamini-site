@@ -56,13 +56,17 @@ function setTheme(id){
   const mobileMenuThemeList = document.getElementById('mobile-menu-theme-list');
   if(mobileMenuThemeList) mobileMenuThemeList.querySelectorAll('button').forEach(b=>b.classList.toggle('selected', b.dataset.id===id));
   const sel = $('#theme-select'); if(sel) sel.value = id;
-  try{ 
+  try{
     console.log('[setTheme] Calling renderThemeIntro...');
-    renderThemeIntro(id); 
+    renderThemeIntro(id);
   }catch(e){}
-  try{ 
+  try{
+    console.log('[setTheme] Loading theme stats...');
+    loadThemeStats(id);
+  }catch(e){}
+  try{
     console.log('[setTheme] Calling renderComments...');
-    renderComments(); 
+    renderComments();
     console.log('[setTheme] renderComments completed');
   }catch(e){
     console.error('[setTheme] renderComments error:', e);
@@ -165,6 +169,10 @@ async function downloadThemeCss(themeId, themeName){
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
     showToast(`Downloaded: ${themeName}.css`, 'success');
+
+    // 다운로드 수 추적
+    await trackDownload(themeId);
+    await loadThemeStats(themeId);
   }catch(e){
     console.error('Download failed:', e);
     showToast('Download failed', 'error');
@@ -181,6 +189,137 @@ async function copyThemeCssCode(themeId, themeName){
   }catch(e){
     console.error('Copy failed:', e);
     showToast('Copy failed', 'error');
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// USER ENGAGEMENT SYSTEM (평점, 좋아요, 다운로드 추적)
+// ════════════════════════════════════════════════════════════════
+
+async function rateTheme(themeId, rating){
+  if(!window._firebase || !window._firebase.db) {
+    showToast('Firebase not initialized', 'error');
+    return;
+  }
+  try{
+    await window._firebase.ensureAuth();
+    const { db, collection, setDoc, doc, serverTimestamp } = window._firebase;
+    const uid = window._currentUid || 'anonymous';
+
+    await setDoc(doc(db, `theme_ratings/${themeId}/ratings`, uid), {
+      rating: parseInt(rating),
+      timestamp: serverTimestamp(),
+      uid
+    });
+
+    showToast(`✨ ${rating}점으로 평가했습니다!`, 'success');
+    await loadThemeStats(themeId);
+  }catch(e){
+    console.error('Rating failed:', e);
+    showToast('평가 저장 실패', 'error');
+  }
+}
+
+async function toggleLikeTheme(themeId){
+  if(!window._firebase || !window._firebase.db) {
+    showToast('Firebase not initialized', 'error');
+    return;
+  }
+  try{
+    await window._firebase.ensureAuth();
+    const { db, collection, setDoc, deleteDoc, doc, serverTimestamp, getDoc } = window._firebase;
+    const uid = window._currentUid || 'anonymous';
+    const likeDocRef = doc(db, `theme_likes/${themeId}/likes`, uid);
+
+    const likeDoc = await getDoc(likeDocRef);
+    if(likeDoc.exists()){
+      await deleteDoc(likeDocRef);
+      showToast('좋아요를 취소했습니다', 'success');
+    }else{
+      await setDoc(likeDocRef, {
+        timestamp: serverTimestamp(),
+        uid
+      });
+      showToast('👍 좋아요!', 'success');
+    }
+
+    await loadThemeStats(themeId);
+  }catch(e){
+    console.error('Like toggle failed:', e);
+    showToast('좋아요 처리 실패', 'error');
+  }
+}
+
+async function trackDownload(themeId){
+  if(!window._firebase || !window._firebase.db) {
+    console.warn('Firebase not initialized, skipping download tracking');
+    return;
+  }
+  try{
+    const { db, doc, updateDoc, increment } = window._firebase;
+    const downloadDocRef = doc(db, 'theme_downloads', themeId);
+
+    await updateDoc(downloadDocRef, {
+      count: increment(1),
+      lastDownloaded: new Date()
+    }).catch(async (error) => {
+      if(error.code === 'not-found'){
+        await window._firebase.setDoc(downloadDocRef, {
+          count: 1,
+          lastDownloaded: new Date(),
+          themeId
+        });
+      }
+    });
+
+    console.log(`[trackDownload] ${themeId} download count increased`);
+  }catch(e){
+    console.error('Download tracking failed:', e);
+  }
+}
+
+async function loadThemeStats(themeId){
+  if(!window._firebase || !window._firebase.db) return;
+
+  try{
+    const { db, collection, getDocs, query, where } = window._firebase;
+
+    let totalRating = 0, ratingCount = 0;
+    let likeCount = 0;
+    let downloadCount = 0;
+
+    try{
+      const ratingsSnap = await getDocs(collection(db, `theme_ratings/${themeId}/ratings`));
+      ratingsSnap.forEach(doc => {
+        totalRating += doc.data().rating || 0;
+        ratingCount++;
+      });
+    }catch(e){}
+
+    try{
+      const likesSnap = await getDocs(collection(db, `theme_likes/${themeId}/likes`));
+      likeCount = likesSnap.size;
+    }catch(e){}
+
+    try{
+      const downloadDoc = await window._firebase.getDoc(window._firebase.doc(db, 'theme_downloads', themeId));
+      downloadCount = downloadDoc.exists() ? downloadDoc.data().count : 0;
+    }catch(e){}
+
+    const avgRating = ratingCount > 0 ? (totalRating / ratingCount).toFixed(1) : 0;
+
+    window._themeStats = window._themeStats || {};
+    window._themeStats[themeId] = {
+      avgRating,
+      ratingCount,
+      likeCount,
+      downloadCount,
+      totalRating
+    };
+
+    console.log(`[loadThemeStats] ${themeId}:`, window._themeStats[themeId]);
+  }catch(e){
+    console.error('Stats loading failed:', e);
   }
 }
 
@@ -365,6 +504,8 @@ export {
   // Theme
   loadThemesManifest, loadThemeCss, updateMenuIcon, setTheme, renderThemePicker, renderThemeIntro, getLocalizedThemeDesc,
   downloadThemeCss, copyThemeCssCode,
+  // User Engagement
+  rateTheme, toggleLikeTheme, trackDownload, loadThemeStats,
   // UI
   initToasts, initFormSamples, initDataTable, initAccordion,
   initMobileAccordion, initMobileCommentForm, initTabs, initConfirmDialog

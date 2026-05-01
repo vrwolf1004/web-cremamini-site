@@ -10,9 +10,9 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
     import {
-      getFirestore, collection, addDoc, getDocs,
+      getFirestore, collection, addDoc, getDocs, getDoc,
       onSnapshot, query, orderBy, limit, where,
-      writeBatch, serverTimestamp, deleteDoc, doc, updateDoc
+      writeBatch, serverTimestamp, deleteDoc, doc, updateDoc, setDoc, increment
     } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -28,9 +28,10 @@
       db: getFirestore(app),
       auth: getAuth(app),
       signInAnonymously,
-      collection, addDoc, getDocs,
+      collection, addDoc, getDocs, getDoc,
       onSnapshot, query, orderBy, limit, where,
-      writeBatch, serverTimestamp, deleteDoc, updateDoc,
+      writeBatch, serverTimestamp, deleteDoc, updateDoc, setDoc, increment,
+      doc,
       docRef: doc
     };
   </script>

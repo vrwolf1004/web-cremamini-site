@@ -1,7 +1,7 @@
 // ── Entry point (DOMContentLoaded) ────────────────────────────
 import { showToast } from './common.js';
 import { loadLocale, applyTranslations } from './i18n.js';
-import { loadThemesManifest, renderThemePicker, setTheme, renderThemeIntro, initFormSamples, initDataTable, initConfirmDialog, initToasts, initTabs, initAccordion, initMobileAccordion, initMobileCommentForm, loadThemeCss } from './ui.js';
+import { loadThemesManifest, renderThemePicker, setTheme, renderThemeIntro, initFormSamples, initDataTable, initConfirmDialog, initToasts, initTabs, initAccordion, initMobileAccordion, initMobileCommentForm, loadThemeCss, loadThemeStats } from './ui.js';
 import { initComments, renderComments, openTranslateModal, closeTranslateModal, openReportModal, closeReportModal, submitReport, validateComment, getCurrentThemeId, ensureAuth, startCooldown, showCommentError } from './comments.js';
 
 // Make comments functions globally accessible for ui.js
