@@ -73,23 +73,42 @@ function renderThemePicker(){
   const list = $('#theme-list');
   const select = $('#theme-select');
   console.log('[renderThemePicker] Starting. list element:', list ? 'found' : 'NOT FOUND', 'select element:', select ? 'found' : 'NOT FOUND');
-  
+
   (window._themes || []).forEach(t=>{
+    const container = document.createElement('div');
+    container.className = 'theme-item';
+
     const btn = document.createElement('button');
     btn.type='button'; btn.textContent=t.name; btn.dataset.id=t.id;
+    btn.className = 'theme-btn';
     btn.addEventListener('click', ()=> {
       console.log('[renderThemePicker] Theme button clicked:', t.id);
       setTheme(t.id);
     });
-    list.appendChild(btn);
+
+    const downloadBtn = document.createElement('button');
+    downloadBtn.type='button'; downloadBtn.className = 'theme-action-btn theme-download';
+    downloadBtn.title = 'Download CSS'; downloadBtn.innerHTML = '⬇';
+    downloadBtn.addEventListener('click', (e)=> { e.stopPropagation(); downloadThemeCss(t.id, t.name); });
+
+    const copyBtn = document.createElement('button');
+    copyBtn.type='button'; copyBtn.className = 'theme-action-btn theme-copy';
+    copyBtn.title = 'Copy CSS'; copyBtn.innerHTML = '📋';
+    copyBtn.addEventListener('click', (e)=> { e.stopPropagation(); copyThemeCssCode(t.id, t.name); });
+
+    container.appendChild(btn);
+    container.appendChild(downloadBtn);
+    container.appendChild(copyBtn);
+    list.appendChild(container);
+
     const opt = document.createElement('option'); opt.value=t.id; opt.textContent=`${t.name} — ${t.category}`; select.appendChild(opt);
   });
-  
+
   select.addEventListener('change', ()=> {
     console.log('[renderThemePicker] Select changed to:', select.value);
     setTheme(select.value);
   });
-  
+
   const saved = localStorage.getItem('pl_theme') || 'basic';
   console.log('[renderThemePicker] Initial theme from localStorage:', saved);
   setTheme(saved);
@@ -107,7 +126,18 @@ function renderThemeIntro(selectedId){
   }
   const t = (window._themes || []).find(x=>x.id===selectedId) || FALLBACK_THEMES.find(x=>x.id===selectedId);
   if(t){
-    container.innerHTML = `<p>${getLocalizedThemeDesc(t.id,t.description)}</p>`;
+    const guideHTML = `
+      <p>${getLocalizedThemeDesc(t.id,t.description)}</p>
+      <div class="theme-guide" style="margin-top: 12px; padding: 10px; background: rgba(0,0,0,0.02); border-radius: 6px; font-size: 0.9rem;">
+        <strong>How to use this theme:</strong>
+        <ul style="margin: 6px 0; padding-left: 18px;">
+          <li><strong>Download:</strong> Use the ⬇ button to save the CSS file</li>
+          <li><strong>Copy:</strong> Use the 📋 button to copy the code</li>
+          <li><strong>Apply:</strong> Add to your project's &lt;style&gt; or &lt;link&gt; tag</li>
+        </ul>
+      </div>
+    `;
+    container.innerHTML = guideHTML;
     if(pageTitle) pageTitle.textContent = (window._locale && window._locale['pageTitle']) ? t.name : t.name;
   }else{
     container.innerHTML = `<h4>테마</h4><p>설명 없음</p>`;
@@ -118,6 +148,40 @@ function renderThemeIntro(selectedId){
 function getLocalizedThemeDesc(id,fallback){
   if(window._locale && window._locale.themes && window._locale.themes[id]) return window._locale.themes[id];
   return fallback || '';
+}
+
+async function downloadThemeCss(themeId, themeName){
+  try{
+    const response = await fetch(`theme/${themeId}.css`);
+    if(!response.ok) throw new Error('Failed to fetch CSS');
+    const cssCode = await response.text();
+    const blob = new Blob([cssCode], {type: 'text/css'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${themeId}.css`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showToast(`Downloaded: ${themeName}.css`, 'success');
+  }catch(e){
+    console.error('Download failed:', e);
+    showToast('Download failed', 'error');
+  }
+}
+
+async function copyThemeCssCode(themeId, themeName){
+  try{
+    const response = await fetch(`theme/${themeId}.css`);
+    if(!response.ok) throw new Error('Failed to fetch CSS');
+    const cssCode = await response.text();
+    await navigator.clipboard.writeText(cssCode);
+    showToast(`Copied: ${themeName} CSS code`, 'success');
+  }catch(e){
+    console.error('Copy failed:', e);
+    showToast('Copy failed', 'error');
+  }
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -300,6 +364,7 @@ function initConfirmDialog(){
 export {
   // Theme
   loadThemesManifest, loadThemeCss, updateMenuIcon, setTheme, renderThemePicker, renderThemeIntro, getLocalizedThemeDesc,
+  downloadThemeCss, copyThemeCssCode,
   // UI
   initToasts, initFormSamples, initDataTable, initAccordion,
   initMobileAccordion, initMobileCommentForm, initTabs, initConfirmDialog
