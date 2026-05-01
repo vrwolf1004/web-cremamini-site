@@ -373,7 +373,7 @@ async function loadThemeStats(themeId){
     };
 
     // UI 업데이트
-    const statsContainer = $(`[data-theme-id="${themeId}"] .theme-stats`);
+    const statsContainer = document.querySelector('#theme-intro .theme-stats');
     if(statsContainer){
       const ratingText = ratingCount > 0 ? `⭐ ${avgRating} <small>(${ratingCount})</small>` : '⭐ — <small>(0)</small>';
       statsContainer.innerHTML = `
