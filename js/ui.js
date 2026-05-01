@@ -110,10 +110,49 @@ function renderThemePicker(){
       <span class="stat-downloads">📥 0</span>
     `;
 
+    // 호버 상호작용 버튼 영역
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'theme-actions';
+
+    // 별점 선택기
+    const ratingSelector = document.createElement('div');
+    ratingSelector.className = 'rating-selector';
+    for(let i = 1; i <= 5; i++){
+      const ratingBtn = document.createElement('button');
+      ratingBtn.type = 'button';
+      ratingBtn.className = 'rating-btn';
+      ratingBtn.dataset.rating = i;
+      ratingBtn.innerHTML = '⭐'.repeat(i);
+      ratingBtn.title = `Rate ${i}/5`;
+      ratingBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        rateTheme(t.id, i);
+      });
+      ratingSelector.appendChild(ratingBtn);
+    }
+
+    // 좋아요 버튼
+    const likeBtn = document.createElement('button');
+    likeBtn.type = 'button';
+    likeBtn.className = 'like-btn';
+    likeBtn.innerHTML = '👍';
+    likeBtn.title = 'Like this theme';
+    likeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleLikeTheme(t.id);
+      // 버튼 강조 효과
+      likeBtn.classList.add('liked');
+      setTimeout(() => likeBtn.classList.remove('liked'), 300);
+    });
+
+    actionsDiv.appendChild(ratingSelector);
+    actionsDiv.appendChild(likeBtn);
+
     container.appendChild(btn);
     container.appendChild(downloadBtn);
     container.appendChild(copyBtn);
     container.appendChild(statsDiv);
+    container.appendChild(actionsDiv);
     list.appendChild(container);
 
     const opt = document.createElement('option'); opt.value=t.id; opt.textContent=`${t.name} — ${t.category}`; select.appendChild(opt);
