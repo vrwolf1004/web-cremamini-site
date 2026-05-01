@@ -81,6 +81,7 @@ function renderThemePicker(){
   (window._themes || []).forEach(t=>{
     const container = document.createElement('div');
     container.className = 'theme-item';
+    container.dataset.themeId = t.id;
 
     const btn = document.createElement('button');
     btn.type='button'; btn.textContent=t.name; btn.dataset.id=t.id;
@@ -100,9 +101,19 @@ function renderThemePicker(){
     copyBtn.title = 'Copy CSS'; copyBtn.innerHTML = '📋';
     copyBtn.addEventListener('click', (e)=> { e.stopPropagation(); copyThemeCssCode(t.id, t.name); });
 
+    // 통계 표시 영역
+    const statsDiv = document.createElement('div');
+    statsDiv.className = 'theme-stats';
+    statsDiv.innerHTML = `
+      <span class="stat-rating">⭐ — <small>(0)</small></span>
+      <span class="stat-likes">👍 0</span>
+      <span class="stat-downloads">📥 0</span>
+    `;
+
     container.appendChild(btn);
     container.appendChild(downloadBtn);
     container.appendChild(copyBtn);
+    container.appendChild(statsDiv);
     list.appendChild(container);
 
     const opt = document.createElement('option'); opt.value=t.id; opt.textContent=`${t.name} — ${t.category}`; select.appendChild(opt);
@@ -316,6 +327,17 @@ async function loadThemeStats(themeId){
       downloadCount,
       totalRating
     };
+
+    // UI 업데이트
+    const statsContainer = $(`[data-theme-id="${themeId}"] .theme-stats`);
+    if(statsContainer){
+      const ratingText = ratingCount > 0 ? `⭐ ${avgRating} <small>(${ratingCount})</small>` : '⭐ — <small>(0)</small>';
+      statsContainer.innerHTML = `
+        <span class="stat-rating">${ratingText}</span>
+        <span class="stat-likes">👍 ${likeCount}</span>
+        <span class="stat-downloads">📥 ${downloadCount}</span>
+      `;
+    }
 
     console.log(`[loadThemeStats] ${themeId}:`, window._themeStats[themeId]);
   }catch(e){
