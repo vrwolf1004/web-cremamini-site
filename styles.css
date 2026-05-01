@@ -44,13 +44,13 @@ p,li,span,label,td,th,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word;word-break:brea
 .theme-stats{display:flex;gap:12px;align-items:center;font-size:0.85rem;color:var(--muted);padding:6px 8px;border-radius:6px;background:rgba(0,0,0,0.02);width:100%;order:3}
 .stat-rating,.stat-likes,.stat-downloads{display:flex;align-items:center;gap:3px;white-space:nowrap}
 .stat-rating small{font-size:0.75rem;color:var(--muted)}
-.theme-actions{display:flex;gap:6px;align-items:center;width:100%;order:4;padding:6px 8px;opacity:0;transition:opacity 0.2s ease;pointer-events:none}
+.theme-actions{position:absolute;bottom:8px;right:8px;display:flex;gap:6px;align-items:center;padding:6px 8px;background:rgba(0,0,0,0.7);border-radius:6px;backdrop-filter:blur(4px);opacity:0;transition:opacity 0.2s ease;pointer-events:none;z-index:10}
 .theme-item:hover .theme-actions{opacity:1;pointer-events:auto}
 .rating-selector{display:flex;gap:3px;align-items:center}
-.rating-btn{background:transparent;border:none;font-size:1.1rem;cursor:pointer;padding:4px 2px;border-radius:4px;transition:all 0.2s ease;color:rgba(0,0,0,0.3)}
-.rating-btn:hover{color:#ffc107;background:rgba(255,193,7,0.1);transform:scale(1.15)}
-.like-btn{background:transparent;border:none;font-size:1.1rem;cursor:pointer;padding:4px 8px;border-radius:4px;transition:all 0.2s ease;color:rgba(0,0,0,0.3)}
-.like-btn:hover{color:#e91e63;background:rgba(233,30,99,0.1);transform:scale(1.15)}
+.rating-btn{background:transparent;border:none;font-size:1rem;cursor:pointer;padding:4px 3px;border-radius:4px;transition:all 0.2s ease;color:#ffd700;text-shadow:0 0 4px rgba(0,0,0,0.5)}
+.rating-btn:hover{color:#ffff00;transform:scale(1.2);filter:drop-shadow(0 0 2px #ffc107)}
+.like-btn{background:transparent;border:none;font-size:1rem;cursor:pointer;padding:4px 6px;border-radius:4px;transition:all 0.2s ease;color:#ff69b4;text-shadow:0 0 4px rgba(0,0,0,0.5)}
+.like-btn:hover{color:#ff1493;transform:scale(1.2);filter:drop-shadow(0 0 2px #e91e63)}
 .like-btn.liked{animation:likeAnimation 0.3s ease}
 @keyframes likeAnimation{0%{transform:scale(1);}50%{transform:scale(1.3);}100%{transform:scale(1)}}
 .theme-select{display:none}
