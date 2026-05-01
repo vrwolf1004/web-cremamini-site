@@ -70,6 +70,14 @@ async function initDashboard() {
     await loadComments();
     console.log(`[대시보드] 신고 ${currentReports.length}개, 댓글 ${currentComments.length}개 로드`);
 
+    // 3️⃣-1️⃣ 자동 신고 처리 실행 (목업)
+    console.log('[대시보드] 자동 신고 처리 검사 중...');
+    const autoHandleResult = await executeAutoReportHandler(currentReports, currentComments);
+    if (autoHandleResult.processed > 0) {
+      console.log(`[대시보드] 자동 처리 대상: ${autoHandleResult.processed}개`);
+      showToast(`자동 신고 처리: ${autoHandleResult.processed}개 댓글`, 'info', 3000);
+    }
+
     // 4️⃣ UI 이벤트 바인딩
     const filterSelect = document.getElementById('filter-status');
     if (filterSelect) {
@@ -99,6 +107,7 @@ async function initDashboard() {
     console.log('[대시보드] 화면 렌더링 중...');
     renderReportsList();
     updateStats();
+    updateAutoHandlerIndicator();
     console.log('[대시보드] 렌더링 완료');
 
     // 6️⃣ 로딩 완료
@@ -350,6 +359,35 @@ function updateStats() {
   document.getElementById('resolved-reports').textContent = resolvedReports;
 }
 
+function updateAutoHandlerIndicator() {
+  const stats = getAutoHandlerStats(currentReports);
+  const indicatorEl = document.getElementById('auto-handler-indicator');
+
+  if (!indicatorEl) {
+    console.log('[자동 신고 처리] 표시 요소 없음 (stats only)', stats);
+    return;
+  }
+
+  const statusText = stats.highRiskCount > 0
+    ? `⚠️ 위험: ${stats.highRiskCount}개 댓글 자동 삭제 대기`
+    : stats.atRiskCount > 0
+    ? `⚡ 주의: ${stats.atRiskCount}개 댓글 임계값 근처`
+    : '✅ 정상';
+
+  const statusClass = stats.highRiskCount > 0 ? 'danger' : stats.atRiskCount > 0 ? 'warning' : 'safe';
+
+  indicatorEl.innerHTML = `
+    <div class="auto-handler-status ${statusClass}">
+      <span>${statusText}</span>
+      <button type="button" class="auto-handler-details-btn" onclick="showAutoHandlerDetails()">
+        자세히 보기
+      </button>
+    </div>
+  `;
+
+  console.log('[자동 신고 처리] 통계 업데이트:', stats);
+}
+
 function getReasonLabel(reason) {
   const labels = {
     'spam': '스팸',
@@ -373,4 +411,77 @@ function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+function showAutoHandlerDetails() {
+  const stats = getAutoHandlerStats(currentReports);
+
+  // 자동 삭제 대상 찾기
+  const candidates = findAutoDeleteCandidates(currentReports);
+
+  let detailsHtml = `
+    <h3>자동 신고 처리 통계</h3>
+    <div style="margin: 16px 0; padding: 16px; background: var(--crema-bg); border-radius: 8px;">
+      <p><strong>임계값 설정</strong></p>
+      <ul style="margin: 8px 0; padding-left: 20px;">
+        <li>신고 횟수: ${stats.autoDeleteThresholds.reportCount}회 이상</li>
+        <li>가중치 점수: ${stats.autoDeleteThresholds.weightedScore}점 이상</li>
+      </ul>
+    </div>
+
+    <div style="margin: 16px 0; padding: 16px; background: var(--crema-bg); border-radius: 8px;">
+      <p><strong>신고 사유별 가중치</strong></p>
+      <ul style="margin: 8px 0; padding-left: 20px;">
+        <li>욕설/혐오 (badword): ${stats.reportWeights.badword}점</li>
+        <li>스팸 (spam): ${stats.reportWeights.spam}점</li>
+        <li>부적절한 내용 (inappropriate): ${stats.reportWeights.inappropriate}점</li>
+        <li>기타 (other): ${stats.reportWeights.other}점</li>
+      </ul>
+    </div>
+
+    <div style="margin: 16px 0; padding: 16px; background: var(--crema-bg); border-radius: 8px;">
+      <p><strong>현재 상태</strong></p>
+      <ul style="margin: 8px 0; padding-left: 20px;">
+        <li>자동 삭제 대기: <span style="color: #d32f2f; font-weight: bold;">${stats.highRiskCount}개</span></li>
+        <li>임계값 근처: <span style="color: #ff9800; font-weight: bold;">${stats.atRiskCount}개</span></li>
+        <li>총 신고된 댓글: ${stats.totalComments}개</li>
+      </ul>
+    </div>
+  `;
+
+  if (candidates.length > 0) {
+    detailsHtml += `
+      <div style="margin: 16px 0; padding: 16px; background: #ffebee; border-radius: 8px; border-left: 4px solid #d32f2f;">
+        <p><strong style="color: #d32f2f;">⚠️ 자동 삭제 대기 목록</strong></p>
+        <ul style="margin: 8px 0; padding-left: 20px;">
+    `;
+
+    candidates.forEach((candidate, idx) => {
+      const comment = currentComments.find(c => c.id === candidate.commentId);
+      const text = comment?.text.substring(0, 50) || '(삭제됨)';
+      detailsHtml += `
+        <li>
+          [${idx + 1}] "${escapeHtml(text)}..."
+          <br/>
+          <small style="color: #666;">신고 ${candidate.decision.reportCount}명 | 점수 ${candidate.decision.score}점 | ${candidate.decision.reason}</small>
+        </li>
+      `;
+    });
+
+    detailsHtml += `
+        </ul>
+      </div>
+    `;
+  }
+
+  alert(detailsHtml.replace(/<[^>]*>/g, (match) => {
+    // 간단한 텍스트 변환 (alert는 HTML을 지원하지 않으므로 텍스트로 표시)
+    if (match === '<br/>') return '\n';
+    if (match.includes('strong')) return match.replace(/<\/?strong>/g, '');
+    return '';
+  }));
+
+  console.group('[자동 신고 처리] 상세 분석');
+  debugReportAnalysis(currentReports, currentComments);
+  console.groupEnd();
 }
