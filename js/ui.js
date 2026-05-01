@@ -162,15 +162,16 @@ async function renderThemeIntro(selectedId){
         const allBtns = ratingContainer.querySelectorAll('button');
         allBtns.forEach((btn, idx) => {
           const btnRating = idx + 1;
-          btn.innerHTML = (btnRating <= selectedRating) ? '⭐'.repeat(btnRating) : '☆'.repeat(btnRating);
+          btn.innerHTML = (btnRating <= selectedRating) ? '⭐' : '☆';
         });
       };
 
       for(let i = 1; i <= 5; i++){
         const ratingBtn = document.createElement('button');
         ratingBtn.type = 'button';
-        ratingBtn.style.cssText = 'background: transparent; border: none; font-size: 1rem; cursor: pointer; color: #ffd700; text-shadow: 0 0 4px rgba(0,0,0,0.5); padding: 4px 3px; border-radius: 4px; transition: all 0.2s ease;';
-        ratingBtn.innerHTML = '☆'.repeat(i);
+        ratingBtn.style.cssText = 'background: transparent; border: none; font-size: 1rem; cursor: pointer; color: #ffd700; text-shadow: 0 0 4px rgba(0,0,0,0.5); padding: 4px 2px; border-radius: 4px; transition: all 0.2s ease;';
+        ratingBtn.innerHTML = '☆';
+        ratingBtn.dataset.rating = i;
         ratingBtn.title = `Rate ${i}/5`;
         ratingBtn.addEventListener('click', ()=> {
           currentRating = i;
