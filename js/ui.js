@@ -107,7 +107,7 @@ function renderThemePicker(){
   setTheme(saved);
 }
 
-function renderThemeIntro(selectedId){
+async function renderThemeIntro(selectedId){
   const container = document.getElementById('theme-intro');
   const pageTitle = document.getElementById('page-title');
   if(!container) return;
