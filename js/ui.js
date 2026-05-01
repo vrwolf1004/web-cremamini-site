@@ -121,18 +121,11 @@ async function renderThemeIntro(selectedId){
   if(t){
     const guideHTML = `
       <p>${getLocalizedThemeDesc(t.id,t.description)}</p>
-      <div class="theme-guide" style="margin-top: 12px; padding: 10px; background: rgba(0,0,0,0.02); border-radius: 6px; font-size: 0.9rem;">
-        <strong>How to use this theme:</strong>
-        <ul style="margin: 6px 0; padding-left: 18px;">
-          <li><strong>Download:</strong> Click the download button below</li>
-          <li><strong>Copy:</strong> Click the copy button below</li>
-          <li><strong>Apply:</strong> Add to your project's &lt;style&gt; or &lt;link&gt; tag</li>
-        </ul>
-      </div>
       <div class="theme-actions-section" style="margin-top: 16px; padding: 12px; background: rgba(0,0,0,0.02); border-radius: 6px;">
         <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px;">
           <button id="download-btn-intro" type="button" style="padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">⬇ Download CSS</button>
           <button id="copy-btn-intro" type="button" style="padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">📋 Copy Code</button>
+          <button id="howto-btn-intro" type="button" style="padding: 8px 12px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; cursor: pointer;">❓ How to use</button>
         </div>
         <div class="theme-stats" style="display: flex; gap: 16px; padding: 8px 0; font-size: 0.9rem;">
           <span class="stat-rating" style="display: flex; align-items: center; gap: 4px;">⭐ — <small>(0)</small></span>
@@ -148,11 +141,13 @@ async function renderThemeIntro(selectedId){
     `;
     container.innerHTML = guideHTML;
 
-    // 다운로드/복사 버튼 이벤트 리스너
+    // 다운로드/복사/사용방법 버튼 이벤트 리스너
     const dlBtn = document.getElementById('download-btn-intro');
     const cpBtn = document.getElementById('copy-btn-intro');
+    const howtoBtn = document.getElementById('howto-btn-intro');
     if(dlBtn) dlBtn.addEventListener('click', ()=> downloadThemeCss(t.id, t.name));
     if(cpBtn) cpBtn.addEventListener('click', ()=> copyThemeCssCode(t.id, t.name));
+    if(howtoBtn) howtoBtn.addEventListener('click', ()=> openHowToModal(t.name));
 
     // 별점 선택기
     const ratingContainer = container.querySelector('.rating-selector');
@@ -256,6 +251,18 @@ async function rateTheme(themeId, rating){
     showToast('Firebase not initialized', 'error');
     return;
   }
+
+  // Rate limiting (5분 = 300000ms)
+  const lastRateTime = localStorage.getItem(`lastRate_${themeId}`);
+  if(lastRateTime){
+    const elapsed = Date.now() - parseInt(lastRateTime);
+    if(elapsed < 300000){
+      const remaining = Math.ceil((300000 - elapsed) / 1000);
+      showToast(`${remaining}초 후에 다시 평가할 수 있습니다`, 'error');
+      return;
+    }
+  }
+
   try{
     await window._firebase.ensureAuth();
     const { db, collection, setDoc, doc, serverTimestamp } = window._firebase;
@@ -266,6 +273,8 @@ async function rateTheme(themeId, rating){
       timestamp: serverTimestamp(),
       uid
     });
+
+    localStorage.setItem(`lastRate_${themeId}`, Date.now().toString());
 
     showToast(`✨ ${rating}점으로 평가했습니다!`, 'success');
     await loadThemeStats(themeId);
@@ -310,6 +319,17 @@ async function trackDownload(themeId){
     console.warn('Firebase not initialized, skipping download tracking');
     return;
   }
+
+  // Rate limiting (5분 = 300000ms)
+  const lastDownloadTime = localStorage.getItem(`lastDownload_${themeId}`);
+  if(lastDownloadTime){
+    const elapsed = Date.now() - parseInt(lastDownloadTime);
+    if(elapsed < 300000){
+      console.log(`[trackDownload] Rate limited for ${themeId}`);
+      return;
+    }
+  }
+
   try{
     const { db, doc, updateDoc, increment } = window._firebase;
     const downloadDocRef = doc(db, 'theme_downloads', themeId);
@@ -326,6 +346,8 @@ async function trackDownload(themeId){
         });
       }
     });
+
+    localStorage.setItem(`lastDownload_${themeId}`, Date.now().toString());
 
     console.log(`[trackDownload] ${themeId} download count increased`);
   }catch(e){
@@ -563,6 +585,36 @@ function initConfirmDialog(){
   modal.querySelector('.modal-backdrop')?.addEventListener('click', ()=> hide());
 }
 
+function openHowToModal(themeName){
+  const modal = document.getElementById('how-to-modal');
+  if(!modal) return;
+
+  const title = modal.querySelector('.modal-title');
+  if(title) title.textContent = `How to use: ${themeName}`;
+
+  modal.setAttribute('aria-hidden', 'false');
+
+  // Setup close button listener
+  const closeBtn = modal.querySelector('#how-to-close');
+  if(closeBtn && !closeBtn._listenerAttached){
+    closeBtn.addEventListener('click', ()=> closeHowToModal());
+    closeBtn._listenerAttached = true;
+  }
+
+  // Setup backdrop close listener
+  const backdrop = modal.querySelector('.modal-backdrop');
+  if(backdrop && !backdrop._listenerAttached){
+    backdrop.addEventListener('click', ()=> closeHowToModal());
+    backdrop._listenerAttached = true;
+  }
+}
+
+function closeHowToModal(){
+  const modal = document.getElementById('how-to-modal');
+  if(!modal) return;
+  modal.setAttribute('aria-hidden', 'true');
+}
+
 // ════════════════════════════════════════════════════════════════
 // 모듈 export
 // ════════════════════════════════════════════════════════════════
@@ -574,5 +626,6 @@ export {
   rateTheme, toggleLikeTheme, trackDownload, loadThemeStats,
   // UI
   initToasts, initFormSamples, initDataTable, initAccordion,
-  initMobileAccordion, initMobileCommentForm, initTabs, initConfirmDialog
+  initMobileAccordion, initMobileCommentForm, initTabs, initConfirmDialog,
+  openHowToModal, closeHowToModal
 };
