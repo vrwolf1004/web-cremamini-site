@@ -35,22 +35,18 @@ p,li,span,label,td,th,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word;word-break:brea
 .controls{padding:4px 12px;background:transparent;display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap}
 .theme-picker{display:flex;gap:12px;align-items:center;justify-content:center}
 .theme-list,#mobile-menu-lang-select{display:flex;gap:8px;flex-wrap:wrap}
-.theme-item{display:flex;gap:4px;align-items:stretch;position:relative;flex-wrap:wrap}
-.theme-btn,.lang-btn{background:var(--surface);border:var(--border-width,1px) solid var(--border-color,rgba(0,0,0,0.08));padding:8px 12px;border-radius:var(--btn-radius,8px);cursor:pointer;color:var(--text);flex:1 1 auto;min-width:80px}
+.theme-item{display:flex;gap:8px;align-items:center;position:relative}
+.theme-btn,.lang-btn{background:var(--surface);border:var(--border-width,1px) solid var(--border-color,rgba(0,0,0,0.08));padding:8px 12px;border-radius:var(--btn-radius,8px);cursor:pointer;color:var(--text);min-width:80px;flex:1 1 auto}
 .theme-btn.selected,.lang-btn.selected{outline:3px solid rgba(37,99,235,0.12)}
-.theme-action-btn{background:var(--surface);border:var(--border-width,1px) solid var(--border-color,rgba(0,0,0,0.08));padding:8px 10px;border-radius:var(--btn-radius,8px);cursor:pointer;color:var(--text);font-size:0.9rem;opacity:0.7;transition:opacity 0.2s ease}
-.theme-item:hover .theme-action-btn{opacity:1}
-.theme-action-btn:hover{background:var(--accent);color:var(--accent-contrast);opacity:1}
-.theme-stats{display:flex;gap:12px;align-items:center;font-size:0.85rem;color:var(--muted);padding:6px 8px;border-radius:6px;background:rgba(0,0,0,0.02);width:100%;order:3}
+.theme-stats{display:flex;gap:12px;align-items:center;font-size:0.85rem;color:var(--muted)}
 .stat-rating,.stat-likes,.stat-downloads{display:flex;align-items:center;gap:3px;white-space:nowrap}
 .stat-rating small{font-size:0.75rem;color:var(--muted)}
-.theme-actions{position:absolute;bottom:8px;right:8px;display:flex;gap:6px;align-items:center;padding:6px 8px;background:rgba(0,0,0,0.7);border-radius:6px;backdrop-filter:blur(4px);opacity:0;transition:opacity 0.2s ease;pointer-events:none;z-index:10}
-.theme-item:hover .theme-actions{opacity:1;pointer-events:auto}
-.rating-selector{display:flex;gap:3px;align-items:center}
+.rating-selector{display:flex;gap:4px;align-items:center}
 .rating-btn{background:transparent;border:none;font-size:1rem;cursor:pointer;padding:4px 3px;border-radius:4px;transition:all 0.2s ease;color:#ffd700;text-shadow:0 0 4px rgba(0,0,0,0.5)}
 .rating-btn:hover{color:#ffff00;transform:scale(1.2);filter:drop-shadow(0 0 2px #ffc107)}
-.like-btn{background:transparent;border:none;font-size:1rem;cursor:pointer;padding:4px 6px;border-radius:4px;transition:all 0.2s ease;color:#ff69b4;text-shadow:0 0 4px rgba(0,0,0,0.5)}
-.like-btn:hover{color:#ff1493;transform:scale(1.2);filter:drop-shadow(0 0 2px #e91e63)}
+.like-btn-intro{background:transparent;border:none;font-size:1.2rem;cursor:pointer;padding:6px 10px;border-radius:4px;transition:all 0.2s ease;color:#ff69b4}
+.like-btn-intro:hover{color:#ff1493;transform:scale(1.2);filter:drop-shadow(0 0 2px #e91e63)}
+.like-btn-intro.liked{animation:likeAnimation 0.3s ease}
 .like-btn.liked{animation:likeAnimation 0.3s ease}
 @keyframes likeAnimation{0%{transform:scale(1);}50%{transform:scale(1.3);}100%{transform:scale(1)}}
 .theme-select{display:none}

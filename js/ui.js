@@ -91,68 +91,7 @@ function renderThemePicker(){
       setTheme(t.id);
     });
 
-    const downloadBtn = document.createElement('button');
-    downloadBtn.type='button'; downloadBtn.className = 'theme-action-btn theme-download';
-    downloadBtn.title = 'Download CSS'; downloadBtn.innerHTML = '⬇';
-    downloadBtn.addEventListener('click', (e)=> { e.stopPropagation(); downloadThemeCss(t.id, t.name); });
-
-    const copyBtn = document.createElement('button');
-    copyBtn.type='button'; copyBtn.className = 'theme-action-btn theme-copy';
-    copyBtn.title = 'Copy CSS'; copyBtn.innerHTML = '📋';
-    copyBtn.addEventListener('click', (e)=> { e.stopPropagation(); copyThemeCssCode(t.id, t.name); });
-
-    // 통계 표시 영역
-    const statsDiv = document.createElement('div');
-    statsDiv.className = 'theme-stats';
-    statsDiv.innerHTML = `
-      <span class="stat-rating">⭐ — <small>(0)</small></span>
-      <span class="stat-likes">👍 0</span>
-      <span class="stat-downloads">📥 0</span>
-    `;
-
-    // 호버 상호작용 버튼 영역
-    const actionsDiv = document.createElement('div');
-    actionsDiv.className = 'theme-actions';
-
-    // 별점 선택기
-    const ratingSelector = document.createElement('div');
-    ratingSelector.className = 'rating-selector';
-    for(let i = 1; i <= 5; i++){
-      const ratingBtn = document.createElement('button');
-      ratingBtn.type = 'button';
-      ratingBtn.className = 'rating-btn';
-      ratingBtn.dataset.rating = i;
-      ratingBtn.innerHTML = '⭐'.repeat(i);
-      ratingBtn.title = `Rate ${i}/5`;
-      ratingBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        rateTheme(t.id, i);
-      });
-      ratingSelector.appendChild(ratingBtn);
-    }
-
-    // 좋아요 버튼
-    const likeBtn = document.createElement('button');
-    likeBtn.type = 'button';
-    likeBtn.className = 'like-btn';
-    likeBtn.innerHTML = '👍';
-    likeBtn.title = 'Like this theme';
-    likeBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleLikeTheme(t.id);
-      // 버튼 강조 효과
-      likeBtn.classList.add('liked');
-      setTimeout(() => likeBtn.classList.remove('liked'), 300);
-    });
-
-    actionsDiv.appendChild(ratingSelector);
-    actionsDiv.appendChild(likeBtn);
-
     container.appendChild(btn);
-    container.appendChild(downloadBtn);
-    container.appendChild(copyBtn);
-    container.appendChild(statsDiv);
-    container.appendChild(actionsDiv);
     list.appendChild(container);
 
     const opt = document.createElement('option'); opt.value=t.id; opt.textContent=`${t.name} — ${t.category}`; select.appendChild(opt);
@@ -185,13 +124,63 @@ function renderThemeIntro(selectedId){
       <div class="theme-guide" style="margin-top: 12px; padding: 10px; background: rgba(0,0,0,0.02); border-radius: 6px; font-size: 0.9rem;">
         <strong>How to use this theme:</strong>
         <ul style="margin: 6px 0; padding-left: 18px;">
-          <li><strong>Download:</strong> Use the ⬇ button to save the CSS file</li>
-          <li><strong>Copy:</strong> Use the 📋 button to copy the code</li>
+          <li><strong>Download:</strong> Click the download button below</li>
+          <li><strong>Copy:</strong> Click the copy button below</li>
           <li><strong>Apply:</strong> Add to your project's &lt;style&gt; or &lt;link&gt; tag</li>
         </ul>
       </div>
+      <div class="theme-actions-section" style="margin-top: 16px; padding: 12px; background: rgba(0,0,0,0.02); border-radius: 6px;">
+        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px;">
+          <button id="download-btn-intro" type="button" style="padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">⬇ Download CSS</button>
+          <button id="copy-btn-intro" type="button" style="padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">📋 Copy Code</button>
+        </div>
+        <div class="theme-stats" style="display: flex; gap: 16px; padding: 8px 0; font-size: 0.9rem;">
+          <span class="stat-rating" style="display: flex; align-items: center; gap: 4px;">⭐ — <small>(0)</small></span>
+          <span class="stat-likes" style="display: flex; align-items: center; gap: 4px;">👍 0</span>
+          <span class="stat-downloads" style="display: flex; align-items: center; gap: 4px;">📥 0</span>
+        </div>
+        <div class="theme-engagement" style="margin-top: 12px; display: flex; gap: 8px; align-items: center;">
+          <label style="font-size: 0.85rem; color: var(--muted);">Rate this theme:</label>
+          <div class="rating-selector" style="display: flex; gap: 4px;"></div>
+          <button class="like-btn-intro" type="button" style="padding: 6px 10px; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: #ff69b4;">👍</button>
+        </div>
+      </div>
     `;
     container.innerHTML = guideHTML;
+
+    // 다운로드/복사 버튼 이벤트 리스너
+    const dlBtn = document.getElementById('download-btn-intro');
+    const cpBtn = document.getElementById('copy-btn-intro');
+    if(dlBtn) dlBtn.addEventListener('click', ()=> downloadThemeCss(t.id, t.name));
+    if(cpBtn) cpBtn.addEventListener('click', ()=> copyThemeCssCode(t.id, t.name));
+
+    // 별점 선택기
+    const ratingContainer = container.querySelector('.rating-selector');
+    if(ratingContainer){
+      for(let i = 1; i <= 5; i++){
+        const ratingBtn = document.createElement('button');
+        ratingBtn.type = 'button';
+        ratingBtn.style.cssText = 'background: transparent; border: none; font-size: 1rem; cursor: pointer; color: #ffd700; text-shadow: 0 0 4px rgba(0,0,0,0.5); padding: 4px 3px; border-radius: 4px; transition: all 0.2s ease;';
+        ratingBtn.innerHTML = '⭐'.repeat(i);
+        ratingBtn.title = `Rate ${i}/5`;
+        ratingBtn.addEventListener('click', ()=> rateTheme(t.id, i));
+        ratingContainer.appendChild(ratingBtn);
+      }
+    }
+
+    // 좋아요 버튼
+    const likeBtn = container.querySelector('.like-btn-intro');
+    if(likeBtn){
+      likeBtn.addEventListener('click', ()=> {
+        toggleLikeTheme(t.id);
+        likeBtn.classList.add('liked');
+        setTimeout(()=> likeBtn.classList.remove('liked'), 300);
+      });
+    }
+
+    // 통계 업데이트
+    await loadThemeStats(t.id);
+
     if(pageTitle) pageTitle.textContent = (window._locale && window._locale['pageTitle']) ? t.name : t.name;
   }else{
     container.innerHTML = `<h4>테마</h4><p>설명 없음</p>`;
