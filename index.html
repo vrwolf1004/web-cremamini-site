@@ -401,23 +401,23 @@
   <div id="how-to-modal" class="modal" aria-hidden="true">
     <div class="modal-backdrop"></div>
     <div class="modal-sheet" role="dialog" aria-modal="true">
-      <h4 class="modal-title">How to use this theme</h4>
+      <h4 class="modal-title" data-i18n="howToUseTitle">How to use this theme</h4>
       <div class="how-to-body">
         <ol style="line-height: 1.8; color: var(--text); margin: 0 0 16px 20px;">
-          <li><strong>Download:</strong> Click the <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 3px;">⬇ Download CSS</code> button below to get the theme CSS file.</li>
-          <li><strong>Copy:</strong> Or click <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 3px;">📋 Copy Code</code> to copy the CSS code to your clipboard.</li>
-          <li><strong>Apply:</strong> Add the CSS to your project:
+          <li><strong id="howto-step1" data-i18n="howToStepDownload">Download:</strong> <span data-i18n="howToStepDownloadEnd">Click the button below to get the theme CSS file.</span></li>
+          <li><strong id="howto-step2" data-i18n="howToStepCopy">Copy:</strong> <span data-i18n="howToStepCopyEnd">to copy the CSS code to your clipboard.</span></li>
+          <li><strong id="howto-step3" data-i18n="howToStepApply">Apply:</strong> <span data-i18n="howToStepApply">Add the CSS to your project:</span>
             <ul style="margin-top: 8px;">
-              <li>Option A: Add a <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 3px;">&lt;link&gt;</code> tag in your HTML <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 3px;">&lt;head&gt;</code>:
+              <li><span data-i18n="howToOptionA">Option A: Add a</span> <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 3px;">&lt;link&gt;</code> <span data-i18n="howToOptionAHead">tag in your HTML</span> <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 3px;">&lt;head&gt;</code> <span data-i18n="howToOptionATag">tag:</span>
                 <pre style="background: rgba(0,0,0,0.05); padding: 8px; border-radius: 4px; overflow-x: auto; font-size: 0.85rem;"><code>&lt;link rel="stylesheet" href="path/to/theme.css"&gt;</code></pre>
               </li>
-              <li>Option B: Paste the code into your CSS file or <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 3px;">&lt;style&gt;</code> tag.</li>
+              <li><span data-i18n="howToOptionB">Option B: Paste the code into your CSS file or</span> <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 3px;">&lt;style&gt;</code> <span data-i18n="howToOptionBTag">tag.</span></li>
             </ul>
           </li>
         </ol>
       </div>
       <div class="modal-actions">
-        <button class="btn ghost" id="how-to-close" style="width: 100%;">Close</button>
+        <button class="btn ghost" id="how-to-close" style="width: 100%;" data-i18n="howToClose">Close</button>
       </div>
     </div>
   </div>
