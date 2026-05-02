@@ -123,6 +123,8 @@
   "howToClose": "閉じる",
   "supportTitle": "⭐ PickLayer を応援する",
   "supportIssueTitle": "📞 問題と提案",
+  "themeActionsUseIt": "このテーマを試してみませんか?",
+  "themeActionsRating": "このテーマどう思いますか?",
   "gridRows": [
     {"name": "田中太郎", "status": "有効"},
     {"name": "山田花子", "status": "無効"},

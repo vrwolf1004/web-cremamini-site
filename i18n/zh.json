@@ -123,6 +123,8 @@
   "howToClose": "关闭",
   "supportTitle": "⭐ 支持 PickLayer",
   "supportIssueTitle": "📞 问题和建议",
+  "themeActionsUseIt": "想试试这个主题吗?",
+  "themeActionsRating": "你觉得这个主题怎么样?",
   "gridRows": [
     {"name": "张伟", "status": "活跃"},
     {"name": "王芳", "status": "未激活"},

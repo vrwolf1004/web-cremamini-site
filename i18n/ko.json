@@ -123,6 +123,8 @@
   "howToClose": "닫기",
   "supportTitle": "⭐ PickLayer 응원하기",
   "supportIssueTitle": "📞 문의 및 제안",
+  "themeActionsUseIt": "이 테마를 써볼까요?",
+  "themeActionsRating": "이 테마 어떤가요?",
   "gridRows": [
     {"name": "김준호", "status": "활성"},
     {"name": "이지은", "status": "비활성"},

@@ -123,6 +123,8 @@
   "howToClose": "Sulje",
   "supportTitle": "⭐ Tue lahjoitus PickLayerille",
   "supportIssueTitle": "📞 Ongelmat ja ehdotukset",
+  "themeActionsUseIt": "Haluaisitko kokeilla tätä teemaa?",
+  "themeActionsRating": "Mitä mieltä olet tästä teemasta?",
   "gridRows": [
     {"name": "Jussi", "status": "Aktiivinen"},
     {"name": "Liisa", "status": "Passiivinen"},

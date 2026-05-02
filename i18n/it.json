@@ -123,6 +123,8 @@
   "howToClose": "Chiudi",
   "supportTitle": "⭐ Supporta PickLayer",
   "supportIssueTitle": "📞 Problemi e suggerimenti",
+  "themeActionsUseIt": "Vuoi provare questo tema?",
+  "themeActionsRating": "Cosa ne pensi di questo tema?",
   "gridRows": [
     {"name": "Marco", "status": "Attivo"},
     {"name": "Giulia", "status": "Inattivo"},
