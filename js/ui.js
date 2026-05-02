@@ -140,7 +140,7 @@ async function renderThemeIntro(selectedId){
         </div>
       </div>
     `;
-    const guideHTML = actionsHTML + `<p>${getLocalizedThemeDesc(t.id,t.description)}</p>`;
+    const guideHTML = `<p>${getLocalizedThemeDesc(t.id,t.description)}</p>`;
     container.innerHTML = guideHTML;
     if(themeContent) themeContent.innerHTML = actionsHTML;
 
