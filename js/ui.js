@@ -120,8 +120,7 @@ async function renderThemeIntro(selectedId){
   const t = (window._themes || []).find(x=>x.id===selectedId) || FALLBACK_THEMES.find(x=>x.id===selectedId);
   if(t){
     const guideHTML = `
-      <p>${getLocalizedThemeDesc(t.id,t.description)}</p>
-      <div class="theme-actions-section" style="margin-top: 16px; padding: 12px; background: rgba(0,0,0,0.02); border-radius: 6px;">
+      <div class="theme-actions-section" style="margin-top: 0; padding: 12px; background: rgba(0,0,0,0.02); border-radius: 6px; margin-bottom: 16px;">
         <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px;">
           <button id="download-btn-intro" type="button" style="padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">⬇ Download CSS</button>
           <button id="copy-btn-intro" type="button" style="padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">📋 Copy Code</button>
@@ -138,6 +137,7 @@ async function renderThemeIntro(selectedId){
           <button class="like-btn-intro" type="button" style="padding: 6px 10px; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: #ff69b4;">👍</button>
         </div>
       </div>
+      <p style="margin-top: 16px;">${getLocalizedThemeDesc(t.id,t.description)}</p>
     `;
     container.innerHTML = guideHTML;
 
