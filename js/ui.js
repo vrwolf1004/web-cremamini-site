@@ -124,10 +124,10 @@ async function renderThemeIntro(selectedId){
     const actionsHTML = `
       <div class="theme-actions-section" style="margin-top: 0; padding: 12px; background: rgba(0,0,0,0.02); border-radius: 6px; margin-bottom: 16px;">
         <div style="font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 8px;">코드 사용</div>
-        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 16px;">
-          <button id="download-btn-intro" type="button" style="padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">⬇ Download CSS</button>
-          <button id="copy-btn-intro" type="button" style="padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">📋 Copy Code</button>
-          <button id="howto-btn-intro" type="button" style="padding: 8px 12px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; cursor: pointer;">❓ How to use</button>
+        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 16px;">
+          <button id="download-btn-intro" type="button" style="flex: 1; padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; white-space: nowrap;">⬇ Download</button>
+          <button id="copy-btn-intro" type="button" style="flex: 1; padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; white-space: nowrap;">📋 Copy</button>
+          <button id="howto-btn-intro" type="button" style="flex: 1; padding: 8px 12px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; cursor: pointer; font-size: 0.9rem; white-space: nowrap;">❓ How to</button>
         </div>
         <div style="font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 8px;">별점</div>
         <div class="theme-stats" style="display: flex; gap: 16px; padding: 8px 0; font-size: 0.9rem; margin-bottom: 12px;">
