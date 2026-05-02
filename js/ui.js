@@ -109,17 +109,19 @@ function renderThemePicker(){
 
 async function renderThemeIntro(selectedId){
   const container = document.getElementById('theme-intro');
+  const themeContent = document.getElementById('theme-content');
   const pageTitle = document.getElementById('page-title');
   if(!container) return;
   if(!selectedId){
     const header = (window._locale && window._locale['themeListHeader']) ? window._locale['themeListHeader'] : 'Theme introductions';
     container.innerHTML = `<h4>${header}</h4><ul>${(window._themes || []).map(t=>`<li><strong>${t.name}</strong> — ${getLocalizedThemeDesc(t.id,t.description)}</li>`).join('')}</ul>`;
     if(pageTitle) pageTitle.textContent = (window._locale && window._locale['pageTitle']) ? window._locale['pageTitle'] : 'Sample Page';
+    if(themeContent) themeContent.innerHTML = '';
     return;
   }
   const t = (window._themes || []).find(x=>x.id===selectedId) || FALLBACK_THEMES.find(x=>x.id===selectedId);
   if(t){
-    const guideHTML = `
+    const actionsHTML = `
       <div class="theme-actions-section" style="margin-top: 0; padding: 12px; background: rgba(0,0,0,0.02); border-radius: 6px; margin-bottom: 16px;">
         <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px;">
           <button id="download-btn-intro" type="button" style="padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">⬇ Download CSS</button>
@@ -137,9 +139,10 @@ async function renderThemeIntro(selectedId){
           <button class="like-btn-intro" type="button" style="padding: 6px 10px; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: #ff69b4;">👍</button>
         </div>
       </div>
-      <p style="margin-top: 16px;">${getLocalizedThemeDesc(t.id,t.description)}</p>
     `;
+    const guideHTML = actionsHTML + `<p>${getLocalizedThemeDesc(t.id,t.description)}</p>`;
     container.innerHTML = guideHTML;
+    if(themeContent) themeContent.innerHTML = actionsHTML;
 
     // 다운로드/복사/사용방법 버튼 이벤트 리스너
     const dlBtn = document.getElementById('download-btn-intro');
@@ -149,10 +152,10 @@ async function renderThemeIntro(selectedId){
     if(cpBtn) cpBtn.addEventListener('click', ()=> copyThemeCssCode(t.id, t.name));
     if(howtoBtn) howtoBtn.addEventListener('click', ()=> openHowToModal(t.name));
 
-    // 별점 선택기
-    const ratingContainer = container.querySelector('.rating-selector');
+    // 별점 선택기 (모든 rating-selector)
+    const ratingContainers = document.querySelectorAll('.rating-selector');
     let currentRating = 0;
-    if(ratingContainer){
+    ratingContainers.forEach(ratingContainer => {
       const updateRatingDisplay = (selectedRating) => {
         const allBtns = ratingContainer.querySelectorAll('button');
         allBtns.forEach((btn, idx) => {
@@ -177,17 +180,17 @@ async function renderThemeIntro(selectedId){
         ratingBtn.addEventListener('mouseleave', () => updateRatingDisplay(currentRating));
         ratingContainer.appendChild(ratingBtn);
       }
-    }
+    });
 
-    // 좋아요 버튼
-    const likeBtn = container.querySelector('.like-btn-intro');
-    if(likeBtn){
+    // 좋아요 버튼 (모든 like-btn-intro)
+    const likeBtns = document.querySelectorAll('.like-btn-intro');
+    likeBtns.forEach(likeBtn => {
       likeBtn.addEventListener('click', ()=> {
         toggleLikeTheme(t.id);
         likeBtn.classList.add('liked');
         setTimeout(()=> likeBtn.classList.remove('liked'), 300);
       });
-    }
+    });
 
     // 통계 업데이트
     await loadThemeStats(t.id);
