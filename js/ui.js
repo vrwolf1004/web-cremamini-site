@@ -144,7 +144,13 @@ async function renderThemeIntro(selectedId){
     `;
     const guideHTML = `<p>${getLocalizedThemeDesc(t.id,t.description)}</p>`;
     container.innerHTML = guideHTML;
-    if(themeContent) themeContent.innerHTML = actionsHTML;
+    if(themeContent) {
+      themeContent.innerHTML = actionsHTML;
+      // 동적으로 추가된 요소에 번역 적용
+      if(typeof applyTranslations === 'function') {
+        applyTranslations();
+      }
+    }
 
     // 다운로드/복사/사용방법 버튼 이벤트 리스너
     const dlBtn = document.getElementById('download-btn-intro');
