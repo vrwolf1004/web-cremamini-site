@@ -121,15 +121,19 @@ async function renderThemeIntro(selectedId){
   }
   const t = (window._themes || []).find(x=>x.id===selectedId) || FALLBACK_THEMES.find(x=>x.id===selectedId);
   if(t){
+    // 현재 언어에서 번역 가져오기
+    const useItText = (window._locale && window._locale['themeActionsUseIt']) ? window._locale['themeActionsUseIt'] : '이 테마를 써볼까요?';
+    const ratingText = (window._locale && window._locale['themeActionsRating']) ? window._locale['themeActionsRating'] : '이 테마 어떤가요?';
+
     const actionsHTML = `
       <div class="theme-actions-section" style="margin-top: 0; padding: 12px; background: rgba(0,0,0,0.02); border-radius: 6px; margin-bottom: 16px;">
-        <div style="font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 8px;" data-i18n="themeActionsUseIt">이 테마를 써볼까요?</div>
+        <div style="font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 8px;">${useItText}</div>
         <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 16px;">
           <button id="download-btn-intro" type="button" style="flex: 1; padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; white-space: nowrap;">⬇ Download</button>
           <button id="copy-btn-intro" type="button" style="flex: 1; padding: 8px 12px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; white-space: nowrap;">📋 Copy</button>
           <button id="howto-btn-intro" type="button" style="flex: 1; padding: 8px 12px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; cursor: pointer; font-size: 0.9rem; white-space: nowrap;">❓ How to</button>
         </div>
-        <div style="font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 8px;" data-i18n="themeActionsRating">이 테마 어떤가요?</div>
+        <div style="font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 8px;">${ratingText}</div>
         <div class="theme-stats" style="display: flex; gap: 16px; padding: 8px 0; font-size: 0.9rem; margin-bottom: 12px;">
           <span class="stat-rating" style="display: flex; align-items: center; gap: 4px;">⭐ — <small>(0)</small></span>
           <span class="stat-likes" style="display: flex; align-items: center; gap: 4px;">👍 0</span>
@@ -144,13 +148,7 @@ async function renderThemeIntro(selectedId){
     `;
     const guideHTML = `<p>${getLocalizedThemeDesc(t.id,t.description)}</p>`;
     container.innerHTML = guideHTML;
-    if(themeContent) {
-      themeContent.innerHTML = actionsHTML;
-      // 동적으로 추가된 요소에 번역 적용
-      if(typeof applyTranslations === 'function') {
-        applyTranslations();
-      }
-    }
+    if(themeContent) themeContent.innerHTML = actionsHTML;
 
     // 다운로드/복사/사용방법 버튼 이벤트 리스너
     const dlBtn = document.getElementById('download-btn-intro');
